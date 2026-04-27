@@ -11,6 +11,7 @@
       background: radial-gradient(circle at center, #0b1a2a, #050d16);
       color: white;
       text-align: center;
+      overflow-x: hidden;
     }
 
     .container {
@@ -23,12 +24,14 @@
       position: relative;
       width: 300px;
       margin: 0 auto 20px;
+      animation: fadeIn 1.5s ease forwards;
     }
 
     .logo-wrapper img {
       width: 100%;
-      z-index: 2;
       position: relative;
+      z-index: 2;
+      animation: pulse 3s infinite ease-in-out;
     }
 
     .rotating-ring {
@@ -40,8 +43,8 @@
       border: 2px dashed #d4af37;
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      animation: spin 20s linear infinite;
-      opacity: 0.3;
+      animation: spin 10s linear infinite;
+      opacity: 0.4;
     }
 
     @keyframes spin {
@@ -49,13 +52,36 @@
       to { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
     h1 {
       letter-spacing: 4px;
       margin: 10px 0;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    p {
+      animation: fadeIn 2.5s ease forwards;
     }
 
     .section {
       margin-top: 60px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .players {
@@ -69,12 +95,14 @@
       border: 1px solid #d4af37;
       border-radius: 8px;
       transition: 0.3s;
+      background: rgba(255,255,255,0.03);
     }
 
     .player:hover {
       background: #d4af37;
       color: black;
-      transform: scale(1.05);
+      transform: scale(1.1) rotate(1deg);
+      box-shadow: 0 0 15px #d4af37;
     }
 
     .tournaments {
@@ -86,12 +114,19 @@
       padding: 10px 15px;
       margin: 10px 0;
       background: rgba(255,255,255,0.05);
-      transition: 0.3s;
+      transition: 0.4s;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .card:hover {
-      background: rgba(212,175,55,0.1);
-      transform: translateX(5px);
+      background: rgba(212,175,55,0.15);
+      transform: translateX(10px) scale(1.02);
     }
 
     footer {
@@ -112,12 +147,12 @@
     <h1>GARDMARINES</h1>
     <p>Сила. Дисциплина. Господство на море.</p>
 
-    <div class="section">
+    <div class="section" id="playersSection">
       <h2>Состав флота</h2>
       <div class="players" id="players"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="tournamentSection">
       <h2>Турниры и достижения</h2>
       <div class="tournaments">
         <div class="card">🏆 Турнир Северного моря — 1 место</div>
@@ -150,6 +185,25 @@
 
       playersContainer.appendChild(div);
     }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          if (entry.target.id === 'tournamentSection') {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, i) => {
+              setTimeout(() => card.classList.add('visible'), i * 200);
+            });
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
   </script>
 
 </body>
