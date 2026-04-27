@@ -1,1417 +1,156 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GARDEMARINES — Флот WoWs</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Oswald:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* металл */
-    --steel-darkest: #0a0d10;
-    --steel-dark: #14181d;
-    --steel-mid: #1e242b;
-    --steel-light: #2a3139;
-    --steel-edge: #3d4651;
-    --steel-shine: #5a6470;
-
-    /* золото — настоящее, как на лого */
-    --gold-shadow: #6e5420;
-    --gold-base: #b8902f;
-    --gold: #d4a849;
-    --gold-bright: #f4d57a;
-    --gold-shine: #fff2c4;
-
-    --silver: #c8d0d8;
-    --text: #e4e8ec;
-    --text-dim: #8b97a3;
-    --line: #2a3641;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Oswald', sans-serif;
-    background: var(--steel-darkest);
-    color: var(--text);
-    overflow-x: hidden;
-    font-weight: 300;
-    line-height: 1.6;
-  }
-
-  /* === ФОН: ПОЛИРОВАННЫЙ МЕТАЛЛ === */
-  .metal-bg {
-    position: fixed;
-    inset: 0;
-    z-index: -3;
-    background:
-      /* радиальный свет сверху */
-      radial-gradient(ellipse 1200px 600px at 50% -10%, rgba(212, 168, 73, 0.12) 0%, transparent 60%),
-      /* основной градиент стали */
-      linear-gradient(180deg, #14181d 0%, #1a1f25 30%, #0f1318 70%, #0a0d10 100%);
-  }
-
-  /* брашед-метал текстура */
-  .metal-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(90deg,
-        transparent 0px,
-        rgba(255, 255, 255, 0.015) 1px,
-        transparent 2px,
-        rgba(0, 0, 0, 0.02) 3px),
-      repeating-linear-gradient(90deg,
-        transparent 0px,
-        rgba(255, 255, 255, 0.008) 0.5px,
-        transparent 1px);
-    opacity: 0.8;
-  }
-
-  /* шум */
-  .metal-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.25;
-    mix-blend-mode: overlay;
-  }
-
-  /* плавающие частички "пыли" */
-  .particles {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: var(--gold-bright);
-    border-radius: 50%;
-    opacity: 0;
-    box-shadow: 0 0 4px var(--gold);
-    animation: float 18s linear infinite;
-  }
-  @keyframes float {
-    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.6; }
-    100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
-  }
-
-  /* === НАВИГАЦИЯ === */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.2rem 2.5rem;
-    background: rgba(10, 13, 16, 0.7);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: padding 0.3s, background 0.3s;
-  }
-  nav.scrolled { padding: 0.7rem 2.5rem; background: rgba(10, 13, 16, 0.92); }
-
-  .nav-brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-  .nav-brand img { width: 36px; height: 36px; transition: transform 0.6s; }
-  .nav-brand:hover img { transform: rotate(360deg); }
-
-  .nav-brand-text {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: 0.3em;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    position: relative;
-    padding: 0.3rem 0;
-    transition: color 0.3s;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0;
-    width: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    transition: width 0.4s;
-  }
-  .nav-links a:hover { color: var(--gold-bright); }
-  .nav-links a:hover::after { width: 100%; }
-
-  .nav-cta {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.8rem;
-    padding: 0.7rem 1.4rem;
-    background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    color: var(--steel-darkest);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 500;
-    border: 1px solid var(--gold-shine);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 242, 196, 0.5),
-      0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s;
-  }
-  .nav-cta:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 242, 196, 0.7),
-      0 0 20px rgba(212, 168, 73, 0.5),
-      0 6px 16px rgba(0, 0, 0, 0.4);
-  }
-
-  /* === HERO === */
-  .hero {
-    min-height: 100vh;
-    padding: 8rem 2rem 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-  }
-
-  /* лучи света за лого */
-  .light-rays {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 800px; height: 800px;
-    transform: translate(-50%, -55%);
-    pointer-events: none;
-    opacity: 0.4;
-    animation: rays-rotate 60s linear infinite;
-  }
-  .light-rays::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      conic-gradient(
-        from 0deg at 50% 50%,
-        transparent 0deg,
-        rgba(212, 168, 73, 0.15) 20deg,
-        transparent 40deg,
-        transparent 90deg,
-        rgba(212, 168, 73, 0.1) 110deg,
-        transparent 130deg,
-        transparent 180deg,
-        rgba(212, 168, 73, 0.15) 200deg,
-        transparent 220deg,
-        transparent 270deg,
-        rgba(212, 168, 73, 0.1) 290deg,
-        transparent 310deg
-      );
-    border-radius: 50%;
-    filter: blur(20px);
-  }
-  @keyframes rays-rotate {
-    from { transform: translate(-50%, -55%) rotate(0deg); }
-    to { transform: translate(-50%, -55%) rotate(360deg); }
-  }
-
-  /* центральный логотип */
-  .hero-logo-frame {
-    position: relative;
-    margin-bottom: 2.5rem;
-    animation: hero-entry 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
-  }
-
-  @keyframes hero-entry {
-    0% { opacity: 0; transform: translateY(40px) scale(0.85); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  .hero-logo {
-    width: 320px;
-    height: 320px;
-    display: block;
-    filter:
-      drop-shadow(0 0 40px rgba(212, 168, 73, 0.4))
-      drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
-    animation: logo-breathe 5s ease-in-out infinite;
-  }
-
-  @keyframes logo-breathe {
-    0%, 100% { filter: drop-shadow(0 0 40px rgba(212, 168, 73, 0.35)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6)); }
-    50% { filter: drop-shadow(0 0 60px rgba(212, 168, 73, 0.6)) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6)); }
-  }
-
-  /* декоративные орнаменты по бокам лого */
-  .ornament {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 180px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
-    opacity: 0;
-    animation: ornament-in 1.2s 0.6s ease-out forwards;
-  }
-  .ornament.left { right: calc(100% + 30px); }
-  .ornament.right { left: calc(100% + 30px); }
-
-  .ornament::before {
-    content: '◆';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--gold);
-    font-size: 0.7rem;
-  }
-  .ornament.left::before { right: 0; }
-  .ornament.right::before { left: 0; }
-
-  @keyframes ornament-in {
-    from { opacity: 0; width: 0; }
-    to { opacity: 1; width: 180px; }
-  }
-
-  /* надпись est */
-  .est-line {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.4em;
-    color: var(--gold);
-    margin-bottom: 1.2rem;
-    opacity: 0;
-    animation: fade-up 1s 0.8s ease-out forwards;
-  }
-  .est-line span { color: var(--text-dim); }
-
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* главный заголовок — золотой металл */
-  .hero-title {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    font-size: clamp(3.5rem, 9vw, 7rem);
-    letter-spacing: 0.12em;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fade-up 1s 1s ease-out forwards;
-    background: linear-gradient(180deg,
-      var(--gold-shine) 0%,
-      var(--gold-bright) 25%,
-      var(--gold) 50%,
-      var(--gold-base) 75%,
-      var(--gold-shadow) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 4px 30px rgba(212, 168, 73, 0.3);
-    position: relative;
-  }
-
-  /* эффект "блика" пробегающего по тексту */
-  .hero-title::after {
-    content: 'GARDEMARINES';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(110deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.6) 50%,
-      transparent 70%);
-    background-size: 250% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 4s 2s ease-in-out infinite;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 250% 0; }
-    50% { background-position: -150% 0; }
-    100% { background-position: -150% 0; }
-  }
-
-  /* подзаголовок */
-  .hero-sub {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    font-size: 1.2rem;
-    color: var(--text-dim);
-    max-width: 600px;
-    margin: 0 auto 1.5rem;
-    letter-spacing: 0.05em;
-    opacity: 0;
-    animation: fade-up 1s 1.2s ease-out forwards;
-  }
-
-  .hero-motto {
-    font-family: 'Cinzel', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--gold);
-    letter-spacing: 0.2em;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fade-up 1s 1.4s ease-out forwards;
-  }
-
-  /* кнопки */
-  .hero-buttons {
-    display: flex;
-    gap: 1.2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    opacity: 0;
-    animation: fade-up 1s 1.6s ease-out forwards;
-  }
-
-  .btn {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.9rem;
-    padding: 1rem 2.2rem;
-    cursor: pointer;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-weight: 500;
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-gold {
-    background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 45%, var(--gold-base) 100%);
-    color: var(--steel-darkest);
-    border: 1px solid var(--gold-shine);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 242, 196, 0.6),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-      0 4px 12px rgba(0, 0, 0, 0.5);
-  }
-
-  .btn-gold::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-  }
-
-  .btn-gold:hover::before { transform: translateX(100%); }
-  .btn-gold:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 242, 196, 0.8),
-      0 0 25px rgba(212, 168, 73, 0.6),
-      0 8px 20px rgba(0, 0, 0, 0.5);
-  }
-
-  .btn-steel {
-    background: linear-gradient(180deg, var(--steel-light) 0%, var(--steel-mid) 50%, var(--steel-dark) 100%);
-    color: var(--text);
-    border: 1px solid var(--steel-edge);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 4px 12px rgba(0, 0, 0, 0.5);
-  }
-
-  .btn-steel:hover {
-    border-color: var(--gold);
-    color: var(--gold-bright);
-    transform: translateY(-2px);
-  }
-
-  /* === СТАТИСТИЧЕСКАЯ ПОЛОСА === */
-  .stat-strip {
-    background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border-top: 1px solid var(--steel-edge);
-    border-bottom: 1px solid var(--steel-edge);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.4);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    position: relative;
-  }
-
-  .stat-strip::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .strip-cell {
-    padding: 2rem 1.5rem;
-    text-align: center;
-    border-right: 1px solid var(--steel-edge);
-    position: relative;
-    transition: background 0.3s;
-  }
-
-  .strip-cell:last-child { border-right: none; }
-  .strip-cell:hover { background: rgba(212, 168, 73, 0.05); }
-
-  .strip-num {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    font-size: 2.8rem;
-    line-height: 1;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
-  }
-
-  .strip-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-  }
-
-  /* === СЕКЦИИ === */
-  section.block {
-    padding: 7rem 2rem;
-    text-align: center;
-    position: relative;
-  }
-
-  .container { max-width: 1200px; margin: 0 auto; }
-
-  .section-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--gold);
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .section-tag::before, .section-tag::after {
-    content: '';
-    width: 30px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .section-title {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: 0.08em;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    background: linear-gradient(180deg, #f0f0f0 0%, #b0b0b0 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .section-title em {
-    font-style: normal;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .section-sub {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    font-size: 1.1rem;
-    color: var(--text-dim);
-    margin-bottom: 4rem;
-    letter-spacing: 0.05em;
-  }
-
-  /* === СОСТАВ === */
-  .roster-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.2rem;
-    text-align: left;
-  }
-
-  .officer {
-    background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border: 1px solid var(--steel-edge);
-    padding: 1.8rem;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 4px 12px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-  }
-
-  .officer::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    transform: scaleX(0);
-    transition: transform 0.4s;
-  }
-
-  .officer:hover {
-    transform: translateY(-6px);
-    border-color: var(--gold-base);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 12px 30px rgba(0, 0, 0, 0.5),
-      0 0 30px rgba(212, 168, 73, 0.15);
-  }
-
-  .officer:hover::before { transform: scaleX(1); }
-
-  .officer-rank {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-  }
-
-  .officer-name {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    font-size: 1.4rem;
-    color: var(--text);
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.03em;
-  }
-
-  .officer-role {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    color: var(--text-dim);
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid var(--line);
-    font-style: italic;
-  }
-
-  .officer-stats {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-  }
-
-  .officer-stats .v { color: var(--gold-bright); font-weight: 500; }
-
-  .officer.commander {
-    grid-column: span 2;
-    background: linear-gradient(135deg, var(--steel-dark) 0%, #2a2118 50%, var(--steel-dark) 100%);
-    border-color: var(--gold-base);
-  }
-
-  .officer.commander::before { transform: scaleX(1); height: 3px; }
-
-  .officer.commander .officer-name {
-    font-size: 1.8rem;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* === СТАТЫ — БОЛЬШИЕ === */
-  .big-stats {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .big-stat {
-    background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border: 1px solid var(--steel-edge);
-    padding: 2.5rem 2rem;
-    text-align: left;
-    position: relative;
-    transition: all 0.4s;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .big-stat:hover {
-    border-color: var(--gold);
-    transform: translateY(-4px);
-  }
-
-  .big-stat.feat {
-    background:
-      radial-gradient(circle at top right, rgba(212, 168, 73, 0.15), transparent 70%),
-      linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border-color: var(--gold-base);
-  }
-
-  .big-stat-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin-bottom: 1rem;
-  }
-
-  .big-stat-val {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    font-size: 4rem;
-    line-height: 1;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.6rem;
-  }
-
-  .big-stat.feat .big-stat-val { font-size: 5rem; }
-
-  .big-stat-meta {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    font-weight: 300;
-  }
-
-  .big-stat-meta .up { color: #6da575; }
-
-  /* график активности */
-  .chart {
-    margin-top: 2rem;
-    padding: 2rem;
-    background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border: 1px solid var(--steel-edge);
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    align-items: center;
-    text-align: left;
-  }
-
-  .chart-info { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; }
-  .chart-info .gold-txt { color: var(--gold); margin-top: 0.4rem; }
-  .chart-info .dim-txt { color: var(--text-dim); }
-
-  .chart-bars {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.4rem;
-    height: 80px;
-  }
-
-  .bar {
-    flex: 1;
-    background: linear-gradient(180deg, var(--gold-bright), var(--gold-base));
-    opacity: 0.5;
-    transition: all 0.3s;
-    transform-origin: bottom;
-    animation: bar-rise 1s ease-out backwards;
-  }
-
-  .bar:hover { opacity: 1; transform: scaleY(1.05); }
-  .bar.high { opacity: 0.9; }
-
-  @keyframes bar-rise {
-    from { transform: scaleY(0); opacity: 0; }
-    to { transform: scaleY(1); }
-  }
-
-  /* === РАСПИСАНИЕ === */
-  .schedule {
-    text-align: left;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .sched-row {
-    display: grid;
-    grid-template-columns: 110px 1fr 130px 130px;
-    gap: 1.5rem;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(90deg, var(--steel-dark) 0%, var(--steel-mid) 100%);
-    border: 1px solid var(--steel-edge);
-    border-left: 3px solid var(--gold);
-    margin-bottom: 0.8rem;
-    align-items: center;
-    transition: all 0.3s;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.04),
-      0 2px 6px rgba(0, 0, 0, 0.3);
-  }
-
-  .sched-row:hover {
-    transform: translateX(6px);
-    border-left-color: var(--gold-bright);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 0 20px rgba(212, 168, 73, 0.15),
-      0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  .sched-date {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    text-align: center;
-    border-right: 1px solid var(--line);
-    padding-right: 1.2rem;
-  }
-
-  .sched-date .d {
-    font-size: 2.4rem;
-    line-height: 1;
-    background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .sched-date .m {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    margin-top: 0.3rem;
-    letter-spacing: 0.2em;
-  }
-
-  .sched-info h4 {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .sched-info p {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    font-size: 0.9rem;
-    color: var(--text-dim);
-  }
-
-  .sched-time {
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--gold-bright);
-    font-size: 0.95rem;
-  }
-
-  .sched-tag {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.75rem;
-    padding: 0.4rem 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .sched-tag.battle { background: rgba(184, 71, 58, 0.15); color: #d96250; border: 1px solid #d96250; }
-  .sched-tag.train { background: rgba(212, 168, 73, 0.1); color: var(--gold); border: 1px solid var(--gold-base); }
-  .sched-tag.event { background: rgba(74, 139, 139, 0.15); color: #6cb1b1; border: 1px solid #6cb1b1; }
-
-  /* === ГАЛЕРЕЯ === */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 160px;
-    gap: 0.8rem;
-  }
-
-  .gal {
-    background: linear-gradient(135deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border: 1px solid var(--steel-edge);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.4s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.04),
-      0 2px 6px rgba(0, 0, 0, 0.3);
-  }
-
-  .gal::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(212, 168, 73, 0.15) 50%, transparent 60%);
-    background-size: 250% 250%;
-    background-position: 100% 0;
-    transition: background-position 0.6s;
-  }
-
-  .gal:hover {
-    border-color: var(--gold);
-    transform: scale(1.03);
-    z-index: 2;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 10px 30px rgba(0, 0, 0, 0.5),
-      0 0 30px rgba(212, 168, 73, 0.2);
-  }
-
-  .gal:hover::after { background-position: 0 100%; }
-
-  .gal-content {
-    text-align: center;
-    color: var(--text-dim);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
-    padding: 1rem;
-    z-index: 1;
-  }
-
-  .gal-content .ic {
-    color: var(--gold);
-    font-size: 1.6rem;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .gal:nth-child(1) { grid-column: span 3; grid-row: span 2; }
-  .gal:nth-child(2) { grid-column: span 3; }
-  .gal:nth-child(5) { grid-column: span 2; }
-
-  /* === ВСТУПИТЬ === */
-  .recruit {
-    background:
-      radial-gradient(circle at 30% 50%, rgba(212, 168, 73, 0.08), transparent 70%),
-      linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border: 1px solid var(--gold-base);
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: left;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.06),
-      0 10px 30px rgba(0, 0, 0, 0.4);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .recruit::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .recruit-l {
-    padding: 3rem;
-    border-right: 1px solid var(--steel-edge);
-  }
-
-  .recruit-l h3 {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 2rem;
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.05em;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .recruit-l p {
-    color: var(--text-dim);
-    margin-bottom: 1.2rem;
-    font-weight: 300;
-    line-height: 1.7;
-  }
-
-  .recruit-r { padding: 3rem; }
-
-  .req-list { list-style: none; }
-
-  .req-list li {
-    padding: 1rem 0;
-    border-bottom: 1px dashed var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9rem;
-  }
-
-  .req-list li:last-child { border-bottom: none; }
-  .req-list .key { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; }
-  .req-list .val { color: var(--gold-bright); font-weight: 500; }
-
-  /* === ФУТЕР === */
-  footer {
-    padding: 4rem 3rem 2rem;
-    border-top: 1px solid var(--steel-edge);
-    background: linear-gradient(180deg, var(--steel-dark) 0%, var(--steel-darkest) 100%);
-    text-align: center;
-  }
-
-  .foot-logo {
-    width: 70px;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 20px rgba(212, 168, 73, 0.3));
-  }
-
-  .foot-name {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 0.3em;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
-  }
-
-  .foot-tagline {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-dim);
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
-  }
-
-  .foot-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    list-style: none;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .foot-links a {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    transition: color 0.3s;
-  }
-
-  .foot-links a:hover { color: var(--gold-bright); }
-
-  .foot-bottom {
-    padding-top: 2rem;
-    border-top: 1px solid var(--line);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-  }
-
-  /* === ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ === */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* === МОБИЛКА === */
-  @media (max-width: 900px) {
-    nav { padding: 0.9rem 1rem; }
-    .nav-links { display: none; }
-    .hero { padding: 6rem 1rem 3rem; }
-    .hero-logo { width: 220px; height: 220px; }
-    .ornament { display: none; }
-    .stat-strip { grid-template-columns: 1fr 1fr; }
-    .strip-cell:nth-child(2) { border-right: none; }
-    .strip-cell:nth-child(1), .strip-cell:nth-child(2) { border-bottom: 1px solid var(--steel-edge); }
-    section.block { padding: 4rem 1rem; }
-    .roster-grid { grid-template-columns: 1fr; }
-    .officer.commander { grid-column: span 1; }
-    .big-stats { grid-template-columns: 1fr 1fr; }
-    .big-stat.feat { grid-column: span 2; }
-    .chart { grid-template-columns: 1fr; gap: 1rem; padding: 1.2rem; }
-    .sched-row { grid-template-columns: 80px 1fr; gap: 0.8rem; padding: 1rem; }
-    .sched-time, .sched-tag { grid-column: 2; justify-self: start; }
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    .gal:nth-child(1), .gal:nth-child(2), .gal:nth-child(5) { grid-column: span 2; grid-row: span 1; }
-    .recruit { grid-template-columns: 1fr; }
-    .recruit-l { border-right: none; border-bottom: 1px solid var(--steel-edge); }
-    .recruit-l, .recruit-r { padding: 2rem; }
-    .foot-links { gap: 1rem; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GARDMARINES</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at center, #0b1a2a, #050d16);
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .logo-wrapper {
+      position: relative;
+      width: 300px;
+      margin: 0 auto 20px;
+    }
+
+    .logo-wrapper img {
+      width: 100%;
+      z-index: 2;
+      position: relative;
+    }
+
+    .rotating-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 260px;
+      height: 260px;
+      border: 2px dashed #d4af37;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin 20s linear infinite;
+      opacity: 0.3;
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    h1 {
+      letter-spacing: 4px;
+      margin: 10px 0;
+    }
+
+    .section {
+      margin-top: 60px;
+    }
+
+    .players {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .player {
+      padding: 10px;
+      border: 1px solid #d4af37;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .player:hover {
+      background: #d4af37;
+      color: black;
+      transform: scale(1.05);
+    }
+
+    .tournaments {
+      text-align: left;
+    }
+
+    .card {
+      border-left: 3px solid #d4af37;
+      padding: 10px 15px;
+      margin: 10px 0;
+      background: rgba(255,255,255,0.05);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      background: rgba(212,175,55,0.1);
+      transform: translateX(5px);
+    }
+
+    footer {
+      margin-top: 80px;
+      opacity: 0.5;
+    }
+  </style>
 </head>
 <body>
 
-<div class="metal-bg"></div>
-<div class="particles" id="particles"></div>
-
-<nav id="nav">
-  <a href="#" class="nav-brand">
-    <img src="logo.png" alt="">
-    <div class="nav-brand-text">GARDEMARINES</div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#roster">Состав</a></li>
-    <li><a href="#stats">Статистика</a></li>
-    <li><a href="#schedule">Расписание</a></li>
-    <li><a href="#gallery">Галерея</a></li>
-  </ul>
-  <a href="#recruit" class="nav-cta">Заявка</a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="light-rays"></div>
-
-  <div class="hero-logo-frame">
-    <span class="ornament left"></span>
-    <img src="logo.png" alt="Gardemarines" class="hero-logo">
-    <span class="ornament right"></span>
-  </div>
-
-  <div class="est-line">EST. <span>·</span> MMXXIV <span>·</span> WORLD OF WARSHIPS</div>
-
-  <h1 class="hero-title">GARDEMARINES</h1>
-
-  <p class="hero-sub">Клан собран из тех, кто играет давно и серьёзно. Дисциплина, командное взаимодействие и хорошая компания на голосе.</p>
-
-  <div class="hero-motto">⚓ Честь · Дисциплина · Флаг ⚓</div>
-
-  <div class="hero-buttons">
-    <a href="#recruit" class="btn btn-gold">Записаться на флот →</a>
-    <a href="#roster" class="btn btn-steel">Состав флота</a>
-  </div>
-</section>
-
-<div class="stat-strip">
-  <div class="strip-cell">
-    <div class="strip-num">47</div>
-    <div class="strip-label">Офицеров</div>
-  </div>
-  <div class="strip-cell">
-    <div class="strip-num">68%</div>
-    <div class="strip-label">Винрейт</div>
-  </div>
-  <div class="strip-cell">
-    <div class="strip-num">2 140</div>
-    <div class="strip-label">Боёв в сезоне</div>
-  </div>
-  <div class="strip-cell">
-    <div class="strip-num">III</div>
-    <div class="strip-label">Лига Шторм</div>
-  </div>
-</div>
-
-<!-- СОСТАВ -->
-<section class="block reveal" id="roster">
   <div class="container">
-    <div class="section-tag">Командование</div>
-    <h2 class="section-title">Офицерский <em>состав</em></h2>
-    <p class="section-sub">Те, кто ведёт эскадру в бой</p>
 
-    <div class="roster-grid">
-      <div class="officer commander">
-        <div class="officer-rank">★ Адмирал · Командующий</div>
-        <h3 class="officer-name">Никнейм_1</h3>
-        <p class="officer-role">Командир флота. Стратегия, дисциплина, последнее слово.</p>
-        <div class="officer-stats">
-          <span>WR: <span class="v">71.2%</span></span>
-          <span>PR: <span class="v">2 340</span></span>
-          <span>В строю: <span class="v">3 года</span></span>
-        </div>
-      </div>
-      <div class="officer">
-        <div class="officer-rank">Капитан 1-го ранга</div>
-        <h3 class="officer-name">Никнейм_2</h3>
-        <p class="officer-role">Заместитель командира</p>
-        <div class="officer-stats">
-          <span>WR: <span class="v">68%</span></span>
-          <span>PR: <span class="v">1 980</span></span>
-        </div>
-      </div>
-      <div class="officer">
-        <div class="officer-rank">Капитан 2-го ранга</div>
-        <h3 class="officer-name">Никнейм_3</h3>
-        <p class="officer-role">Тактик · Линкоры</p>
-        <div class="officer-stats">
-          <span>WR: <span class="v">65%</span></span>
-          <span>PR: <span class="v">1 820</span></span>
-        </div>
-      </div>
-      <div class="officer">
-        <div class="officer-rank">Капитан 3-го ранга</div>
-        <h3 class="officer-name">Никнейм_4</h3>
-        <p class="officer-role">Эсминцы · Разведка</p>
-        <div class="officer-stats">
-          <span>WR: <span class="v">63%</span></span>
-          <span>PR: <span class="v">1 750</span></span>
-        </div>
-      </div>
-      <div class="officer">
-        <div class="officer-rank">Старший лейтенант</div>
-        <h3 class="officer-name">Никнейм_5</h3>
-        <p class="officer-role">Крейсера · ПВО</p>
-        <div class="officer-stats">
-          <span>WR: <span class="v">61%</span></span>
-          <span>PR: <span class="v">1 640</span></span>
-        </div>
-      </div>
-      <div class="officer">
-        <div class="officer-rank">Лейтенант</div>
-        <h3 class="officer-name">Никнейм_6</h3>
-        <p class="officer-role">Авианосцы</p>
-        <div class="officer-stats">
-          <span>WR: <span class="v">58%</span></span>
-          <span>PR: <span class="v">1 520</span></span>
-        </div>
-      </div>
+    <div class="logo-wrapper">
+      <div class="rotating-ring"></div>
+      <img src="logo.png" alt="logo">
     </div>
-  </div>
-</section>
 
-<!-- СТАТИСТИКА -->
-<section class="block reveal" id="stats">
-  <div class="container">
-    <div class="section-tag">Хроника</div>
-    <h2 class="section-title">Цифры <em>сезона</em></h2>
-    <p class="section-sub">Заработанные потом и сталью</p>
+    <h1>GARDMARINES</h1>
+    <p>Сила. Дисциплина. Господство на море.</p>
 
-    <div class="big-stats">
-      <div class="big-stat feat">
-        <div class="big-stat-label">Текущая лига</div>
-        <div class="big-stat-val">ШТОРМ</div>
-        <div class="big-stat-meta"><span class="up">↑</span> 3-й сезон подряд · 3-е место</div>
-      </div>
-      <div class="big-stat">
-        <div class="big-stat-label">Боёв сыграно</div>
-        <div class="big-stat-val">2 140</div>
-        <div class="big-stat-meta"><span class="up">+124</span> за неделю</div>
-      </div>
-      <div class="big-stat">
-        <div class="big-stat-label">Винрейт</div>
-        <div class="big-stat-val">68%</div>
-        <div class="big-stat-meta"><span class="up">+2.1%</span> за сезон</div>
-      </div>
-      <div class="big-stat">
-        <div class="big-stat-label">Состав</div>
-        <div class="big-stat-val">47</div>
-        <div class="big-stat-meta"><span class="up">+3</span> в этом месяце</div>
+    <div class="section">
+      <h2>Состав флота</h2>
+      <div class="players" id="players"></div>
+    </div>
+
+    <div class="section">
+      <h2>Турниры и достижения</h2>
+      <div class="tournaments">
+        <div class="card">🏆 Турнир Северного моря — 1 место</div>
+        <div class="card">⚓ Открытый морской кубок — финалисты</div>
+        <div class="card">🔥 Битва кланов — топ 3</div>
       </div>
     </div>
 
-    <div class="chart">
-      <div class="chart-info">
-        <div class="dim-txt">Активность по дням</div>
-        <div class="gold-txt">последние 14 дней →</div>
-      </div>
-      <div class="chart-bars">
-        <div class="bar" style="height: 30%; animation-delay: 0.05s"></div>
-        <div class="bar" style="height: 45%; animation-delay: 0.1s"></div>
-        <div class="bar high" style="height: 70%; animation-delay: 0.15s"></div>
-        <div class="bar" style="height: 50%; animation-delay: 0.2s"></div>
-        <div class="bar" style="height: 35%; animation-delay: 0.25s"></div>
-        <div class="bar high" style="height: 85%; animation-delay: 0.3s"></div>
-        <div class="bar high" style="height: 95%; animation-delay: 0.35s"></div>
-        <div class="bar" style="height: 40%; animation-delay: 0.4s"></div>
-        <div class="bar" style="height: 55%; animation-delay: 0.45s"></div>
-        <div class="bar high" style="height: 75%; animation-delay: 0.5s"></div>
-        <div class="bar" style="height: 60%; animation-delay: 0.55s"></div>
-        <div class="bar" style="height: 50%; animation-delay: 0.6s"></div>
-        <div class="bar high" style="height: 90%; animation-delay: 0.65s"></div>
-        <div class="bar high" style="height: 100%; animation-delay: 0.7s"></div>
-      </div>
-    </div>
+    <footer>
+      © GARDMARINES
+    </footer>
+
   </div>
-</section>
 
-<!-- РАСПИСАНИЕ -->
-<section class="block reveal" id="schedule">
-  <div class="container">
-    <div class="section-tag">Боевой график</div>
-    <h2 class="section-title">Боевое <em>расписание</em></h2>
-    <p class="section-sub">Тренировки, бои, события на эту неделю</p>
+  <script>
+    const playersContainer = document.getElementById('players');
 
-    <div class="schedule">
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">28</div><div class="m">ПН</div></div>
-        <div class="sched-info">
-          <h4>Тренировочный бой 7v7</h4>
-          <p>Отработка взаимодействия линкор + эсминец</p>
-        </div>
-        <div class="sched-time">20:00 МСК</div>
-        <div class="sched-tag train">Тренировка</div>
-      </div>
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">30</div><div class="m">СР</div></div>
-        <div class="sched-info">
-          <h4>Клановый бой · Лига Шторм</h4>
-          <p>Основной состав, сбор на голосе за 30 минут</p>
-        </div>
-        <div class="sched-time">21:00 МСК</div>
-        <div class="sched-tag battle">Бой</div>
-      </div>
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">02</div><div class="m">СБ</div></div>
-        <div class="sched-info">
-          <h4>Кубок Адмирала</h4>
-          <p>Внутренний турнир флота, призы от командования</p>
-        </div>
-        <div class="sched-time">19:00 МСК</div>
-        <div class="sched-tag event">Событие</div>
-      </div>
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">03</div><div class="m">ВС</div></div>
-        <div class="sched-info">
-          <h4>Открытое собрание флота</h4>
-          <p>Обсуждение стратегии на следующий сезон</p>
-        </div>
-        <div class="sched-time">20:00 МСК</div>
-        <div class="sched-tag event">Событие</div>
-      </div>
-    </div>
-  </div>
-</section>
+    for (let i = 1; i <= 20; i++) {
+      const div = document.createElement('div');
+      div.className = 'player';
+      div.textContent = 'игрок_' + i;
+      div.style.opacity = 0;
+      div.style.transform = 'translateY(20px)';
 
-<!-- ГАЛЕРЕЯ -->
-<section class="block reveal" id="gallery">
-  <div class="container">
-    <div class="section-tag">Архив</div>
-    <h2 class="section-title">Хроники <em>битв</em></h2>
-    <p class="section-sub">Скриншоты, эпичные моменты, награды</p>
+      setTimeout(() => {
+        div.style.transition = '0.5s';
+        div.style.opacity = 1;
+        div.style.transform = 'translateY(0)';
+      }, i * 100);
 
-    <div class="gallery-grid">
-      <div class="gal"><div class="gal-content"><span class="ic">⚓</span>Главный кадр</div></div>
-      <div class="gal"><div class="gal-content"><span class="ic">★</span>Победа в Шторме</div></div>
-      <div class="gal"><div class="gal-content"><span class="ic">⚔</span>Клан-бой</div></div>
-      <div class="gal"><div class="gal-content"><span class="ic">⚜</span>Награждение</div></div>
-      <div class="gal"><div class="gal-content"><span class="ic">◎</span>Лучший выстрел</div></div>
-      <div class="gal"><div class="gal-content"><span class="ic">⚓</span>Встреча флота</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ВСТУПИТЬ -->
-<section class="block reveal" id="recruit">
-  <div class="container">
-    <div class="section-tag">Призыв на флот</div>
-    <h2 class="section-title">Стать <em>гардемарином</em></h2>
-    <p class="section-sub">Если ты ищешь дисциплину, команду и серьёзный подход</p>
-
-    <div class="recruit">
-      <div class="recruit-l">
-        <h3>Призыв открыт</h3>
-        <p>Если ты ищешь команду, где играют ради результата, а не ради статусов — есть место. Мы небольшие, серьёзные и без токсичности.</p>
-        <p>Подача заявки — через Discord. Рассматриваем в течение суток, потом — пробный вечер на голосе и пара совместных боёв.</p>
-        <div class="hero-buttons" style="margin-top: 1.5rem; justify-content: flex-start;">
-          <a href="#" class="btn btn-gold">Discord флота →</a>
-          <a href="#" class="btn btn-steel">Связаться</a>
-        </div>
-      </div>
-      <div class="recruit-r">
-        <ul class="req-list">
-          <li><span class="key">Винрейт</span><span class="val">от 55%</span></li>
-          <li><span class="key">Боёв сыграно</span><span class="val">от 3 000</span></li>
-          <li><span class="key">Корабли</span><span class="val">X уровень</span></li>
-          <li><span class="key">Discord + микро</span><span class="val">обязательно</span></li>
-          <li><span class="key">Возраст</span><span class="val">от 18 лет</span></li>
-          <li><span class="key">Активность</span><span class="val">3+ вечера/нед</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ФУТЕР -->
-<footer>
-  <img src="logo.png" alt="" class="foot-logo">
-  <div class="foot-name">GARDEMARINES</div>
-  <div class="foot-tagline">«Честь · Дисциплина · Флаг»</div>
-  <ul class="foot-links">
-    <li><a href="#">Discord</a></li>
-    <li><a href="#">YouTube</a></li>
-    <li><a href="#">Twitch</a></li>
-    <li><a href="#">VK</a></li>
-    <li><a href="#">Telegram</a></li>
-  </ul>
-  <div class="foot-bottom">
-    © 2026 Флот «Гардемарины» · World of Warships · Не аффилирован с Wargaming
-  </div>
-</footer>
-
-<script>
-  // частички
-  const particlesEl = document.getElementById('particles');
-  for (let i = 0; i < 25; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDelay = Math.random() * 18 + 's';
-    p.style.animationDuration = (12 + Math.random() * 10) + 's';
-    particlesEl.appendChild(p);
-  }
-
-  // навигация ужимается при скролле
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-
-  // анимация появления секций при скролле
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+      playersContainer.appendChild(div);
+    }
+  </script>
 
 </body>
 </html>
