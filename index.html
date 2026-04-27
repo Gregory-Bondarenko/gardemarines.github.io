@@ -56,18 +56,36 @@
     opacity: 0.2; mix-blend-mode: overlay;
   }
 
+  /* === ЧАСТИЧКИ — теперь поярче и побольше === */
   .particles { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; }
   .particle {
-    position: absolute; width: 2px; height: 2px;
-    background: var(--gold-bright); border-radius: 50%;
-    opacity: 0; box-shadow: 0 0 4px var(--gold);
-    animation: float 18s linear infinite;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: float linear infinite;
+  }
+  /* три размера для разнообразия */
+  .particle.s {
+    width: 2px; height: 2px;
+    background: var(--gold-bright);
+    box-shadow: 0 0 6px var(--gold), 0 0 12px var(--gold);
+  }
+  .particle.m {
+    width: 3px; height: 3px;
+    background: var(--gold-shine);
+    box-shadow: 0 0 8px var(--gold-bright), 0 0 16px var(--gold);
+  }
+  .particle.l {
+    width: 4px; height: 4px;
+    background: var(--gold-shine);
+    box-shadow: 0 0 10px var(--gold-bright), 0 0 20px var(--gold), 0 0 30px rgba(244, 213, 122, 0.4);
   }
   @keyframes float {
-    0% { transform: translateY(100vh); opacity: 0; }
-    10% { opacity: 0.5; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(-10vh); opacity: 0; }
+    0% { transform: translateY(105vh) translateX(0); opacity: 0; }
+    8% { opacity: 0.85; }
+    50% { transform: translateY(50vh) translateX(20px); }
+    92% { opacity: 0.85; }
+    100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
   }
 
   /* === НАВИГАЦИЯ === */
@@ -89,7 +107,12 @@
   }
 
   .nav-brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-  .nav-brand img { width: 36px; height: 36px; transition: transform 0.6s; }
+  /* убираем чёрный фон у логотипа в навбаре через blend mode */
+  .nav-brand img {
+    width: 36px; height: 36px;
+    transition: transform 0.6s;
+    mix-blend-mode: screen;
+  }
   .nav-brand:hover img { transform: rotate(360deg); }
   .nav-brand-text {
     font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.3em;
@@ -123,26 +146,26 @@
   }
   .nav-cta:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,242,196,0.7), 0 0 20px rgba(212,168,73,0.5); }
 
-  /* === ЦЕНТРАЛЬНЫЙ КОНТЕЙНЕР === */
+  /* === КОНТЕЙНЕР === */
   .container {
     max-width: var(--content-width);
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  /* === HERO === */
+  /* === HERO — КОМПАКТНЕЕ === */
   .hero {
-    padding: 7rem 0 4rem;
+    padding: 5.5rem 0 3rem;
     text-align: center;
     position: relative;
   }
 
-  /* === ЛОГО — ЦЕНТРАЛЬНАЯ КОМПОЗИЦИЯ === */
+  /* === ЛОГО === */
   .logo-stage {
     position: relative;
-    width: min(520px, 80vmin);
-    height: min(520px, 80vmin);
-    margin: 0 auto 3rem;
+    width: min(380px, 70vmin); /* уменьшил с 520 до 380 */
+    height: min(380px, 70vmin);
+    margin: 0 auto 2rem;
     display: flex; align-items: center; justify-content: center;
     animation: logo-entry 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
   }
@@ -152,16 +175,16 @@
     100% { opacity: 1; transform: scale(1); }
   }
 
-  /* свечение под лого */
+  /* свечение под лого — основа красоты */
   .logo-stage::before {
     content: '';
     position: absolute;
-    inset: -15%;
+    inset: -10%;
     background:
       radial-gradient(circle at center,
-        rgba(244, 213, 122, 0.35) 0%,
-        rgba(212, 168, 73, 0.15) 25%,
-        rgba(212, 168, 73, 0.04) 50%,
+        rgba(244, 213, 122, 0.45) 0%,
+        rgba(212, 168, 73, 0.2) 25%,
+        rgba(212, 168, 73, 0.06) 50%,
         transparent 75%);
     filter: blur(40px);
     z-index: -1;
@@ -169,28 +192,9 @@
   }
 
   @keyframes glow-pulse {
-    0%, 100% { opacity: 0.7; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.12); }
   }
-
-  /* === ВРАЩАЮЩАЯСЯ КОМПАСНАЯ РОЗА ВНУТРИ ЛОГО === */
-  /* размещается ПОД логотипом, видно через прозрачные части */
-  .compass-rose {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 80%; height: 80%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 1;
-    animation: compass-spin 30s linear infinite;
-  }
-
-  @keyframes compass-spin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  .compass-rose svg { width: 100%; height: 100%; }
 
   /* === РАМА С ЗАКЛЁПКАМИ === */
   .logo-frame {
@@ -229,28 +233,30 @@
     100% { opacity: 1; transform: scale(1); }
   }
 
-  /* === САМО ЛОГО === */
+  /* === САМО ЛОГО — БЕЗ ЧЁРНОГО ФОНА === */
   .logo-img {
     position: relative;
-    width: 75%;
-    height: 75%;
+    width: 88%;
+    height: 88%;
     z-index: 2;
+    /* screen blend убирает чёрный пиксельный фон у PNG */
+    mix-blend-mode: screen;
     filter:
       drop-shadow(0 0 30px rgba(212, 168, 73, 0.5))
-      drop-shadow(0 8px 25px rgba(0, 0, 0, 0.7));
+      drop-shadow(0 8px 25px rgba(0, 0, 0, 0.5));
     animation: logo-breathe 5s ease-in-out infinite;
   }
 
   @keyframes logo-breathe {
-    0%, 100% { filter: drop-shadow(0 0 30px rgba(212, 168, 73, 0.45)) drop-shadow(0 8px 25px rgba(0,0,0,0.7)); }
-    50% { filter: drop-shadow(0 0 50px rgba(212, 168, 73, 0.7)) drop-shadow(0 8px 25px rgba(0,0,0,0.7)); }
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(212, 168, 73, 0.45)) drop-shadow(0 8px 25px rgba(0,0,0,0.5)); }
+    50% { filter: drop-shadow(0 0 50px rgba(212, 168, 73, 0.7)) drop-shadow(0 8px 25px rgba(0,0,0,0.5)); }
   }
 
   /* === ТЕКСТ HERO === */
   .est-line {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem; letter-spacing: 0.4em;
-    color: var(--gold); margin-bottom: 1.2rem;
+    font-size: 0.72rem; letter-spacing: 0.4em;
+    color: var(--gold); margin-bottom: 1rem;
     opacity: 0; animation: fade-up 1s 1.2s ease-out forwards;
   }
   .est-line span { color: var(--text-dim); }
@@ -262,9 +268,9 @@
 
   .hero-title {
     font-family: 'Cinzel', serif; font-weight: 900;
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
     letter-spacing: 0.12em; line-height: 1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     opacity: 0; animation: fade-up 1s 1.4s ease-out forwards;
     background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold-bright) 25%, var(--gold) 50%, var(--gold-base) 75%, var(--gold-shadow) 100%);
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -288,27 +294,27 @@
 
   .hero-sub {
     font-family: 'Oswald', sans-serif; font-weight: 300;
-    font-size: 1.1rem; color: var(--text-dim);
-    max-width: 600px; margin: 0 auto 1.5rem;
+    font-size: 1rem; color: var(--text-dim);
+    max-width: 580px; margin: 0 auto 1.2rem;
     letter-spacing: 0.05em;
     opacity: 0; animation: fade-up 1s 1.6s ease-out forwards;
   }
 
   .hero-motto {
     font-family: 'Cinzel', serif; font-style: italic;
-    font-size: 1rem; color: var(--gold);
-    letter-spacing: 0.2em; margin-bottom: 3rem;
+    font-size: 0.95rem; color: var(--gold);
+    letter-spacing: 0.2em; margin-bottom: 2rem;
     opacity: 0; animation: fade-up 1s 1.8s ease-out forwards;
   }
 
   .hero-buttons {
-    display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
     opacity: 0; animation: fade-up 1s 2s ease-out forwards;
   }
 
   .btn {
-    font-family: 'Oswald', sans-serif; font-size: 0.9rem;
-    padding: 1rem 2.2rem; cursor: pointer; text-decoration: none;
+    font-family: 'Oswald', sans-serif; font-size: 0.85rem;
+    padding: 0.9rem 2rem; cursor: pointer; text-decoration: none;
     text-transform: uppercase; letter-spacing: 0.2em; font-weight: 500;
     transition: all 0.3s;
     display: inline-flex; align-items: center; gap: 0.6rem;
@@ -347,22 +353,22 @@
     margin: 0 auto;
     display: grid; grid-template-columns: repeat(4, 1fr);
   }
-  .strip-cell { padding: 2rem 1rem; text-align: center; border-right: 1px solid var(--steel-edge); transition: background 0.3s; }
+  .strip-cell { padding: 1.8rem 1rem; text-align: center; border-right: 1px solid var(--steel-edge); transition: background 0.3s; }
   .strip-cell:last-child { border-right: none; }
   .strip-cell:hover { background: rgba(212, 168, 73, 0.05); }
   .strip-num {
-    font-family: 'Cinzel', serif; font-weight: 900; font-size: 2.5rem; line-height: 1;
+    font-family: 'Cinzel', serif; font-weight: 900; font-size: 2.4rem; line-height: 1;
     background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
   }
-  .strip-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; }
+  .strip-label { font-family: 'Oswald', sans-serif; font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; }
 
   /* === СЕКЦИИ === */
-  section.block { padding: 6rem 0; text-align: center; position: relative; }
+  section.block { padding: 5.5rem 0; text-align: center; position: relative; }
 
   .section-tag {
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
     color: var(--gold); letter-spacing: 0.4em; text-transform: uppercase;
     margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 1rem;
   }
@@ -370,7 +376,7 @@
 
   .section-title {
     font-family: 'Cinzel', serif; font-weight: 700;
-    font-size: clamp(2.2rem, 4.5vw, 3.5rem); letter-spacing: 0.08em; line-height: 1.1;
+    font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: 0.08em; line-height: 1.1;
     margin-bottom: 1rem;
     background: linear-gradient(180deg, #f0f0f0 0%, #b0b0b0 100%);
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -380,9 +386,9 @@
     background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   }
-  .section-sub { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 1.05rem; color: var(--text-dim); margin-bottom: 3.5rem; letter-spacing: 0.05em; }
+  .section-sub { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 1rem; color: var(--text-dim); margin-bottom: 3rem; letter-spacing: 0.05em; }
 
-  /* === ТАБЛИЦА СОСТАВА === */
+  /* === ТАБЛИЦА === */
   .roster-table {
     width: 100%;
     border-collapse: collapse;
@@ -391,71 +397,39 @@
     border: 1px solid var(--steel-edge);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 4px 20px rgba(0,0,0,0.3);
   }
-
   .roster-table thead {
     background: linear-gradient(180deg, var(--steel-light), var(--steel-mid));
     border-bottom: 2px solid var(--gold);
   }
-
   .roster-table th {
     padding: 1.1rem 1.2rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    font-weight: 500;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--gold); font-weight: 500;
   }
-
   .roster-table td {
-    padding: 1rem 1.2rem;
-    border-bottom: 1px solid var(--line);
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.95rem;
+    padding: 1rem 1.2rem; border-bottom: 1px solid var(--line);
+    font-family: 'Oswald', sans-serif; font-size: 0.95rem;
     transition: all 0.3s;
   }
-
   .roster-table tbody tr {
-    opacity: 0;
-    transform: translateX(-20px);
+    opacity: 0; transform: translateX(-20px);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
-
-  .roster-table tbody tr.shown {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .roster-table tbody tr:hover td {
-    background: rgba(212, 168, 73, 0.05);
-    color: var(--gold-bright);
-  }
-
-  .roster-table tbody tr.cmd td {
-    background: linear-gradient(90deg, rgba(212,168,73,0.12) 0%, transparent 70%);
-    border-left: 3px solid var(--gold);
-  }
-
-  .roster-table tbody tr.cmd:hover td {
-    background: linear-gradient(90deg, rgba(212,168,73,0.18) 0%, rgba(212,168,73,0.03) 70%);
-  }
+  .roster-table tbody tr.shown { opacity: 1; transform: translateX(0); }
+  .roster-table tbody tr:hover td { background: rgba(212, 168, 73, 0.05); color: var(--gold-bright); }
+  .roster-table tbody tr.cmd td { background: linear-gradient(90deg, rgba(212,168,73,0.12) 0%, transparent 70%); border-left: 3px solid var(--gold); }
+  .roster-table tbody tr.cmd:hover td { background: linear-gradient(90deg, rgba(212,168,73,0.18) 0%, rgba(212,168,73,0.03) 70%); }
 
   .rank-badge {
-    display: inline-block;
-    padding: 0.3rem 0.7rem;
-    background: var(--steel-darkest);
-    border: 1px solid var(--steel-edge);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    display: inline-block; padding: 0.3rem 0.7rem;
+    background: var(--steel-darkest); border: 1px solid var(--steel-edge);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+    color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;
   }
-
   .rank-badge.cmd {
     background: linear-gradient(180deg, var(--gold-bright), var(--gold-base));
-    color: var(--steel-darkest);
-    border-color: var(--gold-shine);
+    color: var(--steel-darkest); border-color: var(--gold-shine);
     box-shadow: inset 0 1px 0 rgba(255,242,196,0.6);
   }
 
@@ -463,147 +437,61 @@
   .role { color: var(--text-dim); font-style: italic; font-size: 0.9rem; }
   .stat-num { color: var(--gold-bright); font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
 
-  /* === ТУРНИРЫ И ДОСТИЖЕНИЯ === */
-  .tour-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 2rem;
-    text-align: left;
-  }
+  /* === ТУРНИРЫ + ДОСТИЖЕНИЯ === */
+  .tour-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; text-align: left; }
 
-  /* левая колонка — список турниров */
   .tour-list {
     background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border: 1px solid var(--steel-edge);
-    padding: 1.5rem;
+    border: 1px solid var(--steel-edge); padding: 1.5rem;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 4px 12px rgba(0,0,0,0.3);
   }
-
   .tour-list-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--gold);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+    color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase;
+    margin-bottom: 1.2rem; padding-bottom: 0.8rem;
     border-bottom: 1px solid var(--line);
   }
-
   .tour-item {
-    display: grid;
-    grid-template-columns: 60px 1fr auto;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px dashed var(--line);
-    align-items: center;
-    transition: all 0.3s;
+    display: grid; grid-template-columns: 60px 1fr auto;
+    gap: 1rem; padding: 1rem 0; border-bottom: 1px dashed var(--line);
+    align-items: center; transition: all 0.3s;
   }
-
   .tour-item:last-child { border-bottom: none; }
-
-  .tour-item:hover {
-    padding-left: 0.8rem;
-    background: linear-gradient(90deg, rgba(212,168,73,0.06), transparent);
-  }
-
-  .tour-medal {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    font-size: 1.6rem;
-    text-align: center;
-    line-height: 1;
-  }
-
-  .tour-medal.gold {
-    background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .tour-medal.silver {
-    background: linear-gradient(180deg, #e0e0e0, #888888);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .tour-medal.bronze {
-    background: linear-gradient(180deg, #d49b6a, #7a4f2f);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
+  .tour-item:hover { padding-left: 0.8rem; background: linear-gradient(90deg, rgba(212,168,73,0.06), transparent); }
+  .tour-medal { font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.6rem; text-align: center; line-height: 1; }
+  .tour-medal.gold { background: linear-gradient(180deg, var(--gold-shine), var(--gold-base)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .tour-medal.silver { background: linear-gradient(180deg, #e0e0e0, #888888); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .tour-medal.bronze { background: linear-gradient(180deg, #d49b6a, #7a4f2f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .tour-medal.part { color: var(--text-dim); font-size: 1.2rem; }
-
   .tour-info h4 { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 1rem; margin-bottom: 0.2rem; }
   .tour-info p { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--text-dim); }
+  .tour-place { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem; color: var(--gold); text-align: right; min-width: 80px; }
 
-  .tour-place {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--gold);
-    text-align: right;
-    min-width: 80px;
-  }
-
-  /* правая колонка — достижения */
-  .achievements {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    align-content: start;
-  }
-
+  .achievements { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; align-content: start; }
   .achievement {
     background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    border: 1px solid var(--steel-edge);
-    padding: 1.2rem;
-    text-align: center;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
+    border: 1px solid var(--steel-edge); padding: 1.2rem; text-align: center;
+    transition: all 0.3s; position: relative; overflow: hidden;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 2px 8px rgba(0,0,0,0.3);
   }
-
   .achievement::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at center, rgba(212,168,73,0.15), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.4s;
+    opacity: 0; transition: opacity 0.4s;
   }
-
   .achievement:hover {
-    border-color: var(--gold);
-    transform: translateY(-3px);
+    border-color: var(--gold); transform: translateY(-3px);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.5), 0 0 25px rgba(212,168,73,0.2);
   }
-
   .achievement:hover::before { opacity: 1; }
-
   .achievement-icon {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    display: block;
+    font-size: 1.8rem; margin-bottom: 0.5rem; display: block;
     background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
   }
-
-  .achievement-title {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    font-size: 0.85rem;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .achievement-desc {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    position: relative;
-    z-index: 1;
-  }
+  .achievement-title { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.85rem; color: var(--text); margin-bottom: 0.3rem; position: relative; z-index: 1; }
+  .achievement-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-dim); position: relative; z-index: 1; }
 
   /* === РАСПИСАНИЕ === */
   .schedule { text-align: left; }
@@ -620,11 +508,7 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 20px rgba(212,168,73,0.15);
   }
   .sched-date { font-family: 'Cinzel', serif; font-weight: 700; text-align: center; border-right: 1px solid var(--line); padding-right: 1rem; }
-  .sched-date .d {
-    font-size: 2.2rem; line-height: 1;
-    background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
+  .sched-date .d { font-size: 2.2rem; line-height: 1; background: linear-gradient(180deg, var(--gold-shine), var(--gold-base)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .sched-date .m { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; letter-spacing: 0.2em; }
   .sched-info h4 { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 1.05rem; margin-bottom: 0.3rem; }
   .sched-info p { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 0.88rem; color: var(--text-dim); }
@@ -669,7 +553,11 @@
     background: linear-gradient(180deg, var(--steel-dark) 0%, var(--steel-darkest) 100%);
     text-align: center;
   }
-  .foot-logo { width: 60px; margin-bottom: 1.2rem; filter: drop-shadow(0 0 20px rgba(212,168,73,0.3)); }
+  .foot-logo {
+    width: 60px; margin-bottom: 1.2rem;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 20px rgba(212,168,73,0.3));
+  }
   .foot-name {
     font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3em;
     background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold-base) 100%);
@@ -690,7 +578,7 @@
     .nav-inner { padding: 0 1rem; }
     .nav-links { display: none; }
     .container { padding: 0 1rem; }
-    .hero { padding: 5rem 0 3rem; }
+    .hero { padding: 5rem 0 2.5rem; }
     .strip-inner { grid-template-columns: 1fr 1fr; }
     .strip-cell:nth-child(2) { border-right: none; }
     .strip-cell:nth-child(1), .strip-cell:nth-child(2) { border-bottom: 1px solid var(--steel-edge); }
@@ -734,57 +622,11 @@
 <div class="container">
   <section class="hero">
 
-    <!-- ЛОГО + ВРАЩАЮЩАЯСЯ КОМПАСНАЯ РОЗА ПОД НИМ + РАМА -->
     <div class="logo-stage">
-
-      <!-- ВРАЩАЮЩАЯСЯ КОМПАСНАЯ РОЗА — крутится за лого, видна сквозь прозрачные части -->
-      <div class="compass-rose">
-        <svg viewBox="-250 -250 500 500" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="roseGrad">
-              <stop offset="0" stop-color="#f4d57a" stop-opacity="0.0"/>
-              <stop offset="0.5" stop-color="#d4a849" stop-opacity="0.7"/>
-              <stop offset="1" stop-color="#6e5420" stop-opacity="0.4"/>
-            </radialGradient>
-            <linearGradient id="bladeGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#fff2c4" stop-opacity="0.9"/>
-              <stop offset="1" stop-color="#6e5420" stop-opacity="0.3"/>
-            </linearGradient>
-          </defs>
-
-          <!-- 8 длинных лучей розы ветров -->
-          <g fill="url(#bladeGrad)" opacity="0.6">
-            <polygon points="0,0 -8,-200 0,-230 8,-200"/>
-            <polygon points="0,0 -8,-200 0,-230 8,-200" transform="rotate(45)"/>
-            <polygon points="0,0 -8,-200 0,-230 8,-200" transform="rotate(90)"/>
-            <polygon points="0,0 -8,-200 0,-230 8,-200" transform="rotate(135)"/>
-            <polygon points="0,0 -8,-200 0,-230 8,-200" transform="rotate(180)"/>
-            <polygon points="0,0 -8,-200 0,-230 8,-200" transform="rotate(225)"/>
-            <polygon points="0,0 -8,-200 0,-230 8,-200" transform="rotate(270)"/>
-            <polygon points="0,0 -8,-200 0,-230 8,-200" transform="rotate(315)"/>
-          </g>
-
-          <!-- 8 коротких лучей -->
-          <g fill="#d4a849" opacity="0.4">
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(22.5)"/>
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(67.5)"/>
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(112.5)"/>
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(157.5)"/>
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(202.5)"/>
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(247.5)"/>
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(292.5)"/>
-            <polygon points="0,0 -5,-130 0,-150 5,-130" transform="rotate(337.5)"/>
-          </g>
-
-          <!-- центральное свечение -->
-          <circle cx="0" cy="0" r="50" fill="url(#roseGrad)"/>
-        </svg>
-      </div>
-
-      <!-- ЛОГО -->
+      <!-- лого с blend mode — чёрный фон становится прозрачным -->
       <img src="logo.png" alt="Gardemarines" class="logo-img">
 
-      <!-- РАМА с заклёпками поверх -->
+      <!-- золотая рама с заклёпками -->
       <div class="logo-frame">
         <svg viewBox="-250 -250 500 500" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -836,7 +678,7 @@
   </section>
 </div>
 
-<!-- ПОЛОСА СО СТАТАМИ -->
+<!-- СТАТЫ -->
 <div class="stat-strip">
   <div class="strip-inner">
     <div class="strip-cell"><div class="strip-num">47</div><div class="strip-label">Офицеров</div></div>
@@ -846,7 +688,7 @@
   </div>
 </div>
 
-<!-- СОСТАВ — 20 ИГРОКОВ -->
+<!-- СОСТАВ -->
 <div class="container">
   <section class="block reveal" id="roster">
     <div class="section-tag">Командование</div>
@@ -891,7 +733,7 @@
   </section>
 </div>
 
-<!-- ТУРНИРЫ И ДОСТИЖЕНИЯ -->
+<!-- ТУРНИРЫ -->
 <div class="container">
   <section class="block reveal" id="tournaments">
     <div class="section-tag">Слава флота</div>
@@ -899,109 +741,25 @@
     <p class="section-sub">Где мы были, что взяли, чем гордимся</p>
 
     <div class="tour-grid">
-
-      <!-- ЛЕВО: турниры -->
       <div class="tour-list">
         <div class="tour-list-title">◆ История участия</div>
-
-        <div class="tour-item">
-          <div class="tour-medal gold">★</div>
-          <div class="tour-info">
-            <h4>Кубок Балтики</h4>
-            <p>МАЙ 2025 · 32 клана · финал 7v7</p>
-          </div>
-          <div class="tour-place">1 место</div>
-        </div>
-
-        <div class="tour-item">
-          <div class="tour-medal silver">★</div>
-          <div class="tour-info">
-            <h4>Шторм-сезон XV</h4>
-            <p>ЯНВ 2026 · клановые бои · лига Шторм</p>
-          </div>
-          <div class="tour-place">2 место</div>
-        </div>
-
-        <div class="tour-item">
-          <div class="tour-medal bronze">★</div>
-          <div class="tour-info">
-            <h4>Турнир «Стальной крейсер»</h4>
-            <p>ОКТ 2025 · 64 клана · double elimination</p>
-          </div>
-          <div class="tour-place">3 место</div>
-        </div>
-
-        <div class="tour-item">
-          <div class="tour-medal gold">★</div>
-          <div class="tour-info">
-            <h4>Кубок Адмирала (внутр.)</h4>
-            <p>МАР 2026 · внутренний турнир флота</p>
-          </div>
-          <div class="tour-place">1 место</div>
-        </div>
-
-        <div class="tour-item">
-          <div class="tour-medal part">◆</div>
-          <div class="tour-info">
-            <h4>Глобальная карта · Сезон 4</h4>
-            <p>2025 · стратегический режим</p>
-          </div>
-          <div class="tour-place">Top-15</div>
-        </div>
-
-        <div class="tour-item">
-          <div class="tour-medal silver">★</div>
-          <div class="tour-info">
-            <h4>Линия фронта · Сезон 8</h4>
-            <p>ИЮН 2025 · командный режим</p>
-          </div>
-          <div class="tour-place">2 место</div>
-        </div>
-
-        <div class="tour-item">
-          <div class="tour-medal part">◆</div>
-          <div class="tour-info">
-            <h4>Гонка вооружений</h4>
-            <p>СЕН 2024 · отборочный этап</p>
-          </div>
-          <div class="tour-place">1/4 финала</div>
-        </div>
+        <div class="tour-item"><div class="tour-medal gold">★</div><div class="tour-info"><h4>Кубок Балтики</h4><p>МАЙ 2025 · 32 клана · финал 7v7</p></div><div class="tour-place">1 место</div></div>
+        <div class="tour-item"><div class="tour-medal silver">★</div><div class="tour-info"><h4>Шторм-сезон XV</h4><p>ЯНВ 2026 · клановые бои · лига Шторм</p></div><div class="tour-place">2 место</div></div>
+        <div class="tour-item"><div class="tour-medal bronze">★</div><div class="tour-info"><h4>Турнир «Стальной крейсер»</h4><p>ОКТ 2025 · 64 клана · double elimination</p></div><div class="tour-place">3 место</div></div>
+        <div class="tour-item"><div class="tour-medal gold">★</div><div class="tour-info"><h4>Кубок Адмирала (внутр.)</h4><p>МАР 2026 · внутренний турнир флота</p></div><div class="tour-place">1 место</div></div>
+        <div class="tour-item"><div class="tour-medal part">◆</div><div class="tour-info"><h4>Глобальная карта · Сезон 4</h4><p>2025 · стратегический режим</p></div><div class="tour-place">Top-15</div></div>
+        <div class="tour-item"><div class="tour-medal silver">★</div><div class="tour-info"><h4>Линия фронта · Сезон 8</h4><p>ИЮН 2025 · командный режим</p></div><div class="tour-place">2 место</div></div>
+        <div class="tour-item"><div class="tour-medal part">◆</div><div class="tour-info"><h4>Гонка вооружений</h4><p>СЕН 2024 · отборочный этап</p></div><div class="tour-place">1/4 финала</div></div>
       </div>
 
-      <!-- ПРАВО: достижения -->
       <div class="achievements">
-        <div class="achievement">
-          <span class="achievement-icon">⚔</span>
-          <div class="achievement-title">Кракен</div>
-          <div class="achievement-desc">128 раз во флоте</div>
-        </div>
-        <div class="achievement">
-          <span class="achievement-icon">★</span>
-          <div class="achievement-title">Конфедерат</div>
-          <div class="achievement-desc">412 раз</div>
-        </div>
-        <div class="achievement">
-          <span class="achievement-icon">⚓</span>
-          <div class="achievement-title">Главный калибр</div>
-          <div class="achievement-desc">89 раз</div>
-        </div>
-        <div class="achievement">
-          <span class="achievement-icon">⚜</span>
-          <div class="achievement-title">Стрелок</div>
-          <div class="achievement-desc">203 раза</div>
-        </div>
-        <div class="achievement">
-          <span class="achievement-icon">◎</span>
-          <div class="achievement-title">Снайпер</div>
-          <div class="achievement-desc">156 раз</div>
-        </div>
-        <div class="achievement">
-          <span class="achievement-icon">⊕</span>
-          <div class="achievement-title">Защитник</div>
-          <div class="achievement-desc">94 раза</div>
-        </div>
+        <div class="achievement"><span class="achievement-icon">⚔</span><div class="achievement-title">Кракен</div><div class="achievement-desc">128 раз во флоте</div></div>
+        <div class="achievement"><span class="achievement-icon">★</span><div class="achievement-title">Конфедерат</div><div class="achievement-desc">412 раз</div></div>
+        <div class="achievement"><span class="achievement-icon">⚓</span><div class="achievement-title">Главный калибр</div><div class="achievement-desc">89 раз</div></div>
+        <div class="achievement"><span class="achievement-icon">⚜</span><div class="achievement-title">Стрелок</div><div class="achievement-desc">203 раза</div></div>
+        <div class="achievement"><span class="achievement-icon">◎</span><div class="achievement-title">Снайпер</div><div class="achievement-desc">156 раз</div></div>
+        <div class="achievement"><span class="achievement-icon">⊕</span><div class="achievement-title">Защитник</div><div class="achievement-desc">94 раза</div></div>
       </div>
-
     </div>
   </section>
 </div>
@@ -1089,14 +847,16 @@
 </footer>
 
 <script>
-  // частички
+  // === ЧАСТИЧКИ — больше и поярче, разных размеров ===
   const particlesEl = document.getElementById('particles');
-  for (let i = 0; i < 25; i++) {
+  const sizes = ['s', 's', 's', 'm', 'm', 'l']; // больше мелких, меньше крупных
+  for (let i = 0; i < 50; i++) {  // удвоил количество (было 25)
     const p = document.createElement('div');
-    p.className = 'particle';
+    const size = sizes[Math.floor(Math.random() * sizes.length)];
+    p.className = 'particle ' + size;
     p.style.left = Math.random() * 100 + '%';
-    p.style.animationDelay = Math.random() * 18 + 's';
-    p.style.animationDuration = (12 + Math.random() * 10) + 's';
+    p.style.animationDelay = Math.random() * 20 + 's';
+    p.style.animationDuration = (10 + Math.random() * 12) + 's';
     particlesEl.appendChild(p);
   }
 
@@ -1113,7 +873,7 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // АНИМАЦИЯ ПОЯВЛЕНИЯ ИГРОКОВ В ТАБЛИЦЕ — по очереди при попадании в зону видимости
+  // анимация таблицы по очереди
   const rosterRows = document.querySelectorAll('#rosterTable tbody tr');
   const rosterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
