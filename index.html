@@ -160,40 +160,6 @@
     mix-blend-mode: screen;
     filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.6));
   }
-
-  /* === КОРАБЛЬ НА ОРБИТЕ ===
-     Нет контр-вращения: корабль прикреплён к ободу штурвала,
-     едет по касательной, нос всегда по направлению движения.
-  */
-  .ship-orbit {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    pointer-events: none;
-    opacity: 0;
-    animation: orbit-spin 28s linear infinite;
-    animation-delay: 2.5s;
-    animation-fill-mode: forwards;
-  }
-
-  @keyframes orbit-spin {
-    0%   { transform: rotate(-90deg); opacity: 1; }
-    100% { transform: rotate(270deg); opacity: 1; }
-  }
-
-  .ship-svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 130px;
-    height: 52px;
-    margin-top: -239px;
-    margin-left: -65px;
-    filter:
-      drop-shadow(0 2px 8px rgba(0,0,0,0.9))
-      drop-shadow(0 0 14px rgba(212, 168, 73, 0.4));
-  }
-
   /* === ШТУРВАЛЬНАЯ РАМА === */
   .helm-frame {
     position: absolute;
@@ -262,10 +228,10 @@
   .hero-title::after {
     content: 'GARDEMARINES';
     position: absolute; inset: 0;
-    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%);
+    background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.35) 50%, transparent 65%);
     background-size: 250% 100%;
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    animation: shimmer 4s 2.5s ease-in-out infinite;
+    animation: shimmer 7s 3s ease-in-out infinite;
   }
   @keyframes shimmer {
     0% { background-position: 250% 0; }
@@ -347,7 +313,7 @@
   .stat-num { color: var(--gold-bright); font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
 
   /* === ТУРНИРЫ === */
-  .tour-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; text-align: left; }
+  .tour-grid { display: block; text-align: left; max-width: 800px; margin: 0 auto; }
   .tour-list { background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%); border: 1px solid var(--steel-edge); padding: 1.5rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 4px 12px rgba(0,0,0,0.3); }
   .tour-list-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--line); }
   .tour-item { display: grid; grid-template-columns: 60px 1fr auto; gap: 1rem; padding: 1rem 0; border-bottom: 1px dashed var(--line); align-items: center; transition: all 0.3s; }
@@ -449,10 +415,8 @@
     <ul class="nav-links">
       <li><a href="#roster">Состав</a></li>
       <li><a href="#tournaments">Турниры</a></li>
-      <li><a href="#schedule">Расписание</a></li>
-      <li><a href="#recruit">Заявка</a></li>
     </ul>
-    <a href="#recruit" class="nav-cta">Вступить</a>
+    
   </div>
 </nav>
 
@@ -463,188 +427,6 @@
     <div class="logo-stage">
       <div class="logo-glow"></div>
       <img src="logo.png" alt="Gardemarines" class="logo-img">
-
-      <!-- КОРАБЛЬ НА ОРБИТЕ — прикреплён к ободу штурвала -->
-      <div class="ship-orbit">
-        <!--
-          Корабль в системе координат: нос смотрит вправо (+X).
-          Весь orbit-div крутится БЕЗ контр-вращения —
-          корабль едет по касательной как намертво прибитый к кольцу.
-          Расположен сверху, смещён от центра на радиус 312px вверх.
-        -->
-        <svg class="ship-svg" viewBox="-65 -26 130 52" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <!-- корпус: тёмно-серый военный -->
-            <linearGradient id="hullG" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#6a7480"/>
-              <stop offset="45%"  stop-color="#4a5460"/>
-              <stop offset="100%" stop-color="#2a3038"/>
-            </linearGradient>
-            <!-- надстройка: чуть светлее -->
-            <linearGradient id="superG" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#7a8490"/>
-              <stop offset="100%" stop-color="#3d4651"/>
-            </linearGradient>
-            <!-- башни: золото -->
-            <linearGradient id="turretG" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#f4d57a"/>
-              <stop offset="50%"  stop-color="#c9a04a"/>
-              <stop offset="100%" stop-color="#7a5a1a"/>
-            </linearGradient>
-            <!-- ватерлиния акцент -->
-            <linearGradient id="wlG" x1="-1" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stop-color="#d4a849" stop-opacity="0"/>
-              <stop offset="30%"  stop-color="#f4d57a" stop-opacity="0.9"/>
-              <stop offset="70%"  stop-color="#f4d57a" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#d4a849" stop-opacity="0"/>
-            </linearGradient>
-            <!-- дым -->
-            <linearGradient id="smokeG" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%"   stop-color="#778" stop-opacity="0.8"/>
-              <stop offset="100%" stop-color="#556" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-
-          <!-- === КОРПУС === -->
-          <!-- подводная часть (тёмная) -->
-          <path d="M 56,2 C 40,2 -44,4 -58,1 L -62,-1 C -46,-5 40,-5 56,-1 Z"
-                fill="#1e2428" stroke="none"/>
-          <!-- надводный борт -->
-          <path d="M 58,-1 C 42,-5 -44,-5 -60,-2 L -60,2 C -44,5 42,5 58,2 Z"
-                fill="url(#hullG)" stroke="#1a2028" stroke-width="0.3"/>
-          <!-- нос — острый бронированный клин -->
-          <path d="M 58,-1 L 64,0 L 58,2" fill="#5a6470" stroke="#2a3038" stroke-width="0.4"/>
-
-          <!-- якорный клюз -->
-          <circle cx="48" cy="-1" r="1.5" fill="#1a2028" stroke="#d4a849" stroke-width="0.4"/>
-
-          <!-- ватерлиния (золотой штрих) -->
-          <line x1="-56" y1="0" x2="56" y2="0"
-                stroke="url(#wlG)" stroke-width="0.7"/>
-
-          <!-- ПАЛУБА -->
-          <rect x="-52" y="-6" width="108" height="5" rx="0.5"
-                fill="#3d4651" stroke="#2a3038" stroke-width="0.3"/>
-          <!-- доски палубы (тонкие линии) -->
-          <line x1="-40" y1="-6" x2="-40" y2="-1" stroke="#2a3038" stroke-width="0.2" opacity="0.5"/>
-          <line x1="-20" y1="-6" x2="-20" y2="-1" stroke="#2a3038" stroke-width="0.2" opacity="0.5"/>
-          <line x1="0"   y1="-6" x2="0"   y2="-1" stroke="#2a3038" stroke-width="0.2" opacity="0.5"/>
-          <line x1="20"  y1="-6" x2="20"  y2="-1" stroke="#2a3038" stroke-width="0.2" opacity="0.5"/>
-          <line x1="40"  y1="-6" x2="40"  y2="-1" stroke="#2a3038" stroke-width="0.2" opacity="0.5"/>
-
-          <!-- === НОСОВАЯ БАШНЯ ГК (два ствола) === -->
-          <!-- основание -->
-          <ellipse cx="38" cy="-8" rx="9" ry="4" fill="#1e2428" stroke="#2a3038" stroke-width="0.3"/>
-          <!-- башня -->
-          <rect x="30" y="-12" width="16" height="8" rx="2"
-                fill="url(#turretG)" stroke="#6e5420" stroke-width="0.5"/>
-          <!-- срез башни (бронированный лоб) -->
-          <rect x="44" y="-11.5" width="3" height="7" rx="1"
-                fill="#8a6820" stroke="#6e5420" stroke-width="0.3"/>
-          <!-- ствол 1 -->
-          <line x1="47" y1="-10.5" x2="62" y2="-10.5"
-                stroke="#2a3038" stroke-width="2.2" stroke-linecap="round"/>
-          <line x1="47" y1="-10.5" x2="62" y2="-10.5"
-                stroke="#c9a04a" stroke-width="0.8" stroke-linecap="round" stroke-opacity="0.4"/>
-          <!-- ствол 2 -->
-          <line x1="47" y1="-7.5" x2="62" y2="-7.5"
-                stroke="#2a3038" stroke-width="2.2" stroke-linecap="round"/>
-          <line x1="47" y1="-7.5" x2="62" y2="-7.5"
-                stroke="#c9a04a" stroke-width="0.8" stroke-linecap="round" stroke-opacity="0.4"/>
-
-          <!-- === КОРМОВАЯ БАШНЯ ГК === -->
-          <ellipse cx="-32" cy="-8" rx="8" ry="3.5" fill="#1e2428" stroke="#2a3038" stroke-width="0.3"/>
-          <rect x="-40" y="-12" width="14" height="7" rx="2"
-                fill="url(#turretG)" stroke="#6e5420" stroke-width="0.5"/>
-          <rect x="-40" y="-11.5" width="3" height="6" rx="1"
-                fill="#8a6820" stroke="#6e5420" stroke-width="0.3"/>
-          <!-- стволы назад -->
-          <line x1="-43" y1="-10"  x2="-56" y2="-10"
-                stroke="#2a3038" stroke-width="2" stroke-linecap="round"/>
-          <line x1="-43" y1="-10"  x2="-56" y2="-10"
-                stroke="#c9a04a" stroke-width="0.7" stroke-linecap="round" stroke-opacity="0.4"/>
-          <line x1="-43" y1="-7.5" x2="-54" y2="-7.5"
-                stroke="#2a3038" stroke-width="2" stroke-linecap="round"/>
-          <line x1="-43" y1="-7.5" x2="-54" y2="-7.5"
-                stroke="#c9a04a" stroke-width="0.7" stroke-linecap="round" stroke-opacity="0.4"/>
-
-          <!-- === ЦЕНТРАЛЬНАЯ НАДСТРОЙКА === -->
-          <!-- нижний уровень -->
-          <rect x="-14" y="-14" width="28" height="9" rx="1"
-                fill="url(#superG)" stroke="#2a3038" stroke-width="0.4"/>
-          <!-- иллюминаторы нижнего -->
-          <circle cx="-8"  cy="-10" r="1.2" fill="#0a1018" stroke="#d4a849" stroke-width="0.4"/>
-          <circle cx="-2"  cy="-10" r="1.2" fill="#0a1018" stroke="#d4a849" stroke-width="0.4"/>
-          <circle cx="4"   cy="-10" r="1.2" fill="#0a1018" stroke="#d4a849" stroke-width="0.4"/>
-          <circle cx="10"  cy="-10" r="1.2" fill="#0a1018" stroke="#d4a849" stroke-width="0.4"/>
-          <!-- верхний уровень (мостик) -->
-          <rect x="-9" y="-20" width="18" height="7" rx="1"
-                fill="url(#superG)" stroke="#2a3038" stroke-width="0.4"/>
-          <!-- окна мостика -->
-          <rect x="-7"  y="-19" width="3" height="2.5" rx="0.3" fill="#0a1018" stroke="#d4a849" stroke-width="0.3"/>
-          <rect x="-2.5" y="-19" width="3" height="2.5" rx="0.3" fill="#0a1018" stroke="#d4a849" stroke-width="0.3"/>
-          <rect x="2"   y="-19" width="3" height="2.5" rx="0.3" fill="#0a1018" stroke="#d4a849" stroke-width="0.3"/>
-          <rect x="6.5" y="-19" width="3" height="2.5" rx="0.3" fill="#0a1018" stroke="#d4a849" stroke-width="0.3"/>
-          <!-- козырёк мостика -->
-          <rect x="-10" y="-20.5" width="20" height="1.5" rx="0.5"
-                fill="#5a6470" stroke="#2a3038" stroke-width="0.3"/>
-
-          <!-- === ТРУБА === -->
-          <!-- основание -->
-          <rect x="-5" y="-20" width="9" height="7" rx="1"
-                fill="#3d4651" stroke="#2a3038" stroke-width="0.3"/>
-          <!-- сама труба -->
-          <rect x="-4" y="-27" width="7" height="10" rx="1.5"
-                fill="#2a3038" stroke="#1a2028" stroke-width="0.4"/>
-          <!-- полоса на трубе (золотая) -->
-          <rect x="-4" y="-22" width="7" height="1.5"
-                fill="#d4a849" opacity="0.7"/>
-          <!-- дым (градиентные эллипсы) -->
-          <ellipse cx="1" cy="-29" rx="3.5" ry="2"   fill="url(#smokeG)" opacity="0.7"/>
-          <ellipse cx="3" cy="-33" rx="5"   ry="2.5" fill="url(#smokeG)" opacity="0.4"/>
-          <ellipse cx="5" cy="-37" rx="6.5" ry="3"   fill="url(#smokeG)" opacity="0.2"/>
-
-          <!-- === МАЧТА === -->
-          <line x1="3" y1="-20" x2="3" y2="-46"
-                stroke="#4a5460" stroke-width="0.9" stroke-linecap="round"/>
-          <!-- рей верхний -->
-          <line x1="-8" y1="-40" x2="14" y2="-40"
-                stroke="#3a4450" stroke-width="0.6" stroke-linecap="round"/>
-          <!-- рей нижний -->
-          <line x1="-5" y1="-32" x2="11" y2="-32"
-                stroke="#3a4450" stroke-width="0.5" stroke-linecap="round"/>
-          <!-- вантовые тросы -->
-          <line x1="3" y1="-46" x2="20" y2="-20"
-                stroke="#2a3038" stroke-width="0.4" stroke-opacity="0.6"/>
-          <line x1="3" y1="-46" x2="-14" y2="-20"
-                stroke="#2a3038" stroke-width="0.4" stroke-opacity="0.6"/>
-
-          <!-- ФЛАГ (золотой, развевается) -->
-          <path d="M3,-46 L18,-43 L14,-40 L3,-40 Z"
-                fill="#d4a849" stroke="#b8902f" stroke-width="0.4"/>
-          <path d="M8,-45 Q14,-43 12,-41" fill="none"
-                stroke="#f4d57a" stroke-width="0.4" opacity="0.6"/>
-
-          <!-- антенна -->
-          <line x1="3" y1="-46" x2="3" y2="-50"
-                stroke="#4a5460" stroke-width="0.5"/>
-
-          <!-- боковое орудие (зенитное, среднее) -->
-          <rect x="14" y="-9" width="4" height="3" rx="0.5"
-                fill="#c9a04a" stroke="#6e5420" stroke-width="0.3"/>
-          <line x1="18" y1="-8" x2="24" y2="-11"
-                stroke="#2a3038" stroke-width="1.5" stroke-linecap="round"/>
-
-          <!-- корма — закруглённая -->
-          <path d="M -60,-2 Q -65,0 -60,2" fill="#3a4450" stroke="#1a2028" stroke-width="0.4"/>
-
-          <!-- кильватерная волна (золотые линии) -->
-          <path d="M -62,1 Q -70,3 -75,2" fill="none"
-                stroke="#d4a849" stroke-width="0.6" stroke-opacity="0.5"/>
-          <path d="M -62,-1 Q -70,-3 -74,-2" fill="none"
-                stroke="#d4a849" stroke-width="0.4" stroke-opacity="0.3"/>
-        </svg>
-      </div>
 
       <!-- ШТУРВАЛЬНАЯ РАМА -->
       <div class="helm-frame">
@@ -690,18 +472,10 @@
     </div>
     <h1 class="hero-title">GARDEMARINES</h1>
     <p class="hero-sub">Клан собран из тех, кто играет давно и серьёзно. Дисциплина, командное взаимодействие и хорошая компания на голосе.</p>
-    <div class="hero-motto">⚓ Честь · Дисциплина · Флаг ⚓</div>
     <div class="hero-buttons">
-      <a href="#recruit" class="btn btn-gold">Записаться на флот →</a>
-      <a href="#roster" class="btn btn-steel">Состав флота</a>
+      <a href="#roster"      class="btn btn-gold">Состав флота</a>
+      <a href="#tournaments" class="btn btn-steel">Турниры</a>
     </div>
-  </section>
-</div>
-
-<!-- СТАТЫ -->
-<div class="stat-strip">
-  <div class="strip-inner">
-    <div class="strip-cell"><div class="strip-num">47</div><div class="strip-label">Офицеров</div></div>
     <div class="strip-cell"><div class="strip-num">68%</div><div class="strip-label">Винрейт</div></div>
     <div class="strip-cell"><div class="strip-num">2 140</div><div class="strip-label">Боёв в сезоне</div></div>
     <div class="strip-cell"><div class="strip-num">III</div><div class="strip-label">Лига Шторм</div></div>
@@ -715,37 +489,9 @@
     <h2 class="section-title">Офицерский <em>состав</em></h2>
     <p class="section-sub">Те, кто ведёт эскадру в бой</p>
 
-    <table class="roster-table" id="rosterTable">
-      <thead>
-        <tr>
-          <th>#</th><th>Звание</th><th>Никнейм</th>
-          <th class="hide-mob">Должность</th><th>WR</th>
-          <th class="hide-mob">PR</th><th class="hide-mob">Стаж</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="cmd"><td>01</td><td><span class="rank-badge cmd">★ Адмирал</span></td><td class="nick">Игрок_1</td><td class="hide-mob role">Командир флота</td><td class="stat-num">71.2%</td><td class="hide-mob stat-num">2 340</td><td class="hide-mob stat-num">3 г.</td></tr>
-        <tr><td>02</td><td><span class="rank-badge">Кап. 1р</span></td><td class="nick">Игрок_2</td><td class="hide-mob role">Зам. командира</td><td class="stat-num">68.0%</td><td class="hide-mob stat-num">1 980</td><td class="hide-mob stat-num">2 г.</td></tr>
-        <tr><td>03</td><td><span class="rank-badge">Кап. 2р</span></td><td class="nick">Игрок_3</td><td class="hide-mob role">Тактик · Линкоры</td><td class="stat-num">65.0%</td><td class="hide-mob stat-num">1 820</td><td class="hide-mob stat-num">2 г.</td></tr>
-        <tr><td>04</td><td><span class="rank-badge">Кап. 2р</span></td><td class="nick">Игрок_4</td><td class="hide-mob role">Стратег · Крейсера</td><td class="stat-num">64.5%</td><td class="hide-mob stat-num">1 790</td><td class="hide-mob stat-num">2 г.</td></tr>
-        <tr><td>05</td><td><span class="rank-badge">Кап. 3р</span></td><td class="nick">Игрок_5</td><td class="hide-mob role">Эсминцы · Разведка</td><td class="stat-num">63.0%</td><td class="hide-mob stat-num">1 750</td><td class="hide-mob stat-num">1 г.</td></tr>
-        <tr><td>06</td><td><span class="rank-badge">Кап. 3р</span></td><td class="nick">Игрок_6</td><td class="hide-mob role">Авианосцы</td><td class="stat-num">62.0%</td><td class="hide-mob stat-num">1 720</td><td class="hide-mob stat-num">1 г.</td></tr>
-        <tr><td>07</td><td><span class="rank-badge">Ст. лейтенант</span></td><td class="nick">Игрок_7</td><td class="hide-mob role">Крейсера · ПВО</td><td class="stat-num">61.0%</td><td class="hide-mob stat-num">1 640</td><td class="hide-mob stat-num">1 г.</td></tr>
-        <tr><td>08</td><td><span class="rank-badge">Ст. лейтенант</span></td><td class="nick">Игрок_8</td><td class="hide-mob role">Линкоры · Поддержка</td><td class="stat-num">60.5%</td><td class="hide-mob stat-num">1 610</td><td class="hide-mob stat-num">11 мес.</td></tr>
-        <tr><td>09</td><td><span class="rank-badge">Лейтенант</span></td><td class="nick">Игрок_9</td><td class="hide-mob role">Эсминцы</td><td class="stat-num">59.0%</td><td class="hide-mob stat-num">1 560</td><td class="hide-mob stat-num">10 мес.</td></tr>
-        <tr><td>10</td><td><span class="rank-badge">Лейтенант</span></td><td class="nick">Игрок_10</td><td class="hide-mob role">Крейсера</td><td class="stat-num">58.5%</td><td class="hide-mob stat-num">1 540</td><td class="hide-mob stat-num">9 мес.</td></tr>
-        <tr><td>11</td><td><span class="rank-badge">Лейтенант</span></td><td class="nick">Игрок_11</td><td class="hide-mob role">Авианосцы</td><td class="stat-num">58.0%</td><td class="hide-mob stat-num">1 520</td><td class="hide-mob stat-num">8 мес.</td></tr>
-        <tr><td>12</td><td><span class="rank-badge">Мл. лейтенант</span></td><td class="nick">Игрок_12</td><td class="hide-mob role">Линкоры</td><td class="stat-num">57.5%</td><td class="hide-mob stat-num">1 500</td><td class="hide-mob stat-num">7 мес.</td></tr>
-        <tr><td>13</td><td><span class="rank-badge">Мл. лейтенант</span></td><td class="nick">Игрок_13</td><td class="hide-mob role">Эсминцы</td><td class="stat-num">57.0%</td><td class="hide-mob stat-num">1 480</td><td class="hide-mob stat-num">6 мес.</td></tr>
-        <tr><td>14</td><td><span class="rank-badge">Мичман</span></td><td class="nick">Игрок_14</td><td class="hide-mob role">Крейсера</td><td class="stat-num">56.5%</td><td class="hide-mob stat-num">1 460</td><td class="hide-mob stat-num">6 мес.</td></tr>
-        <tr><td>15</td><td><span class="rank-badge">Мичман</span></td><td class="nick">Игрок_15</td><td class="hide-mob role">Линкоры</td><td class="stat-num">56.0%</td><td class="hide-mob stat-num">1 440</td><td class="hide-mob stat-num">5 мес.</td></tr>
-        <tr><td>16</td><td><span class="rank-badge">Мичман</span></td><td class="nick">Игрок_16</td><td class="hide-mob role">Эсминцы</td><td class="stat-num">55.5%</td><td class="hide-mob stat-num">1 420</td><td class="hide-mob stat-num">5 мес.</td></tr>
-        <tr><td>17</td><td><span class="rank-badge">Гардемарин</span></td><td class="nick">Игрок_17</td><td class="hide-mob role">Универсал</td><td class="stat-num">55.0%</td><td class="hide-mob stat-num">1 400</td><td class="hide-mob stat-num">4 мес.</td></tr>
-        <tr><td>18</td><td><span class="rank-badge">Гардемарин</span></td><td class="nick">Игрок_18</td><td class="hide-mob role">Крейсера</td><td class="stat-num">54.5%</td><td class="hide-mob stat-num">1 380</td><td class="hide-mob stat-num">3 мес.</td></tr>
-        <tr><td>19</td><td><span class="rank-badge">Гардемарин</span></td><td class="nick">Игрок_19</td><td class="hide-mob role">Эсминцы</td><td class="stat-num">54.0%</td><td class="hide-mob stat-num">1 360</td><td class="hide-mob stat-num">2 мес.</td></tr>
-        <tr><td>20</td><td><span class="rank-badge">Кадет</span></td><td class="nick">Игрок_20</td><td class="hide-mob role">Стажёр</td><td class="stat-num">52.0%</td><td class="hide-mob stat-num">1 280</td><td class="hide-mob stat-num">1 мес.</td></tr>
-      </tbody>
-    </table>
+    <div style="display:flex;justify-content:center;margin:0 auto;">
+      <canvas id="radarCanvas" width="620" height="620" style="display:block;width:100%;max-width:680px;background:transparent;"></canvas>
+    </div>
   </section>
 </div>
 
@@ -768,83 +514,17 @@
         <div class="tour-item"><div class="tour-medal part">◆</div><div class="tour-info"><h4>Гонка вооружений</h4><p>СЕН 2024 · отборочный этап</p></div><div class="tour-place">1/4 финала</div></div>
       </div>
 
-      <div class="achievements">
-        <div class="achievement"><span class="achievement-icon">⚔</span><div class="achievement-title">Кракен</div><div class="achievement-desc">128 раз во флоте</div></div>
-        <div class="achievement"><span class="achievement-icon">★</span><div class="achievement-title">Конфедерат</div><div class="achievement-desc">412 раз</div></div>
-        <div class="achievement"><span class="achievement-icon">⚓</span><div class="achievement-title">Главный калибр</div><div class="achievement-desc">89 раз</div></div>
-        <div class="achievement"><span class="achievement-icon">⚜</span><div class="achievement-title">Стрелок</div><div class="achievement-desc">203 раза</div></div>
-        <div class="achievement"><span class="achievement-icon">◎</span><div class="achievement-title">Снайпер</div><div class="achievement-desc">156 раз</div></div>
-        <div class="achievement"><span class="achievement-icon">⊕</span><div class="achievement-title">Защитник</div><div class="achievement-desc">94 раза</div></div>
       </div>
+    </div>
     </div>
   </section>
 </div>
 
 <!-- РАСПИСАНИЕ -->
-<div class="container">
-  <section class="block reveal" id="schedule">
-    <div class="section-tag">Боевой график</div>
-    <h2 class="section-title">Боевое <em>расписание</em></h2>
-    <p class="section-sub">Тренировки, бои, события на эту неделю</p>
-    <div class="schedule">
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">28</div><div class="m">ПН</div></div>
-        <div class="sched-info"><h4>Тренировочный бой 7v7</h4><p>Отработка взаимодействия линкор + эсминец</p></div>
-        <div class="sched-time">20:00 МСК</div>
-        <div class="sched-tag train">Тренировка</div>
-      </div>
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">30</div><div class="m">СР</div></div>
-        <div class="sched-info"><h4>Клановый бой · Лига Шторм</h4><p>Основной состав, сбор на голосе за 30 минут</p></div>
-        <div class="sched-time">21:00 МСК</div>
-        <div class="sched-tag battle">Бой</div>
-      </div>
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">02</div><div class="m">СБ</div></div>
-        <div class="sched-info"><h4>Кубок Адмирала</h4><p>Внутренний турнир флота, призы от командования</p></div>
-        <div class="sched-time">19:00 МСК</div>
-        <div class="sched-tag event">Событие</div>
-      </div>
-      <div class="sched-row">
-        <div class="sched-date"><div class="d">03</div><div class="m">ВС</div></div>
-        <div class="sched-info"><h4>Открытое собрание флота</h4><p>Обсуждение стратегии на следующий сезон</p></div>
-        <div class="sched-time">20:00 МСК</div>
-        <div class="sched-tag event">Событие</div>
-      </div>
-    </div>
-  </section>
-</div>
+
 
 <!-- ВСТУПИТЬ -->
-<div class="container">
-  <section class="block reveal" id="recruit">
-    <div class="section-tag">Призыв на флот</div>
-    <h2 class="section-title">Стать <em>гардемарином</em></h2>
-    <p class="section-sub">Если ты ищешь дисциплину, команду и серьёзный подход</p>
 
-    <div class="recruit">
-      <div class="recruit-l">
-        <h3>Призыв открыт</h3>
-        <p>Если ты ищешь команду, где играют ради результата, а не ради статусов — есть место. Мы небольшие, серьёзные и без токсичности.</p>
-        <p>Подача заявки — через Discord. Рассматриваем в течение суток, потом — пробный вечер на голосе и пара совместных боёв.</p>
-        <div class="hero-buttons" style="margin-top: 1.5rem; justify-content: flex-start;">
-          <a href="#" class="btn btn-gold">Discord →</a>
-          <a href="#" class="btn btn-steel">Связаться</a>
-        </div>
-      </div>
-      <div class="recruit-r">
-        <ul class="req-list">
-          <li><span class="key">Винрейт</span><span class="val">от 55%</span></li>
-          <li><span class="key">Боёв сыграно</span><span class="val">от 3 000</span></li>
-          <li><span class="key">Корабли</span><span class="val">X уровень</span></li>
-          <li><span class="key">Discord + микро</span><span class="val">обязательно</span></li>
-          <li><span class="key">Возраст</span><span class="val">от 18 лет</span></li>
-          <li><span class="key">Активность</span><span class="val">3+ вечера/нед</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</div>
 
 <footer>
   <div class="container">
@@ -886,18 +566,433 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  const rosterRows = document.querySelectorAll('#rosterTable tbody tr');
-  const rosterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        rosterRows.forEach((row, i) => {
-          setTimeout(() => row.classList.add('shown'), i * 60);
-        });
-        rosterObserver.disconnect();
-      }
+
+
+  // ============ RADAR ============
+  (function(){
+    const cv = document.getElementById('radarCanvas');
+    if(!cv) return;
+    const ctx = cv.getContext('2d');
+    const W=620, CX=310, CY=310, RMAX=268, TAU=Math.PI*2, SPEED=0.0028;
+
+    const TIER_R   = {cmd:52, off:108, grd:166, cdt:224};
+
+    const PLAYERS=[
+      {nick:'Игрок_1',  tier:'cmd'},{nick:'Игрок_2',  tier:'cmd'},
+      {nick:'Игрок_3',  tier:'cmd'},{nick:'Игрок_4',  tier:'cmd'},
+      {nick:'Игрок_5',  tier:'off'},{nick:'Игрок_6',  tier:'off'},
+      {nick:'Игрок_7',  tier:'off'},{nick:'Игрок_8',  tier:'off'},
+      {nick:'Игрок_9',  tier:'off'},{nick:'Игрок_10', tier:'off'},
+      {nick:'Игрок_11', tier:'off'},{nick:'Игрок_12', tier:'off'},
+      {nick:'Игрок_13', tier:'off'},{nick:'Игрок_14', tier:'off'},
+      {nick:'Игрок_15', tier:'off'},{nick:'Игрок_16', tier:'off'},
+      {nick:'Игрок_17', tier:'off'},{nick:'Игрок_18', tier:'off'},
+      {nick:'Игрок_19', tier:'off'},{nick:'Игрок_20', tier:'off'},
+      {nick:'Игрок_21', tier:'grd'},{nick:'Игрок_22', tier:'grd'},
+      {nick:'Игрок_23', tier:'grd'},{nick:'Игрок_24', tier:'grd'},
+      {nick:'Игрок_25', tier:'grd'},{nick:'Игрок_26', tier:'grd'},
+      {nick:'Игрок_27', tier:'grd'},{nick:'Игрок_28', tier:'grd'},
+      {nick:'Игрок_29', tier:'grd'},{nick:'Игрок_30', tier:'grd'},
+      {nick:'Игрок_31', tier:'grd'},{nick:'Игрок_32', tier:'grd'},
+      {nick:'Игрок_33', tier:'cdt'},{nick:'Игрок_34', tier:'cdt'},
+      {nick:'Игрок_35', tier:'cdt'},{nick:'Игрок_36', tier:'cdt'},
+      {nick:'Игрок_37', tier:'cdt'},{nick:'Игрок_38', tier:'cdt'},
+      {nick:'Игрок_39', tier:'cdt'},{nick:'Игрок_40', tier:'cdt'},
+      {nick:'Игрок_41', tier:'cdt'},{nick:'Игрок_42', tier:'cdt'},
+      {nick:'Игрок_43', tier:'cdt'},{nick:'Игрок_44', tier:'cdt'},
+      {nick:'Игрок_45', tier:'cdt'},
+    ];
+
+    function norm(a){let x=a%TAU;return x<0?x+TAU:x;}
+
+    const byTier={cmd:[],off:[],grd:[],cdt:[]};
+    PLAYERS.forEach((p,i)=>byTier[p.tier].push(i));
+
+    const dots=[];
+    ['cmd','off','grd','cdt'].forEach(t=>{
+      const ids=byTier[t], n=ids.length, r=TIER_R[t];
+      const step=TAU/n;
+      const start=-Math.PI/2;
+      ids.forEach((idx,k)=>{
+        const ang=norm(start+k*step+(Math.random()-0.5)*0.08);
+        const rv=r+(Math.random()-0.5)*12;
+        dots[idx]={
+          x:CX+rv*Math.cos(ang), y:CY+rv*Math.sin(ang),
+          angle:ang, nick:PLAYERS[idx].nick, tier:t,
+          bright:0, revealed:false, group:k%3,
+        };
+      });
     });
-  }, { threshold: 0.1 });
-  if (rosterRows.length) rosterObserver.observe(rosterRows[0]);
+
+    let sweep=norm(-Math.PI/2), totalAngle=0;
+    const TOTAL=3;
+
+    function reset(){
+      totalAngle=0; sweep=norm(-Math.PI/2);
+      dots.forEach(d=>{d.bright=0;d.revealed=false;});
+    }
+
+    function drawBg(){
+      ctx.clearRect(0,0,W,W);
+      [52,108,166,224,268].forEach((r,i)=>{
+        ctx.beginPath();ctx.arc(CX,CY,r,0,TAU);
+        ctx.strokeStyle=i===4?'#c9a04a':'#243040';
+        ctx.lineWidth=i===4?1.2:0.5;ctx.stroke();
+      });
+      [[CX-272,CY,CX+272,CY],[CX,CY-272,CX,CY+272],
+       [CX-193,CY-193,CX+193,CY+193],[CX+193,CY-193,CX-193,CY+193]
+      ].forEach(([x1,y1,x2,y2])=>{
+        ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);
+        ctx.strokeStyle='#243040';ctx.lineWidth=0.4;ctx.stroke();
+      });
+      for(let i=0;i<36;i++){
+        const a=(i/36)*TAU, len=i%9===0?10:i%3===0?6:3;
+        ctx.beginPath();
+        ctx.moveTo(CX+Math.cos(a)*268,CY+Math.sin(a)*268);
+        ctx.lineTo(CX+Math.cos(a)*(268-len),CY+Math.sin(a)*(268-len));
+        ctx.strokeStyle='#c9a04a';ctx.lineWidth=0.6;ctx.stroke();
+      }
+      ctx.font='bold 11px monospace';ctx.fillStyle='#d4a849';
+      ctx.textAlign='center';ctx.fillText('N',CX,CY-276);ctx.fillText('S',CX,CY+287);
+      ctx.textAlign='left'; ctx.fillText('E',CX+278,CY+4);
+      ctx.textAlign='right';ctx.fillText('W',CX-275,CY+4);
+      ctx.beginPath();ctx.arc(CX,CY,3,0,TAU);ctx.fillStyle='#d4a849';ctx.fill();
+
+      const pass=Math.floor(totalAngle/TAU)+1;
+      const pct=Math.min(100,Math.round(((totalAngle%TAU)/TAU)*100));
+      ctx.font='9px monospace';ctx.fillStyle='#2a3a48';ctx.textAlign='left';
+      ctx.fillText('SCAN '+Math.min(pass,TOTAL)+'/'+TOTAL+'  '+pct+'%',CX-260,CY+263);
+    }
+
+    function drawSweep(){
+      const TRAIL=Math.PI*0.55, STEPS=20;
+      for(let i=0;i<STEPS;i++){
+        const a0=sweep-TRAIL*(1-i/STEPS);
+        const a1=sweep-TRAIL*(1-(i+1)/STEPS);
+        const t=(i+1)/STEPS;
+        ctx.save();ctx.beginPath();ctx.moveTo(CX,CY);
+        ctx.arc(CX,CY,RMAX,a0,a1);ctx.closePath();
+        ctx.fillStyle='rgba(212,168,73,'+(t*t*0.13)+')';
+        ctx.fill();ctx.restore();
+      }
+      ctx.beginPath();ctx.moveTo(CX,CY);
+      ctx.lineTo(CX+Math.cos(sweep)*RMAX,CY+Math.sin(sweep)*RMAX);
+      ctx.strokeStyle='rgba(212,168,73,0.88)';ctx.lineWidth=1.2;ctx.stroke();
+    }
+
+    function nickPos(d){
+      const NW=d.nick.length*6.2;
+      const PAD=20;
+      const qx=d.x>CX?1:-1;
+      const qy=d.y>CY?1:-1;
+      let tx=d.x+qx*10;
+      let ty=d.y+qy*13;
+      const anchor=qx>0?'left':'right';
+      if(anchor==='left'){ if(tx+NW>W-PAD) tx=W-PAD-NW; }
+      else               { if(tx-NW<PAD)  tx=PAD+NW;   }
+      ty=Math.max(PAD+10,Math.min(W-PAD,ty));
+      return {tx,ty,anchor};
+    }
+
+    function drawDots(){
+      dots.forEach(d=>{
+        if(d.bright<0.01)return;
+        const a=d.bright;
+        ctx.save();ctx.globalAlpha=a*0.15;
+        ctx.beginPath();ctx.arc(d.x,d.y,12,0,TAU);
+        ctx.fillStyle='#d4a849';ctx.fill();ctx.restore();
+        ctx.save();ctx.globalAlpha=a;
+        ctx.beginPath();ctx.arc(d.x,d.y,3,0,TAU);
+        ctx.fillStyle='#d4a849';ctx.fill();ctx.restore();
+        if(a<0.08)return;
+        const {tx,ty,anchor}=nickPos(d);
+        ctx.save();ctx.globalAlpha=a*0.92;
+        ctx.font='10px monospace';ctx.fillStyle='#d4a849';
+        ctx.textAlign=anchor;ctx.fillText(d.nick,tx,ty);
+        ctx.restore();
+      });
+    }
+
+    function frame(){
+      sweep=norm(sweep+SPEED);
+      totalAngle+=SPEED;
+      if(totalAngle>=TAU*TOTAL+0.01){reset();return requestAnimationFrame(frame);}
+
+      const passes=totalAngle/TAU;
+      dots.forEach(d=>{
+        const lo=d.group, hi=d.group+1;
+        const canReveal=passes>=lo&&passes<hi+0.02;
+        const diff=norm(d.angle-sweep);
+        const onBeam=diff<0.07||diff>TAU-0.015;
+
+        if(onBeam&&canReveal&&!d.revealed){ d.revealed=true; }
+
+        if(d.revealed){
+          if(onBeam&&canReveal) d.bright=Math.min(1,d.bright+0.08);
+          else                  d.bright=Math.max(0,d.bright-0.0015);
+        }
+      });
+
+      drawBg();drawSweep();drawDots();
+      requestAnimationFrame(frame);
+    }
+
+    // запускаем только когда секция попадает в viewport
+    const radarObs=new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting){ radarObs.disconnect(); frame(); }
+    },{threshold:0.2});
+    radarObs.observe(cv);
+  })();
+</script>
+
+
+
+<script>
+(function(){
+  const canvas = document.getElementById('shipCanvas');
+  if(!canvas) return;
+
+  // Размеры берём из родителя .hero
+  function getSize(){
+    const hero = canvas.parentElement;
+    return { w: hero.offsetWidth, h: hero.offsetHeight };
+  }
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+
+  const { w, h } = getSize();
+  renderer.setSize(w, h);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, w/h, 0.1, 500);
+  // камера смотрит чуть сверху-сбоку на орбиту
+  camera.position.set(0, 18, 0);
+  camera.lookAt(0, 0, 0);
+
+  // Освещение
+  scene.add(new THREE.AmbientLight(0x334455, 1.0));
+  const sun = new THREE.DirectionalLight(0xfff2c4, 2.5);
+  sun.position.set(10, 20, 8); sun.castShadow = true;
+  scene.add(sun);
+  const rim = new THREE.DirectionalLight(0xd4a849, 0.8);
+  rim.position.set(-8, 5, -10);
+  scene.add(rim);
+
+  // Орбитальное кольцо
+  const ringGeo = new THREE.TorusGeometry(5.8, 0.018, 8, 160);
+  const ringMat = new THREE.MeshStandardMaterial({ color:0xd4a849, metalness:0.9, roughness:0.2 });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.rotation.x = Math.PI/2;
+  scene.add(ring);
+
+  // Группа орбиты
+  const orbitGroup = new THREE.Group();
+  scene.add(orbitGroup);
+
+  let shipLoaded = false;
+  let shipMesh = null;
+  let flagMesh = null;
+
+  // Загружаем GLB через GLTFLoader
+  // GLTFLoader r128 — подключаем из CDN
+  const loaderScript = document.createElement('script');
+  loaderScript.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
+  loaderScript.onload = () => {
+    const loader = new THREE.GLTFLoader();
+    loader.load(
+      './ship.glb',
+      (gltf) => {
+        const model = gltf.scene;
+
+        // Центрируем модель
+        const box = new THREE.Box3().setFromObject(model);
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+        model.position.sub(center);
+
+        // Масштабируем чтобы вписать в ~2 единицы по длинной оси
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 2.0 / maxDim;
+        model.scale.setScalar(scale);
+
+        // Применяем золотистый материал ко всем мешам
+        model.traverse(child => {
+          if(child.isMesh){
+            child.castShadow = true;
+            child.receiveShadow = true;
+            // сохраняем оригинальные материалы если есть текстуры
+            // если нет — применяем золотистую сталь
+            if(!child.material.map){
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0x8a9aaa,
+                metalness: 0.6,
+                roughness: 0.5,
+              });
+            }
+          }
+        });
+
+        // Поворачиваем нос по направлению орбиты
+        model.rotation.y = Math.PI / 2;
+
+        // Размещаем на орбите (справа от центра)
+        const shipGroup = new THREE.Group();
+        shipGroup.add(model);
+        shipGroup.position.set(5.8, 0, 0);
+        orbitGroup.add(shipGroup);
+        shipMesh = shipGroup;
+        shipLoaded = true;
+      },
+      (xhr) => console.log('Ship: ' + Math.round(xhr.loaded/xhr.total*100) + '%'),
+      (err) => {
+        console.warn('GLB load failed:', err);
+        // Фоллбек — простая геометрия
+        fallbackShip();
+      }
+    );
+  };
+  document.head.appendChild(loaderScript);
+
+  function fallbackShip(){
+    const g = new THREE.Group();
+    const mat = new THREE.MeshStandardMaterial({ color:0xd4a849, metalness:0.7, roughness:0.3 });
+    const hull = new THREE.Mesh(new THREE.BoxGeometry(2.2,0.25,0.55), mat);
+    g.add(hull);
+    const tower = new THREE.Mesh(new THREE.BoxGeometry(0.5,0.4,0.4), mat);
+    tower.position.set(0.1,0.32,0); g.add(tower);
+    const barrel1 = new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,0.7,6), mat);
+    barrel1.rotation.z = Math.PI/2; barrel1.position.set(0.65,0.38,0.1); g.add(barrel1);
+    const barrel2 = barrel1.clone(); barrel2.position.z = -0.1; g.add(barrel2);
+    g.position.set(5.8, 0, 0);
+    orbitGroup.add(g);
+    shipLoaded = true;
+  }
+
+  // Resize
+  window.addEventListener('resize', ()=>{
+    const {w,h} = getSize();
+    renderer.setSize(w,h);
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+  });
+
+  // Анимация
+  let t = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t += 0.004;
+    // орбита — вращаем группу вокруг Y
+    orbitGroup.rotation.y = t;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  const cv = document.getElementById('shipCanvas');
+  if(!cv) return;
+
+  const stage = cv.parentElement; // .logo-stage
+  const S = stage.offsetWidth || 440;
+
+  const renderer = new THREE.WebGLRenderer({ canvas:cv, antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(S, S);
+
+  const scene = new THREE.Scene();
+  // Камера смотрит строго сверху — видна орбита как круг
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
+  camera.position.set(0, 22, 0);
+  camera.lookAt(0, 0, 0);
+
+  // Свет
+  scene.add(new THREE.AmbientLight(0x445566, 1.2));
+  const sun = new THREE.DirectionalLight(0xfff2c4, 2.8);
+  sun.position.set(6, 12, 4);
+  scene.add(sun);
+  const gold = new THREE.DirectionalLight(0xd4a849, 1.0);
+  gold.position.set(-4, 6, -8);
+  scene.add(gold);
+
+  // Орбита — радиус подбираем под размер штурвала
+  // штурвал r=252 в viewBox 520, logo-stage ~440px -> scale 0.846
+  // внешний обод: 252*0.846=213px CSS, в Three.js мировых единицах:
+  // camera.fov=38, distance=22 -> visible height = 2*22*tan(19°) ≈ 15.2 units
+  // logo-stage = S px -> 1 unit = S/15.2 px -> 213px = 213/(S/15.2) units
+  // При S=440: 213/(440/15.2) = 213/28.9 ≈ 7.4 units
+  const ORBIT_R = 7.4;
+
+  // Группа орбиты (вращается)
+  const orbit = new THREE.Group();
+  scene.add(orbit);
+
+  // Загружаем ship.glb
+  const ls = document.createElement('script');
+  ls.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
+  ls.onload = () => {
+    new THREE.GLTFLoader().load('./ship.glb',
+      gltf => {
+        const model = gltf.scene;
+        // Центрируем и масштабируем
+        const box3 = new THREE.Box3().setFromObject(model);
+        const sz = new THREE.Vector3(); box3.getSize(sz);
+        const ctr = new THREE.Vector3(); box3.getCenter(ctr);
+        model.position.sub(ctr);
+        model.scale.setScalar(1.8 / Math.max(sz.x, sz.y, sz.z));
+        // Нос вперёд по орбите (вдоль -Z)
+        model.rotation.y = 0;
+        // Материал если нет текстур
+        model.traverse(ch => {
+          if(ch.isMesh && !ch.material.map){
+            ch.material = new THREE.MeshStandardMaterial({
+              color:0x8a9aaa, metalness:0.55, roughness:0.55
+            });
+          }
+        });
+        // Размещаем на орбите
+        const sg = new THREE.Group();
+        sg.add(model);
+        sg.position.set(ORBIT_R, 0, 0);
+        orbit.add(sg);
+      },
+      null,
+      () => fallback()
+    );
+  };
+  document.head.appendChild(ls);
+
+  // Фоллбек — простой золотой корпус
+  function fallback(){
+    const mat = new THREE.MeshStandardMaterial({color:0xd4a849,metalness:0.8,roughness:0.3});
+    const g = new THREE.Group();
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(2,0.2,0.5),mat)));
+    const t = new THREE.Mesh(new THREE.BoxGeometry(0.5,0.35,0.35),mat);
+    t.position.set(0.2,0.27,0); g.add(t);
+    g.position.set(ORBIT_R,0,0);
+    orbit.add(g);
+  }
+
+  window.addEventListener('resize',()=>{
+    const ns = stage.offsetWidth||440;
+    renderer.setSize(ns,ns);
+  });
+
+  let t = 0;
+  (function frame(){
+    requestAnimationFrame(frame);
+    t += 0.004;
+    orbit.rotation.y = t;
+    renderer.render(scene,camera);
+  })();
+})();
 </script>
 
 </body>
