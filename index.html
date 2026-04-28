@@ -115,8 +115,8 @@
 
   .logo-stage {
     position: relative;
-    width: min(440px, 78vmin);
-    height: min(440px, 78vmin);
+    width: min(360px, 62vmin);
+    height: min(360px, 62vmin);
     margin: 0 auto 2rem;
     display: flex; align-items: center; justify-content: center;
     animation: logo-entry 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
@@ -127,22 +127,7 @@
     100% { opacity: 1; transform: scale(1); }
   }
 
-  /* свечение-ореол ВОКРУГ лого */
-  .logo-glow {
-    position: absolute;
-    inset: -8%;
-    z-index: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at center,
-        transparent 35%,
-        rgba(244, 213, 122, 0.35) 42%,
-        rgba(212, 168, 73, 0.25) 50%,
-        rgba(212, 168, 73, 0.08) 65%,
-        transparent 80%);
-    filter: blur(25px);
-    animation: glow-pulse 5s ease-in-out infinite;
-  }
+
 
   @keyframes glow-pulse {
     0%, 100% { opacity: 0.7; transform: scale(1); }
@@ -154,48 +139,13 @@
  */
   .logo-img {
     position: relative;
-    width: 84%;
-    height: 84%;
+    width: 100%;
+    height: 100%;
     z-index: 2;
     mix-blend-mode: screen;
     filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.6));
   }
-  /* === ШТУРВАЛЬНАЯ РАМА === */
-  .helm-frame {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-    animation: helm-slow-spin 90s linear infinite;
-  }
-
-  @keyframes helm-slow-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .helm-frame svg { width: 100%; height: 100%; overflow: visible; }
-
-  .helm-ring {
-    fill: none;
-    stroke-dasharray: 1700;
-    stroke-dashoffset: 1700;
-    animation: draw-ring 2s 0.4s ease-out forwards;
-  }
-
-  @keyframes draw-ring {
-    to { stroke-dashoffset: 0; }
-  }
-
-  .spoke {
-    opacity: 0;
-    animation: spoke-in 0.6s ease-out forwards;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  @keyframes spoke-in {
-    0% { opacity: 0; transform: scale(0.5); }
+  
     100% { opacity: 1; transform: scale(1); }
   }
 
@@ -279,14 +229,7 @@
   .btn-steel:hover { border-color: var(--gold); color: var(--gold-bright); transform: translateY(-2px); }
 
   /* === ПОЛОСА СТАТОВ === */
-  .stat-strip { background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%); border-top: 1px solid var(--steel-edge); border-bottom: 1px solid var(--steel-edge); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.4); position: relative; }
-  .stat-strip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-  .strip-inner { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
-  .strip-cell { padding: 1.8rem 1rem; text-align: center; border-right: 1px solid var(--steel-edge); transition: background 0.3s; }
-  .strip-cell:last-child { border-right: none; }
-  .strip-cell:hover { background: rgba(212, 168, 73, 0.05); }
-  .strip-num { font-family: 'Cinzel', serif; font-weight: 900; font-size: 2.4rem; line-height: 1; background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-  .strip-label { font-family: 'Oswald', sans-serif; font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; }
+
 
   /* === СЕКЦИИ === */
   section.block { padding: 5.5rem 0; text-align: center; position: relative; }
@@ -425,48 +368,7 @@
   <section class="hero">
 
     <div class="logo-stage">
-      <div class="logo-glow"></div>
       <img src="logo.png" alt="Gardemarines" class="logo-img">
-
-      <!-- ШТУРВАЛЬНАЯ РАМА -->
-      <div class="helm-frame">
-        <svg viewBox="-260 -260 520 520" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="helmGold" x1="0" y1="-1" x2="0" y2="1">
-              <stop offset="0" stop-color="#fff2c4"/>
-              <stop offset="0.3" stop-color="#f4d57a"/>
-              <stop offset="0.5" stop-color="#d4a849"/>
-              <stop offset="0.7" stop-color="#b8902f"/>
-              <stop offset="1" stop-color="#6e5420"/>
-            </linearGradient>
-            <linearGradient id="helmDark" x1="0" y1="-1" x2="0" y2="1">
-              <stop offset="0" stop-color="#6e5420"/>
-              <stop offset="0.5" stop-color="#3a2a10"/>
-              <stop offset="1" stop-color="#1a1208"/>
-            </linearGradient>
-            <radialGradient id="knobGrad" cx="0.35" cy="0.35">
-              <stop offset="0" stop-color="#fff2c4"/>
-              <stop offset="0.4" stop-color="#f4d57a"/>
-              <stop offset="0.7" stop-color="#d4a849"/>
-              <stop offset="1" stop-color="#3a2a10"/>
-            </radialGradient>
-            <linearGradient id="spokeGrad" x1="-1" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#3a2a10"/>
-              <stop offset="0.3" stop-color="#b8902f"/>
-              <stop offset="0.5" stop-color="#fff2c4"/>
-              <stop offset="0.7" stop-color="#b8902f"/>
-              <stop offset="1" stop-color="#3a2a10"/>
-            </linearGradient>
-          </defs>
-
-          <circle class="helm-ring" cx="0" cy="0" r="252" stroke="url(#helmGold)" stroke-width="8" style="animation-delay: 0.2s"/>
-          <circle class="helm-ring" cx="0" cy="0" r="244" stroke="url(#helmDark)" stroke-width="1" stroke-opacity="0.6" style="animation-delay: 0.5s"/>
-          <circle class="helm-ring" cx="0" cy="0" r="222" stroke="url(#helmGold)" stroke-width="2" style="animation-delay: 0.8s"/>
-
-          <g>
-          </g>
-        </svg>
-      </div>
 
 
     </div>
@@ -475,19 +377,14 @@
     <div class="hero-buttons">
       <a href="#roster"      class="btn btn-gold">Состав флота</a>
       <a href="#tournaments" class="btn btn-steel">Турниры</a>
-    </div>
-    <div class="strip-cell"><div class="strip-num">68%</div><div class="strip-label">Винрейт</div></div>
-    <div class="strip-cell"><div class="strip-num">2 140</div><div class="strip-label">Боёв в сезоне</div></div>
-    <div class="strip-cell"><div class="strip-num">III</div><div class="strip-label">Лига Шторм</div></div>
+    </div></div>
   </div>
 </div>
 
 <!-- СОСТАВ -->
 <div class="container">
   <section class="block reveal" id="roster">
-    <div class="section-tag">Командование</div>
-    <h2 class="section-title">Офицерский <em>состав</em></h2>
-    <p class="section-sub">Те, кто ведёт эскадру в бой</p>
+    <h2 class="section-title">Состав <em>флота</em></h2>
 
     <div style="display:flex;justify-content:center;margin:0 auto;">
       <canvas id="radarCanvas" width="620" height="620" style="display:block;width:100%;max-width:680px;background:transparent;"></canvas>
@@ -498,9 +395,7 @@
 <!-- ТУРНИРЫ -->
 <div class="container">
   <section class="block reveal" id="tournaments">
-    <div class="section-tag">Слава флота</div>
     <h2 class="section-title">Турниры и <em>достижения</em></h2>
-    <p class="section-sub">Где мы были, что взяли, чем гордимся</p>
 
     <div class="tour-grid">
       <div class="tour-list">
@@ -749,7 +644,6 @@
 
 <script>
 (function(){
-  const canvas = document.getElementById('shipCanvas');
   if(!canvas) return;
 
   // Размеры берём из родителя .hero
@@ -892,15 +786,8 @@
   animate();
 })();
 </script>
-
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
-  const cv = document.getElementById('shipCanvas');
   if(!cv) return;
   const stage = cv.parentElement;
   const S = stage.offsetWidth || 440;
