@@ -894,106 +894,184 @@
 </script>
 
 
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
   const cv = document.getElementById('shipCanvas');
   if(!cv) return;
-
-  const stage = cv.parentElement; // .logo-stage
+  const stage = cv.parentElement;
   const S = stage.offsetWidth || 440;
 
-  const renderer = new THREE.WebGLRenderer({ canvas:cv, antialias:true, alpha:true });
+  const renderer = new THREE.WebGLRenderer({canvas:cv, antialias:true, alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setSize(S, S);
+  renderer.setSize(S,S);
 
   const scene = new THREE.Scene();
-  // Камера смотрит строго сверху — видна орбита как круг
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
-  camera.position.set(0, 22, 0);
-  camera.lookAt(0, 0, 0);
+  const camera = new THREE.PerspectiveCamera(38,1,0.1,200);
+  camera.position.set(0,22,0);
+  camera.lookAt(0,0,0);
 
-  // Свет
-  scene.add(new THREE.AmbientLight(0x445566, 1.2));
-  const sun = new THREE.DirectionalLight(0xfff2c4, 2.8);
-  sun.position.set(6, 12, 4);
-  scene.add(sun);
-  const gold = new THREE.DirectionalLight(0xd4a849, 1.0);
-  gold.position.set(-4, 6, -8);
-  scene.add(gold);
+  scene.add(new THREE.AmbientLight(0x445566, 1.0));
+  const sun = new THREE.DirectionalLight(0xfff2c4, 2.5);
+  sun.position.set(6,14,4); scene.add(sun);
+  const rim = new THREE.DirectionalLight(0xd4a849, 1.2);
+  rim.position.set(-5,6,-8); scene.add(rim);
 
-  // Орбита — радиус подбираем под размер штурвала
-  // штурвал r=252 в viewBox 520, logo-stage ~440px -> scale 0.846
-  // внешний обод: 252*0.846=213px CSS, в Three.js мировых единицах:
-  // camera.fov=38, distance=22 -> visible height = 2*22*tan(19°) ≈ 15.2 units
-  // logo-stage = S px -> 1 unit = S/15.2 px -> 213px = 213/(S/15.2) units
-  // При S=440: 213/(440/15.2) = 213/28.9 ≈ 7.4 units
   const ORBIT_R = 7.4;
-
-  // Группа орбиты (вращается)
   const orbit = new THREE.Group();
   scene.add(orbit);
 
-  // Загружаем ship.glb
+  // --- Пробуем загрузить GLB ---
+  function buildShip(parent){
+    const gold = new THREE.MeshStandardMaterial({color:0xd4a849, metalness:0.85, roughness:0.25});
+    const steel= new THREE.MeshStandardMaterial({color:0x6a7a8a, metalness:0.6,  roughness:0.5});
+    const dark = new THREE.MeshStandardMaterial({color:0x2a3038, metalness:0.4,  roughness:0.7});
+    const black= new THREE.MeshStandardMaterial({color:0x111820, metalness:0.3,  roughness:0.8});
+
+    function box(w,h,d,m,x,y,z){ const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m); o.position.set(x,y,z); return o; }
+    function cyl(rt,rb,h,s,m,x,y,z,rx=0,ry=0,rz=0){ const o=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,s),m); o.position.set(x,y,z); o.rotation.set(rx,ry,rz); return o; }
+
+    const ship = new THREE.Group();
+
+    // Корпус — вытянутый клин
+    const hullPts = [
+      new THREE.Vector2(7.5,0), new THREE.Vector2(6.8,1.3),
+      new THREE.Vector2(-6.5,1.3), new THREE.Vector2(-7.2,0.6),
+      new THREE.Vector2(-7.2,-0.6), new THREE.Vector2(-6.5,-1.3),
+      new THREE.Vector2(6.8,-1.3)
+    ];
+    const hullShape = new THREE.Shape(hullPts);
+    const hullGeo = new THREE.ExtrudeGeometry(hullShape,{depth:1.8, bevelEnabled:true, bevelThickness:0.12, bevelSize:0.08, bevelSegments:2});
+    const hull = new THREE.Mesh(hullGeo, steel);
+    hull.rotation.x = Math.PI/2; hull.position.set(-7.2,-0.6,-0.9);
+    ship.add(hull);
+
+    // Палуба
+    ship.add(box(14.8,0.12,2.0,dark, 0,0.15,0));
+
+    // Нос острый
+    const nose = cyl(0.04,0.7,1.0,6,steel, 8.0,-0.25,0, 0,0,Math.PI/2);
+    ship.add(nose);
+
+    // Башня 1 (носовая, 2 ствола)
+    const t1 = new THREE.Group();
+    t1.add(box(1.6,0.45,1.6,dark, 0,0.22,0));
+    t1.add(box(1.3,0.42,1.2,gold, 0,0.65,0));
+    t1.add(box(0.25,0.42,1.2,dark,0.75,0.65,0)); // лоб
+    for(let s of [-0.3,0.3]){
+      t1.add(cyl(0.06,0.06,2.6,6,black, 1.7,0.7,s, 0,0,Math.PI/2));
+    }
+    t1.position.set(5.0,0.28,0); ship.add(t1);
+
+    // Башня 2 (вторая носовая)
+    const t2 = t1.clone(); t2.position.set(2.8,0.28,0); ship.add(t2);
+
+    // Башня 3 (первая кормовая — смотрит назад)
+    const t3 = t1.clone();
+    t3.rotation.y = Math.PI;
+    t3.position.set(-3.2,0.28,0); ship.add(t3);
+
+    // Башня 4 (кормовая)
+    const t4 = t1.clone();
+    t4.rotation.y = Math.PI;
+    t4.position.set(-5.4,0.28,0); ship.add(t4);
+
+    // Надстройка нижняя
+    ship.add(box(3.0,1.1,1.7,steel, 0.5,0.9,0));
+    // Надстройка верхняя
+    ship.add(box(2.1,0.85,1.3,steel, 0.3,1.9,0));
+    // Мостик
+    ship.add(box(1.5,0.65,1.0,steel, 0.2,2.62,0));
+    // Стёкла мостика
+    ship.add(box(0.06,0.42,0.95,black, 1.0,2.58,0));
+    ship.add(box(0.06,0.42,0.95,black,-0.6,2.58,0));
+
+    // Труба 1
+    ship.add(cyl(0.22,0.28,1.3,10,black,  1.0,2.15,0.25));
+    ship.add(cyl(0.225,0.225,0.07,10,gold, 1.0,1.62,0.25));
+    // Труба 2
+    ship.add(cyl(0.19,0.24,1.05,10,black, -0.5,1.95,0.25));
+    ship.add(cyl(0.195,0.195,0.07,10,gold,-0.5,1.55,0.25));
+
+    // Мачта
+    ship.add(cyl(0.05,0.05,4.2,6,dark, 0.7,4.3,0));
+    ship.add(cyl(0.03,0.03,2.8,6,dark, 0.7,6.6,0));
+    ship.add(box(2.8,0.04,0.04,dark, 0.7,5.2,0)); // рей
+    ship.add(box(2.0,0.03,0.03,dark, 0.7,7.2,0)); // рей верхний
+
+    // Флаг
+    const fGeo = new THREE.PlaneGeometry(0.95,0.55);
+    const fMat = new THREE.MeshStandardMaterial({color:0xd4a849, side:THREE.DoubleSide, roughness:0.7});
+    const flag = new THREE.Mesh(fGeo,fMat);
+    flag.position.set(1.65,7.35,0.08);
+    ship.add(flag);
+
+    // Ватерлиния
+    const wl = box(14.5,0.05,0.04,gold, 0,-0.65,1.0);
+    ship.add(wl);
+    const wl2 = wl.clone(); wl2.position.z=-1.0; ship.add(wl2);
+
+    // Кильватер
+    ship.add(cyl(0.04,0.04,0.6,6,gold,-8.5,-0.5, 0.7,0,0, Math.PI/6));
+    ship.add(cyl(0.04,0.04,0.6,6,gold,-8.5,-0.5,-0.7,0,0,-Math.PI/6));
+
+    ship.scale.setScalar(0.15);
+    ship.rotation.y = -Math.PI/2; // нос вперёд по орбите
+
+    const sg = new THREE.Group();
+    sg.add(ship);
+    sg.position.set(ORBIT_R,0,0);
+    parent.add(sg);
+
+    return flag; // вернём для анимации
+  }
+
+  let flagRef = null;
+
   const ls = document.createElement('script');
-  ls.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
-  ls.onload = () => {
+  ls.src='https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
+  ls.onload=()=>{
     new THREE.GLTFLoader().load('./ship.glb',
-      gltf => {
-        const model = gltf.scene;
-        // Центрируем и масштабируем
-        const box3 = new THREE.Box3().setFromObject(model);
-        const sz = new THREE.Vector3(); box3.getSize(sz);
-        const ctr = new THREE.Vector3(); box3.getCenter(ctr);
+      gltf=>{
+        const model=gltf.scene;
+        const box3=new THREE.Box3().setFromObject(model);
+        const sz=new THREE.Vector3(); box3.getSize(sz);
+        const ctr=new THREE.Vector3(); box3.getCenter(ctr);
         model.position.sub(ctr);
-        model.scale.setScalar(1.8 / Math.max(sz.x, sz.y, sz.z));
-        // Нос вперёд по орбите (вдоль -Z)
-        model.rotation.y = 0;
-        // Материал если нет текстур
-        model.traverse(ch => {
-          if(ch.isMesh && !ch.material.map){
-            ch.material = new THREE.MeshStandardMaterial({
-              color:0x8a9aaa, metalness:0.55, roughness:0.55
-            });
+        model.scale.setScalar(1.9/Math.max(sz.x,sz.y,sz.z));
+        model.rotation.y=-Math.PI/2;
+        model.traverse(ch=>{
+          if(ch.isMesh&&!ch.material.map){
+            ch.material=new THREE.MeshStandardMaterial({color:0x8a9aaa,metalness:0.55,roughness:0.5});
           }
         });
-        // Размещаем на орбите
-        const sg = new THREE.Group();
-        sg.add(model);
-        sg.position.set(ORBIT_R, 0, 0);
+        const sg=new THREE.Group();
+        sg.add(model); sg.position.set(ORBIT_R,0,0);
         orbit.add(sg);
       },
       null,
-      () => fallback()
+      ()=>{ flagRef=buildShip(orbit); }
     );
   };
   document.head.appendChild(ls);
 
-  // Фоллбек — простой золотой корпус
-  function fallback(){
-    const mat = new THREE.MeshStandardMaterial({color:0xd4a849,metalness:0.8,roughness:0.3});
-    const g = new THREE.Group();
-    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(2,0.2,0.5),mat)));
-    const t = new THREE.Mesh(new THREE.BoxGeometry(0.5,0.35,0.35),mat);
-    t.position.set(0.2,0.27,0); g.add(t);
-    g.position.set(ORBIT_R,0,0);
-    orbit.add(g);
-  }
-
   window.addEventListener('resize',()=>{
-    const ns = stage.offsetWidth||440;
+    const ns=stage.offsetWidth||440;
     renderer.setSize(ns,ns);
   });
 
-  let t = 0;
+  let t=0;
   (function frame(){
     requestAnimationFrame(frame);
-    t += 0.004;
-    orbit.rotation.y = t;
+    t+=0.004;
+    orbit.rotation.y=t;
+    if(flagRef) flagRef.rotation.z=Math.sin(t*4)*0.07;
     renderer.render(scene,camera);
   })();
 })();
 </script>
-
 </body>
 </html>
