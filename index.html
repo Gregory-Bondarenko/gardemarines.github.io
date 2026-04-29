@@ -398,18 +398,60 @@
     <h2 class="section-title">Турниры и <em>достижения</em></h2>
 
     <div class="tour-grid">
-      <div class="tour-list">
+                        <div class="tour-list">
         <div class="tour-list-title">◆ История участия</div>
-        <div class="tour-item"><div class="tour-medal gold">★</div><div class="tour-info"><h4>Кубок Балтики</h4><p>МАЙ 2025 · 32 клана · финал 7v7</p></div><div class="tour-place">1 место</div></div>
-        <div class="tour-item"><div class="tour-medal silver">★</div><div class="tour-info"><h4>Шторм-сезон XV</h4><p>ЯНВ 2026 · клановые бои · лига Шторм</p></div><div class="tour-place">2 место</div></div>
-        <div class="tour-item"><div class="tour-medal bronze">★</div><div class="tour-info"><h4>Турнир «Стальной крейсер»</h4><p>ОКТ 2025 · 64 клана · double elimination</p></div><div class="tour-place">3 место</div></div>
-        <div class="tour-item"><div class="tour-medal gold">★</div><div class="tour-info"><h4>Кубок Адмирала (внутр.)</h4><p>МАР 2026 · внутренний турнир флота</p></div><div class="tour-place">1 место</div></div>
-        <div class="tour-item"><div class="tour-medal part">◆</div><div class="tour-info"><h4>Глобальная карта · Сезон 4</h4><p>2025 · стратегический режим</p></div><div class="tour-place">Top-15</div></div>
-        <div class="tour-item"><div class="tour-medal silver">★</div><div class="tour-info"><h4>Линия фронта · Сезон 8</h4><p>ИЮН 2025 · командный режим</p></div><div class="tour-place">2 место</div></div>
-        <div class="tour-item"><div class="tour-medal part">◆</div><div class="tour-info"><h4>Гонка вооружений</h4><p>СЕН 2024 · отборочный этап</p></div><div class="tour-place">1/4 финала</div></div>
+        <div class="tour-item">
+          <div class="tour-medal gold">★</div>
+          <div class="tour-info"><h4>Risers Cup 26</h4><p>МАРТ 2026<br>Победители</p></div>
+          <div class="tour-place">🏆 1 место</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal gold">★</div>
+          <div class="tour-info"><h4>Кубок СНГ 25</h4><p>ФЕВР 2025<br>Победители</p></div>
+          <div class="tour-place">🏆 1 место</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal part">◆</div>
+          <div class="tour-info"><h4>Ocean Cup 5</h4><p>СЕНТ 2025<br>Играли сборной командой UGF</p></div>
+          <div class="tour-place">1/8 Финала</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal part">◆</div>
+          <div class="tour-info"><h4>Winter Cup 25</h4><p>ЯНВ 2025</p></div>
+          <div class="tour-place">1/4 Финала нижней сетки</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal part">◆</div>
+          <div class="tour-info"><h4>Rookie Cup 25</h4><p>МАРТ 2025<br>Играл 2й состав GDM2</p></div>
+          <div class="tour-place">1/8 Финала</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal silver">★</div>
+          <div class="tour-info"><h4>Кубок СНГ 24</h4><p>ФЕВР 2024</p></div>
+          <div class="tour-place">🥈 2 место</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal part">◆</div>
+          <div class="tour-info"><h4>Ocean Cup 4</h4><p>СЕНТ 2024</p></div>
+          <div class="tour-place">Групповая стадия</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal part">◆</div>
+          <div class="tour-info"><h4>Winter Cup 24</h4><p>ЯНВ 2024</p></div>
+          <div class="tour-place">1/4 Финала</div>
+        </div>
+        <div class="tour-item">
+          <div class="tour-medal part">◆</div>
+          <div class="tour-info"><h4>Ocean Cup 3</h4><p>АПР 2024<br>Выступало 2 состава</p></div>
+          <div class="tour-place">Групповая стадия</div>
+        </div>
       </div>
-
       </div>
+    </div>
+      </div>
+    </div>
+      </div>
+    </div>
     </div>
     </div>
   </section>
@@ -470,32 +512,54 @@
     const ctx = cv.getContext('2d');
     const W=620, CX=310, CY=310, RMAX=268, TAU=Math.PI*2, SPEED=0.0028;
 
-    const TIER_R   = {cmd:52, off:108, grd:166, cdt:224};
+    const TIER_R={cmd:130, off:130, grd:130, cdt:130, all:130};
 
     const PLAYERS=[
-      {nick:'Игрок_1',  tier:'cmd'},{nick:'Игрок_2',  tier:'cmd'},
-      {nick:'Игрок_3',  tier:'cmd'},{nick:'Игрок_4',  tier:'cmd'},
-      {nick:'Игрок_5',  tier:'off'},{nick:'Игрок_6',  tier:'off'},
-      {nick:'Игрок_7',  tier:'off'},{nick:'Игрок_8',  tier:'off'},
-      {nick:'Игрок_9',  tier:'off'},{nick:'Игрок_10', tier:'off'},
-      {nick:'Игрок_11', tier:'off'},{nick:'Игрок_12', tier:'off'},
-      {nick:'Игрок_13', tier:'off'},{nick:'Игрок_14', tier:'off'},
-      {nick:'Игрок_15', tier:'off'},{nick:'Игрок_16', tier:'off'},
-      {nick:'Игрок_17', tier:'off'},{nick:'Игрок_18', tier:'off'},
-      {nick:'Игрок_19', tier:'off'},{nick:'Игрок_20', tier:'off'},
-      {nick:'Игрок_21', tier:'grd'},{nick:'Игрок_22', tier:'grd'},
-      {nick:'Игрок_23', tier:'grd'},{nick:'Игрок_24', tier:'grd'},
-      {nick:'Игрок_25', tier:'grd'},{nick:'Игрок_26', tier:'grd'},
-      {nick:'Игрок_27', tier:'grd'},{nick:'Игрок_28', tier:'grd'},
-      {nick:'Игрок_29', tier:'grd'},{nick:'Игрок_30', tier:'grd'},
-      {nick:'Игрок_31', tier:'grd'},{nick:'Игрок_32', tier:'grd'},
-      {nick:'Игрок_33', tier:'cdt'},{nick:'Игрок_34', tier:'cdt'},
-      {nick:'Игрок_35', tier:'cdt'},{nick:'Игрок_36', tier:'cdt'},
-      {nick:'Игрок_37', tier:'cdt'},{nick:'Игрок_38', tier:'cdt'},
-      {nick:'Игрок_39', tier:'cdt'},{nick:'Игрок_40', tier:'cdt'},
-      {nick:'Игрок_41', tier:'cdt'},{nick:'Игрок_42', tier:'cdt'},
-      {nick:'Игрок_43', tier:'cdt'},{nick:'Игрок_44', tier:'cdt'},
-      {nick:'Игрок_45', tier:'cdt'},
+      {nick:'egorkochman', tier:'all'},
+      {nick:'MaloyGnoy', tier:'all'},
+      {nick:'Leps_on_TV', tier:'all'},
+      {nick:'gggk303', tier:'all'},
+      {nick:'Alex_DeviL777', tier:'all'},
+      {nick:'Wit163rus', tier:'all'},
+      {nick:'Yaruy_K', tier:'all'},
+      {nick:'PoznyakAlexDi', tier:'all'},
+      {nick:'Tima-ma', tier:'all'},
+      {nick:'Roman_WOW_', tier:'all'},
+      {nick:'Checkmatic', tier:'all'},
+      {nick:'mcbay1988', tier:'all'},
+      {nick:'Alexander-VIII', tier:'all'},
+      {nick:'CEPbIU_76', tier:'all'},
+      {nick:'Evgeniy_Ivshin', tier:'all'},
+      {nick:'Alex_Messer', tier:'all'},
+      {nick:'Prado_VOD', tier:'all'},
+      {nick:'Naikon71', tier:'all'},
+      {nick:'F0K1CH', tier:'all'},
+      {nick:'Super-zverugin', tier:'all'},
+      {nick:'BaLTaZaR014', tier:'all'},
+      {nick:'ZEMJI9IHUH', tier:'all'},
+      {nick:'komawars', tier:'all'},
+      {nick:'dimonlamo', tier:'all'},
+      {nick:'RoskeA-RoBBi', tier:'all'},
+      {nick:'isaev_denis', tier:'all'},
+      {nick:'Dennazzz', tier:'all'},
+      {nick:'Intrepids7', tier:'all'},
+      {nick:'FenomenRostov', tier:'all'},
+      {nick:'BursAssassin', tier:'all'},
+      {nick:'ChestorQQ_RU', tier:'all'},
+      {nick:'OziSchneider', tier:'all'},
+      {nick:'GOLDBERG475', tier:'all'},
+      {nick:'devasator91', tier:'all'},
+      {nick:'lucky292pear', tier:'all'},
+      {nick:'OziBlitz', tier:'all'},
+      {nick:'Xolod', tier:'all'},
+      {nick:'vsegda-buhoy', tier:'all'},
+      {nick:'vladimir_chevere', tier:'all'},
+      {nick:'sagoyakov_roman-', tier:'all'},
+      {nick:'Fufic-92', tier:'all'},
+      {nick:'Aerilou', tier:'all'},
+      {nick:'Mrwhitevoron', tier:'all'},
+      {nick:'Praporsch1k', tier:'all'},
+      {nick:'SharOn_RU', tier:'all'}
     ];
 
     function norm(a){let x=a%TAU;return x<0?x+TAU:x;}
@@ -960,5 +1024,11 @@
   })();
 })();
 </script>
+
+
+
+
+
+
 </body>
 </html>
