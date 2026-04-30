@@ -433,6 +433,335 @@
     .tour-place { grid-column: 2; font-size: 0.8rem; }
     .nav-brand-text { font-size: 0.85rem; letter-spacing: 0.15em; }
   }
+
+  .nav-season { color: var(--gold-bright) !important; }
+
+  /* СЕЗОН */
+  #season { text-align: center; }
+
+  .season-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--steel-edge);
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .season-grid::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .season-cell {
+    background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
+    padding: 1.8rem 1rem;
+    text-align: center;
+  }
+  .season-cell-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.2em;
+    margin-bottom: 0.8rem;
+  }
+  .season-cell-val {
+    font-family: 'Cinzel', serif; font-weight: 900;
+    font-size: 2.2rem; line-height: 1;
+    margin-bottom: 0.4rem;
+    background: linear-gradient(180deg, #e8e8e8 0%, #888 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .season-cell-val.gold {
+    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .season-cell-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; color: var(--text-dim);
+  }
+
+  @media(max-width:900px){
+    .season-grid { grid-template-columns: 1fr; }
+    .season-cell { padding: 1.2rem 1rem; }
+    .season-cell-val { font-size: 1.8rem; }
+  }
+
+
+  /* === ВЕРТИКАЛЬНЫЙ ПУТЬ К ФИНАЛУ === */
+  .vroad-title {
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem;
+    color:var(--gold); letter-spacing:0.25em; text-transform:uppercase;
+    margin-bottom:2rem; display:inline-flex; align-items:center; gap:1rem;
+  }
+  .vroad-title::before,.vroad-title::after { content:''; width:30px; height:1px; background:var(--gold); }
+
+  .vroad {
+    display:grid;
+    grid-template-columns: 1fr 48px 1fr;
+    gap:0;
+    position:relative;
+    max-width:700px;
+    margin:0 auto 2rem;
+  }
+
+  /* Вертикальная линия — центральная колонка */
+  .vroad-line {
+    position:relative;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .vroad-line::before {
+    content:'';
+    position:absolute;
+    top:0; bottom:0; left:50%;
+    width:3px;
+    background: linear-gradient(180deg,
+      transparent,
+      var(--gold-base) 3%,
+      var(--gold-bright) 50%,
+      var(--gold-base) 97%,
+      transparent
+    );
+    box-shadow: 0 0 12px rgba(212,168,73,0.35);
+    transform:translateX(-50%);
+  }
+
+  /* Узел (точка) на линии */
+  .vroad-node {
+    width:12px; height:12px; border-radius:50%; z-index:2; flex-shrink:0;
+    background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
+    border:2px solid var(--gold-bright);
+    box-shadow:0 0 8px rgba(212,168,73,0.6);
+    margin:0 auto;
+  }
+  .vroad-node.dim {
+    background:var(--steel-mid);
+    border-color:var(--steel-edge);
+    box-shadow:none;
+  }
+
+  /* Стадия */
+  .vroad-stage-name {
+    font-family:'Cinzel',serif; font-weight:700; font-size:0.68rem;
+    color:var(--gold); letter-spacing:0.1em; white-space:nowrap;
+    text-align:center; margin:0.3rem 0;
+  }
+  .vroad-node.dim + .vroad-stage-name { color:var(--text-dim); }
+
+  /* Строка = одна стадия */
+  .vroad-row {
+    display:contents;
+  }
+
+  /* Колонки матчей */
+  .vroad-col-rc { /* справа — RC26 официальные */
+    display:flex; flex-direction:column; gap:4px;
+    padding:0.6rem 0 0.6rem 0.8rem;
+    justify-content:center;
+  }
+  .vroad-col-scrim { /* слева — Scrim */
+    display:flex; flex-direction:column; gap:4px;
+    padding:0.6rem 0.8rem 0.6rem 0;
+    justify-content:center;
+    align-items:flex-end;
+  }
+
+  /* Матч */
+  .vm {
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
+    padding:0.25rem 0.5rem;
+    display:flex; gap:0.5rem; align-items:center;
+    background:var(--steel-mid);
+    white-space:nowrap;
+    border-left:2px solid var(--gold);
+    position:relative;
+  }
+  .vroad-col-scrim .vm {
+    border-left:none;
+    border-right:2px solid rgba(212,168,73,0.4);
+    flex-direction:row-reverse;
+    opacity:0.78;
+  }
+  .vm.loss { border-left-color:#b8473a; }
+  .vm.loss .vm-score { color:#d96250; }
+  .vroad-col-scrim .vm.loss { border-right-color:#b8473a; border-left:none; }
+  .vm.dim { border-left-color:var(--steel-edge); border-style:dashed; opacity:0.55; }
+
+  /* Чёрточка от матча к линии */
+  .vm::after {
+    content:''; position:absolute;
+    right:-9px; top:50%;
+    width:9px; height:1px;
+    background:var(--gold-base);
+    opacity:0.5;
+  }
+  .vroad-col-scrim .vm::after {
+    left:-9px; right:auto;
+  }
+  .vm.dim::after { background:var(--steel-edge); }
+
+  .vm-opp { color:var(--text); }
+  .vm-score { color:var(--gold-bright); font-weight:700; flex-shrink:0; }
+
+  /* Кубок */
+  .vroad-trophy {
+    text-align:center; font-size:2.5rem;
+    padding:1rem 0 0.5rem;
+    filter:drop-shadow(0 0 12px rgba(212,168,73,0.5));
+    animation:trophyGlow 3s ease-in-out infinite;
+    grid-column:1/-1;
+  }
+  @keyframes trophyGlow {
+    0%,100%{filter:drop-shadow(0 0 8px rgba(212,168,73,0.4));}
+    50%{filter:drop-shadow(0 0 20px rgba(212,168,73,0.8));}
+  }
+
+  /* Легенда */
+  .vroad-legend {
+    display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:0.63rem; color:var(--text-dim);
+    max-width:700px; margin:0 auto;
+    padding-top:1rem; border-top:1px solid var(--line);
+  }
+  .vroad-legend span { display:flex; align-items:center; gap:0.5rem; }
+  .vl-bar { display:inline-block; width:12px; height:2px; }
+  .vl-bar.gold { background:var(--gold); }
+  .vl-bar.dim  { background:var(--steel-edge); }
+  .vl-bar.red  { background:#b8473a; }
+
+  @media(max-width:600px){
+    .vroad { grid-template-columns:1fr 36px 1fr; }
+    .vm { font-size:0.6rem; padding:0.2rem 0.35rem; }
+  }
+
+
+
+
+
+
+  /* ── ВЕРТИКАЛЬНЫЙ ТАЙМЛАЙН ── */
+  .timeline-wrap {
+    max-width: 680px;
+    margin: 2rem auto 0;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  /* Центральная линия через весь таймлайн */
+  .timeline-wrap::before {
+    content: '';
+    position: absolute;
+    top: 20px; bottom: 50px;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold-base) 85%, transparent);
+    box-shadow: 0 0 12px rgba(212,168,73,0.35);
+    z-index: 0;
+  }
+
+  .timeline-stage { margin-bottom: 0; }
+  .timeline-stage.dim .tl-label { color: var(--text-dim); }
+
+  /* Строка */
+  .tl-row {
+    display: grid;
+    grid-template-columns: 1fr 50px 1fr;
+    align-items: center;
+    min-height: 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Строка с узлом (название стадии) */
+  .tl-header-row { min-height: 48px; }
+
+  /* Центральный узел */
+  .tl-spine-node {
+    display: flex; flex-direction: column; align-items: center;
+    position: relative; z-index: 2;
+  }
+  /* Сегмент линии в обычных строках */
+  .tl-spine-seg {
+    position: relative; z-index: 0;
+  }
+
+  .tl-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
+    border: 2px solid var(--gold-bright);
+    box-shadow: 0 0 10px rgba(212,168,73,0.6);
+    flex-shrink: 0;
+  }
+  .tl-dot.dim {
+    background: var(--steel-mid); border-color: var(--steel-edge); box-shadow: none;
+  }
+
+  .tl-label {
+    font-family: 'Cinzel', serif; font-weight: 700;
+    font-size: 0.72rem; color: var(--gold); letter-spacing: 0.12em;
+    text-align: center; margin-top: 0.2rem; white-space: nowrap;
+  }
+
+  /* Колонки */
+  .tl-col-left  { display: flex; justify-content: flex-end; padding-right: 6px; }
+  .tl-col-right { display: flex; justify-content: flex-start; padding-left: 6px; }
+  .tl-empty-cell { height: 32px; }
+
+  /* Карточки */
+  .tl-card {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem;
+    padding: 0.22rem 0.45rem;
+    background: var(--steel-mid);
+    display: flex; align-items: center; gap: 0.3rem;
+    white-space: nowrap; margin: 2px 0;
+  }
+  .tl-card.scrim.win  { border-right: 2px solid var(--gold); }
+  .tl-card.scrim.loss { border-right: 2px solid #b8473a; color: #d96250; }
+  .tl-card.scrim.dim  { border-right: 2px dashed var(--steel-edge); opacity: 0.6; }
+  .tl-card.rc.win     { border-left: 2px solid var(--gold); }
+  .tl-card.rc.loss    { border-left: 2px solid #b8473a; color: #d96250; }
+  .tl-card.rc.dim     { border-left: 2px dashed var(--steel-edge); opacity: 0.6; }
+
+  .tl-score { color: var(--gold-bright); font-weight: 700; }
+  .tl-card.loss .tl-score { color: #d96250; }
+  .tl-card.dim  .tl-score { color: var(--text-dim); }
+  .tl-date  { color: var(--text-dim); font-size: 0.58rem; }
+
+  /* черточка к линии */
+  .tl-tick {
+    width: 8px; height: 1px;
+    background: var(--gold-base); opacity: 0.5; flex-shrink: 0;
+  }
+
+  /* кубок */
+  .tl-trophy {
+    text-align: center; font-size: 2.2rem; padding: 0.5rem 0 0;
+    position: relative; z-index: 2;
+    animation: trophyGlow 3s ease-in-out infinite;
+  }
+  @keyframes trophyGlow {
+    0%,100% { filter: drop-shadow(0 0 6px rgba(212,168,73,0.4)); }
+    50%      { filter: drop-shadow(0 0 18px rgba(212,168,73,0.9)); }
+  }
+
+  /* легенда */
+  .tl-legend {
+    display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--text-dim);
+  }
+  .tl-legend span { display: flex; align-items: center; gap: 0.4rem; }
+  .tl-ld { display: inline-block; width: 12px; height: 2px; }
+  .tl-ld.gold { background: var(--gold); }
+  .tl-ld.red  { background: #b8473a; }
+  .tl-ld.gray { background: var(--steel-edge); }
+
+  @media(max-width:600px){
+    .tl-date { display: none; }
+    .tl-card { font-size: 0.6rem; }
+    .timeline-wrap { padding: 0; }
+  }
+
 </style>
 </head>
 <body>
@@ -449,6 +778,7 @@
     <ul class="nav-links">
       <li><a href="#roster">Состав</a></li>
       <li><a href="#tournaments">Турниры</a></li>
+      <li><a href="#season" class="nav-season">Сезон 2026</a></li>
     </ul>
     
   </div>
@@ -550,10 +880,280 @@
   </section>
 </div>
 
-<!-- РАСПИСАНИЕ -->
+<!-- СЕЗОН 2026 -->
+<div class="container">
+  <section class="block reveal" id="season">
+    <div class="section-tag">Risers Cup 2026</div>
+    <h2 class="section-title">Сезон <em>2026</em></h2>
 
+    <div class="season-grid">
+      <div class="season-cell">
+        <div class="season-cell-label">Винрейт (все матчи)</div>
+        <div class="season-cell-val">86.7%</div>
+        <div class="season-cell-sub">13 побед · 2 поражения</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-cell-label">Винрейт RC26</div>
+        <div class="season-cell-val gold">85.7%</div>
+        <div class="season-cell-sub">6 побед · 1 поражение</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-cell-label">Раундов выиграно</div>
+        <div class="season-cell-val">78.3%</div>
+        <div class="season-cell-sub">47 из 60 раундов</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-cell-label">Лучшая карта</div>
+        <div class="season-cell-val gold">100%</div>
+        <div class="season-cell-sub">Ловушка · Спящий гигант · Контрудар</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-cell-label">Правый борт</div>
+        <div class="season-cell-val gold">100%</div>
+        <div class="season-cell-sub">Левый борт 83.3%</div>
+      </div>
+      <div class="season-cell">
+        <div class="season-cell-label">Слабая карта</div>
+        <div class="season-cell-val">33%</div>
+        <div class="season-cell-sub">Два брата</div>
+      </div>
+    </div>
 
-<!-- ВСТУПИТЬ -->
+    <div class="section-tag" style="margin-bottom:1.5rem;margin-top:0.5rem;">Путь к финалу</div>
+    <div class="timeline-wrap">
+      <div class="timeline-stage">
+        <div class="tl-row tl-header-row">
+          <div class="tl-col-left"></div>
+          <div class="tl-spine-node">
+            <div class="tl-dot"></div>
+            <div class="tl-label">Швейцарка</div>
+          </div>
+          <div class="tl-col-right"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim win">
+              <span class="tl-date">28.02</span>
+              <span>[NSFW]</span>
+              <span class="tl-score">4:2</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim win">
+              <span class="tl-date">11.03</span>
+              <span>[AZD]</span>
+              <span class="tl-score">6:0</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc loss">
+              <span class="tl-tick"></span>
+              <span>[YOINK]</span>
+              <span class="tl-date">14.03</span>
+              <span class="tl-score">1:2</span>
+            </div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim win">
+              <span class="tl-date">16.03</span>
+              <span>[BEREG]</span>
+              <span class="tl-score">5:0</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim loss">
+              <span class="tl-date">19.03</span>
+              <span>[JN]</span>
+              <span class="tl-score">1:5</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc win">
+              <span class="tl-tick"></span>
+              <span>[ONYXH]</span>
+              <span class="tl-date">22.03</span>
+              <span class="tl-score">2:0</span>
+            </div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc win">
+              <span class="tl-tick"></span>
+              <span>[WOWSH]</span>
+              <span class="tl-date">28.03</span>
+              <span class="tl-score">2:0</span>
+            </div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim win">
+              <span class="tl-date">04.04</span>
+              <span>[YOLO]</span>
+              <span class="tl-score">4:0</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc win">
+              <span class="tl-tick"></span>
+              <span>[JN]</span>
+              <span class="tl-date">05.04</span>
+              <span class="tl-score">2:0</span>
+            </div></div>
+        </div>
+      </div>
+      <div class="timeline-stage">
+        <div class="tl-row tl-header-row">
+          <div class="tl-col-left"></div>
+          <div class="tl-spine-node">
+            <div class="tl-dot"></div>
+            <div class="tl-label">1/8 Финала</div>
+          </div>
+          <div class="tl-col-right"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim win">
+              <span class="tl-date">11.04</span>
+              <span>[RETRO]</span>
+              <span class="tl-score">4:1</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc win">
+              <span class="tl-tick"></span>
+              <span>[RMI]</span>
+              <span class="tl-date">12.04</span>
+              <span class="tl-score">3:0</span>
+            </div></div>
+        </div>
+      </div>
+      <div class="timeline-stage">
+        <div class="tl-row tl-header-row">
+          <div class="tl-col-left"></div>
+          <div class="tl-spine-node">
+            <div class="tl-dot"></div>
+            <div class="tl-label">1/4 Финала</div>
+          </div>
+          <div class="tl-col-right"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim win">
+              <span class="tl-date">16.04</span>
+              <span>[BETEP]</span>
+              <span class="tl-score">3:2</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc win">
+              <span class="tl-tick"></span>
+              <span>[NSFW]</span>
+              <span class="tl-date">18.04</span>
+              <span class="tl-score">3:0</span>
+            </div></div>
+        </div>
+      </div>
+      <div class="timeline-stage">
+        <div class="tl-row tl-header-row">
+          <div class="tl-col-left"></div>
+          <div class="tl-spine-node">
+            <div class="tl-dot"></div>
+            <div class="tl-label">1/2 Финала</div>
+          </div>
+          <div class="tl-col-right"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim win">
+              <span class="tl-date">23.04</span>
+              <span>[BETEP]</span>
+              <span class="tl-score">4:1</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc win">
+              <span class="tl-tick"></span>
+              <span>[DF]</span>
+              <span class="tl-date">26.04</span>
+              <span class="tl-score">3:0</span>
+            </div></div>
+        </div>
+      </div>
+      <div class="timeline-stage dim">
+        <div class="tl-row tl-header-row">
+          <div class="tl-col-left"></div>
+          <div class="tl-spine-node">
+            <div class="tl-dot dim"></div>
+            <div class="tl-label">Финал</div>
+          </div>
+          <div class="tl-col-right"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-card scrim dim">
+              <span class="tl-date">30.04</span>
+              <span>[LBF1]</span>
+              <span class="tl-score">?</span>
+              <span class="tl-tick"></span>
+            </div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
+          <div class="tl-spine-seg"></div>
+          <div class="tl-col-right"><div class="tl-card rc dim">
+              <span class="tl-tick"></span>
+              <span>[YOLO]</span>
+              <span class="tl-date">03.05</span>
+              <span class="tl-score">?</span>
+            </div></div>
+        </div>
+      </div>
+
+      <div class="tl-trophy">🏆</div>
+
+      <div class="tl-legend">
+        <span><i class="tl-ld gray"></i> Scrim (слева)</span>
+        <span><i class="tl-ld gold"></i> RC26 (справа)</span>
+        <span><i class="tl-ld gold"></i> Победа</span>
+        <span><i class="tl-ld red"></i> Поражение</span>
+      </div>
+    </div>
+
+  </section>
+</div>
 
 
 <footer>
