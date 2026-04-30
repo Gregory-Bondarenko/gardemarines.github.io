@@ -380,6 +380,18 @@
     .nav-inner { padding: 0 1rem; }
     .nav-links { display: none; }
 
+    /* Турниры — всё в одну строку */
+    .tour-item {
+      grid-template-columns: 36px 1fr auto !important;
+      min-height: auto !important;
+      padding: 0.9rem 0 !important;
+      gap: 0.6rem !important;
+    }
+    .tour-medal { font-size: 1.1rem !important; }
+    .tour-info h4 { font-size: 0.9rem; }
+    .tour-info p { font-size: 0.72rem; }
+    .tour-place { font-size: 0.78rem; min-width: 60px; text-align: right; white-space: nowrap; }
+
     /* Контейнеры */
     .container { padding: 0 1rem; }
     section.block { padding: 3rem 0; }
