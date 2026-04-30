@@ -6,7 +6,7 @@
 <title>Gardemarines — Флот Гардемарины | World of Warships Legends</title>
 
 <!-- SEO -->
-<meta name="description" content="GDM — один из наиболее успешных флотов в СНГ в игре World of Warships Legends. Официальный сайт клана Гардемарины. Состав, турниры, достижения.">
+<meta name="description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends. Официальный сайт клана Гардемарины. Состав, турниры, достижения.">
 <meta name="keywords" content="
   Gardemarines, Гардемарины, GDM, ГДМ, Гардемарины клан, GDM клан,
   gardemarines.ru, Gardemarine, Гардемарин,
@@ -32,7 +32,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gardemarines.ru">
 <meta property="og:title" content="Gardemarines — Флот Гардемарины | World of Warships Legends">
-<meta property="og:description" content="GDM — один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
+<meta property="og:description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
 <meta property="og:image" content="https://gardemarines.ru/logo.png">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Gardemarines">
@@ -40,7 +40,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Gardemarines [GDM] — World of Warships Legends">
-<meta name="twitter:description" content="GDM — один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
+<meta name="twitter:description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
 <meta name="twitter:image" content="https://gardemarines.ru/logo.png">
 <meta name="google-site-verification" content="google298b3a4774992c99">
 <meta name="yandex-verification" content="8a59f5874d14fa97">
@@ -450,7 +450,7 @@
 
     </div>
     <h1 class="hero-title">GARDEMARINES</h1>
-    <p class="hero-sub">Флот в котором главная ценность — люди</p>
+    <p class="hero-sub">Флот в котором главная ценность люди</p>
     <div class="hero-buttons">
       <a href="#roster"      class="btn btn-gold">Состав флота</a>
       <a href="#tournaments" class="btn btn-steel">Турниры</a>
@@ -612,7 +612,7 @@
       {nick:'Xolod', tier:'all'},
       {nick:'vsegda-buhoy', tier:'all'},
       {nick:'vladimir_chevere', tier:'all'},
-      {nick:'sagoyakov_roman-', tier:'all'},
+      {nick:'sagoyakov_roman', tier:'all'},
       {nick:'Fufic-92', tier:'all'},
       {nick:'Aerilou', tier:'all'},
       {nick:'Mrwhitevoron', tier:'all'},
@@ -648,9 +648,16 @@
     // Ручные корректировки позиций
     dots.forEach(d=>{
       if(d.nick==='egorkochman'){
-        const ang=d.angle;
+        const ang=d.angle+0.14;
         const r=90;
         d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
+        d.angle=ang;
+      }
+      if(d.nick==='Wit163rus'){
+        const ang=d.angle+0.42;
+        const r=Math.hypot(d.x-CX, d.y-CY);
+        d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
+        d.angle=ang;
       }
       if(d.nick==='RoskeA-RoBBi'){
         // чуть центрее — уменьшаем радиус
@@ -659,10 +666,10 @@
         d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
       }
       if(d.nick==='Wit163rus'){
-        // чуть наружнее — увеличиваем радиус
         const ang=d.angle;
         const r=200;
         d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
+        d.group=1;
       }
       if(d.nick==='Mrwhitevoron'){
         const ang=d.angle+0.18;
@@ -692,7 +699,7 @@
     }
 
     let sweep=norm(-Math.PI/2+0.7), totalAngle=0;
-    const TOTAL=3;
+    const TOTAL=4;
 
     function reset(){
       totalAngle=0; sweep=norm(-Math.PI/2+0.7);
@@ -776,7 +783,7 @@
       const passes=totalAngle/TAU;
       dots.forEach(d=>{
         const lo=d.group, hi=d.group+1;
-        const canReveal=passes>=lo&&passes<hi+0.005;
+        const canReveal=passes>=lo&&passes<hi;
         const diff=norm(d.angle-sweep);
         const onBeam=diff<0.07||diff>TAU-0.015;
 
@@ -784,7 +791,7 @@
 
         if(d.revealed){
           if(onBeam&&canReveal) d.bright=Math.min(1,d.bright+0.08);
-          else                  d.bright=Math.max(0,d.bright-0.0015);
+          else                  d.bright=Math.max(0,d.bright-0.0008);
         }
       });
 
