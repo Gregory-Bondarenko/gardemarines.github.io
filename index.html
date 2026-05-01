@@ -799,9 +799,19 @@
   .sm-map-val { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--gold-bright); text-align:right; }
   .sm-map-weak .sm-map-val { color:#d96250; }
   @media(max-width:900px){
-    .season-metrics { grid-template-columns:1fr; }
-    .sm-group { border-right:none; padding-right:0; border-bottom:1px solid var(--line); padding-bottom:1.5rem; }
-    .sm-map-row { grid-template-columns:110px 1fr 38px; }
+    .season-metrics { grid-template-columns: 1fr; gap: 0; }
+    .sm-group {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1.5rem;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .sm-divider { width: 1px; height: 70px; }
+    .sm-val { font-size: 2.8rem; }
+    .sm-maps { padding: 0; }
+    .sm-map-row { grid-template-columns: 120px 1fr 38px; }
   }
 
 
@@ -1036,49 +1046,49 @@
 
     <div class="tour-grid">
                               <div class="tour-list">
-        <div class="tour-list-title">◆ История участия</div>
+        <div class="tour-list-title"><i class="fa-solid fa-clock-rotate-left"></i> История участий</div>
         <div class="tour-item">
-          <div class="tour-medal gold">★</div>
+          <div class="tour-medal gold"><i class="fa-solid fa-trophy"></i></div>
           <div class="tour-info"><h4>Risers Cup 26</h4><p>МАРТ 2026<br>Победители</p></div>
-          <div class="tour-place">🏆 1 место</div>
+          <div class="tour-place"><i class="fa-solid fa-trophy"></i> 1 место</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal part">◆</div>
+          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
           <div class="tour-info"><h4>Ocean Cup 5</h4><p>СЕНТ 2025<br>Играли сборной командой UGF</p></div>
           <div class="tour-place">1/8 Финала</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal part">◆</div>
+          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
           <div class="tour-info"><h4>Rookie Cup 25</h4><p>МАРТ 2025<br>Играл 2й состав GDM2</p></div>
           <div class="tour-place">1/8 Финала</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal gold">★</div>
+          <div class="tour-medal gold"><i class="fa-solid fa-trophy"></i></div>
           <div class="tour-info"><h4>Кубок СНГ 25</h4><p>ФЕВР 2025<br>Победители</p></div>
-          <div class="tour-place">🏆 1 место</div>
+          <div class="tour-place"><i class="fa-solid fa-trophy"></i> 1 место</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal part">◆</div>
+          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
           <div class="tour-info"><h4>Winter Cup 25</h4><p>ЯНВ 2025</p></div>
           <div class="tour-place">1/4 Финала нижней сетки</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal part">◆</div>
+          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
           <div class="tour-info"><h4>Ocean Cup 4</h4><p>СЕНТ 2024</p></div>
           <div class="tour-place">Групповая стадия</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal part">◆</div>
+          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
           <div class="tour-info"><h4>Ocean Cup 3</h4><p>АПР 2024<br>Выступало 2 состава</p></div>
           <div class="tour-place">Групповая стадия</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal silver">★</div>
+          <div class="tour-medal silver"><i class="fa-solid fa-medal"></i></div>
           <div class="tour-info"><h4>Кубок СНГ 24</h4><p>ФЕВР 2024</p></div>
-          <div class="tour-place">🥈 2 место</div>
+          <div class="tour-place"><i class="fa-solid fa-medal"></i> 2 место</div>
         </div>
         <div class="tour-item">
-          <div class="tour-medal part">◆</div>
+          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
           <div class="tour-info"><h4>Winter Cup 24</h4><p>ЯНВ 2024</p></div>
           <div class="tour-place">1/4 Финала</div>
         </div>
