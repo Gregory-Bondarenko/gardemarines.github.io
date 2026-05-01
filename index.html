@@ -715,6 +715,7 @@
     background: var(--steel-mid);
     display: flex; align-items: center; gap: 0.3rem;
     white-space: nowrap; margin: 2px 0;
+    position: relative;
   }
   .tl-card.scrim.win  { border-right: 2px solid var(--gold); }
   .tl-card.scrim.loss { border-right: 2px solid #b8473a; color: #d96250; }
@@ -752,124 +753,6 @@
     .tl-card { font-size: 0.6rem; }
     .timeline-wrap { padding: 0; }
   }
-
-
-  
-
-
-
-  /* Карточки таймлайна — единый размер */
-  .tl-card {
-    width: 148px !important;
-    min-height: 50px;
-    box-sizing: border-box;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0.3rem 0.55rem !important;
-  }
-  .tl-col-left  { align-items: flex-end; }
-  .tl-col-right { align-items: flex-start; }
-
-  /* Линии от карточек к центру — длиннее и выразительнее */
-  .tl-col-left .tl-card::after {
-    content: '';
-    position: absolute;
-    right: -26px; top: 50%;
-    width: 26px; height: 1px;
-    transform: translateY(-50%);
-  }
-  .tl-col-left  .tl-card.win::after  { background: linear-gradient(90deg, transparent, var(--gold) 60%); opacity: 0.8; }
-  .tl-col-left  .tl-card.loss::after { background: linear-gradient(90deg, transparent, #b8473a 60%); opacity: 0.7; }
-  .tl-col-left  .tl-card.dim::after  { background: linear-gradient(90deg, transparent, var(--steel-edge) 60%); opacity: 0.5; }
-
-  .tl-col-right .tl-card::before {
-    content: '';
-    position: absolute;
-    left: -26px; top: 50%;
-    width: 26px; height: 1px;
-    transform: translateY(-50%);
-  }
-  .tl-col-right .tl-card.win::before  { background: linear-gradient(270deg, transparent, var(--gold) 60%); opacity: 0.8; }
-  .tl-col-right .tl-card.loss::before { background: linear-gradient(270deg, transparent, #b8473a 60%); opacity: 0.7; }
-  .tl-col-right .tl-card.dim::before  { background: linear-gradient(270deg, transparent, var(--steel-edge) 60%); opacity: 0.5; }
-
-  /* Дата */
-  .tl-card-date {
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem;
-    color: var(--text-dim); margin-bottom: 3px; text-align: center;
-  }
-
-  /* Счёт — единый формат, читается по цвету рамки */
-  .tl-card-match {
-    display: flex; align-items: center; justify-content: center;
-    gap: 0.3rem; font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem; color: var(--text);
-  }
-  .tl-score-mid {
-    font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.78rem;
-    color: var(--text); padding: 0 0.15rem;
-  }
-  /* Победа — счёт золотой */
-  .tl-card.win  .tl-score-mid { color: var(--gold-bright); }
-  /* Поражение — счёт красный */
-  .tl-card.loss .tl-score-mid { color: #d96250; }
-  .tl-card.dim  .tl-score-mid { color: var(--text-dim); }
-
-  /* тик убираем */
-  .tl-tick { display: none !important; }
-  @keyframes trophyGlow {
-    0%,100% { filter: drop-shadow(0 0 6px rgba(212,168,73,0.4)); }
-    50%      { filter: drop-shadow(0 0 18px rgba(212,168,73,0.9)); }
-  }
-
-
-  /* Кубок SVG */
-  .tl-cup-label {
-    font-family: 'Cinzel', serif; font-weight: 700;
-    font-size: 0.7rem; letter-spacing: 0.3em;
-    color: var(--gold); margin-top: 0.2rem;
-  }
-  @keyframes trophyGlow {
-    0%,100% { filter: drop-shadow(0 0 8px rgba(212,168,73,0.45)); }
-    50%      { filter: drop-shadow(0 0 20px rgba(212,168,73,0.85)); }
-  }
-
-  /* Фикс черточек — родитель должен быть relative */
-  .tl-col-left, .tl-col-right { position: relative; }
-
-  /* Черточки — теперь на самом col а не на card */
-  .tl-col-left::after {
-    content: none !important;
-  }
-  .tl-col-right::before {
-    content: none !important;
-  }
-  .tl-col-left .tl-card { position: relative; }
-  .tl-col-right .tl-card { position: relative; }
-
-  .tl-col-left .tl-card::after {
-    content: '';
-    position: absolute;
-    right: -28px; top: 50%;
-    width: 28px; height: 1px;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-  .tl-col-left .tl-card.win::after  { background: linear-gradient(90deg, rgba(212,168,73,0.1), rgba(212,168,73,0.8)); }
-  .tl-col-left .tl-card.loss::after { background: linear-gradient(90deg, rgba(184,71,58,0.1), rgba(184,71,58,0.7)); }
-  .tl-col-left .tl-card.dim::after  { background: linear-gradient(90deg, rgba(60,70,80,0.1), rgba(60,70,80,0.5)); }
-
-  .tl-col-right .tl-card::before {
-    content: '';
-    position: absolute;
-    left: -28px; top: 50%;
-    width: 28px; height: 1px;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-  .tl-col-right .tl-card.win::before  { background: linear-gradient(270deg, rgba(212,168,73,0.1), rgba(212,168,73,0.8)); }
-  .tl-col-right .tl-card.loss::before { background: linear-gradient(270deg, rgba(184,71,58,0.1), rgba(184,71,58,0.7)); }
-  .tl-col-right .tl-card.dim::before  { background: linear-gradient(270deg, rgba(60,70,80,0.1), rgba(60,70,80,0.5)); }
 
 
   .tl-cup-icon {
@@ -936,7 +819,7 @@
     padding-right: 8px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
-    color: rgba(139,151,163,0.45);
+    color: rgba(220,235,248,0.92);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     line-height: 1.5;
@@ -946,7 +829,7 @@
     padding-left: 8px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
-    color: rgba(139,151,163,0.45);
+    color: rgba(220,235,248,0.92);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     line-height: 1.5;
@@ -955,6 +838,145 @@
     font-size: 0.58rem; opacity: 0.7; display: block;
   }
   .tl-header-mid {}
+
+
+
+
+  /* Черточки от карточек к центральной линии */
+  .tl-col-left .tl-card::after {
+    content: '';
+    position: absolute;
+    right: -26px; top: 50%;
+    width: 26px; height: 1px;
+    transform: translateY(-50%);
+  }
+  .tl-col-left .tl-card.win::after  { background: linear-gradient(90deg, transparent, rgba(212,168,73,0.8)); }
+  .tl-col-left .tl-card.loss::after { background: linear-gradient(90deg, transparent, rgba(184,71,58,0.7)); }
+  .tl-col-left .tl-card.dim::after  { background: linear-gradient(90deg, transparent, rgba(80,90,100,0.5)); }
+
+  .tl-col-right .tl-card::before {
+    content: '';
+    position: absolute;
+    left: -26px; top: 50%;
+    width: 26px; height: 1px;
+    transform: translateY(-50%);
+  }
+  .tl-col-right .tl-card.win::before  { background: linear-gradient(270deg, transparent, rgba(212,168,73,0.8)); }
+  .tl-col-right .tl-card.loss::before { background: linear-gradient(270deg, transparent, rgba(184,71,58,0.7)); }
+  .tl-col-right .tl-card.dim::before  { background: linear-gradient(270deg, transparent, rgba(80,90,100,0.5)); }
+
+
+  /* Форматирование внутри карточек */
+  .tl-card-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-bottom: 2px;
+  }
+  .tl-card-match {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+  .tl-us {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+  .tl-them {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+  .tl-score-mid {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--text);
+    padding: 0 0.1rem;
+  }
+  .tl-card.win  .tl-score-mid { color: var(--gold-bright); }
+  .tl-card.loss .tl-score-mid { color: #d96250; }
+  .tl-card.dim  .tl-score-mid { color: var(--text-dim); }
+  .tl-card.loss .tl-us        { color: var(--text); }
+  .tl-card.loss .tl-them      { color: var(--text); }
+
+
+  /* ── ЕДИНЫЙ РАЗМЕР И ЦЕНТРОВКА КАРТОЧЕК ── */
+  .tl-col-left  { align-items: flex-end; }
+  .tl-col-right { align-items: flex-start; }
+
+  .tl-card {
+    width: 152px !important;
+    min-height: 52px !important;
+    box-sizing: border-box !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.35rem 0.6rem !important;
+    position: relative;
+    text-align: center;
+  }
+  .tl-card-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--text-dim);
+    text-align: center;
+    width: 100%;
+    margin-bottom: 3px;
+  }
+  .tl-card-match {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    width: 100%;
+  }
+  .tl-us, .tl-them {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.64rem;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .tl-score-mid {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 0 0.15rem;
+    white-space: nowrap;
+  }
+  .tl-card.win  .tl-score-mid { color: var(--gold-bright); }
+  .tl-card.loss .tl-score-mid { color: #d96250; }
+  .tl-card.dim  .tl-score-mid { color: var(--text-dim); }
+  .tl-card.loss .tl-us   { color: var(--text); }
+  .tl-card.loss .tl-them { color: var(--text); }
+
+
+  /* Ссылка на трансляцию */
+  .tl-stream {
+    position: absolute;
+    top: 3px; right: 4px;
+    font-size: 0.55rem;
+    color: var(--gold-base);
+    opacity: 0.5;
+    text-decoration: none;
+    transition: opacity 0.2s, color 0.2s;
+    letter-spacing: 0.05em;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .tl-stream:hover {
+    opacity: 1;
+    color: var(--gold-bright);
+  }
+  .tl-stream::before {
+    content: '▶';
+    font-size: 0.5rem;
+    margin-right: 2px;
+  }
 
 </style>
 </head>
@@ -988,7 +1010,7 @@
 
     </div>
     <h1 class="hero-title">GARDEMARINES</h1>
-    <p class="hero-sub">Флот в котором главная ценность люди</p>
+    <p class="hero-sub">Флот в котором главная ценность - люди</p>
     <div class="hero-buttons">
       <a href="#roster"      class="btn btn-gold">Состав флота</a>
       <a href="#tournaments" class="btn btn-steel">Турниры</a>
@@ -1090,8 +1112,8 @@
         <div class="sm-divider"></div>
         <div class="sm-item">
           <div class="sm-val">79.4<span class="sm-pct">%</span></div>
-          <div class="sm-label">Раунды</div>
-          <div class="sm-sub">50 / 63</div>
+          <div class="sm-label">Раунды (Карты)</div>
+          <div class="sm-sub">50W · 13L</div>
         </div>
       </div>
 
@@ -1107,26 +1129,24 @@
       </div>
     </div>
 
-    <div class="section-tag" style="margin-bottom:1.5rem;margin-top:0.5rem;">Путь к финалу</div>
+    <div class="section-tag" style="margin-bottom:1.5rem;margin-top:0.5rem;">Путь к трофею</div>
     <div class="tl-header-labels">
       <div class="tl-header-l">Scrim<br><span>Тренировки</span></div>
       <div class="tl-header-mid"></div>
       <div class="tl-header-r">RC26<br><span>Турнирные</span></div>
     </div>
     <div class="timeline-wrap">
+
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
-          <div class="tl-spine-node">
-            <div class="tl-dot"></div>
-            <div class="tl-label">Швейцарка</div>
-          </div>
+          <div class="tl-spine-node"><div class="tl-dot"></div><div class="tl-label">Швейцарка</div></div>
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">28.02</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:2</span><span class="tl-them">NSFW</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:2</span><span class="tl-them">NSFW</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1134,7 +1154,7 @@
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">11.03</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">6:0</span><span class="tl-them">AZD</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">6:0</span><span class="tl-them">AZD</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1144,13 +1164,13 @@
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-card rc loss">
               <div class="tl-card-date">14.03</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">YOINK</span><span class="tl-score-mid">2:1</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">1:2</span><span class="tl-them">YOINK</span></div>
             </div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">16.03</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">5:0</span><span class="tl-them">BEREG</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-them">BEREG</span><span class="tl-score-mid">0:5</span><span class="tl-us">GDM</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1158,7 +1178,7 @@
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim loss">
               <div class="tl-card-date">19.03</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">1:5</span><span class="tl-them">JN</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-them">JN</span><span class="tl-score-mid">5:1</span><span class="tl-us">GDM</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1168,7 +1188,7 @@
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-card rc win">
               <div class="tl-card-date">22.03</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">ONYXH</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-them">ONYXH</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div>
             </div></div>
         </div>
         <div class="tl-row">
@@ -1176,13 +1196,13 @@
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-card rc win">
               <div class="tl-card-date">28.03</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">WOWSH</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">2:0</span><span class="tl-them">WOWSH</span></div>
             </div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">04.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:0</span><span class="tl-them">YOLO</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-them">YOLO</span><span class="tl-score-mid">0:4</span><span class="tl-us">GDM</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1192,23 +1212,21 @@
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-card rc win">
               <div class="tl-card-date">05.04</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">JN</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-them">JN</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div>
             </div></div>
         </div>
       </div>
+
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
-          <div class="tl-spine-node">
-            <div class="tl-dot"></div>
-            <div class="tl-label">1/8 Финала</div>
-          </div>
+          <div class="tl-spine-node"><div class="tl-dot"></div><div class="tl-label">1/8 Финала</div></div>
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">11.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:1</span><span class="tl-them">RETRO</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:1</span><span class="tl-them">RETRO</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1218,23 +1236,21 @@
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-card rc win">
               <div class="tl-card-date">12.04</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">RMI</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:0</span><span class="tl-them">RMI</span></div>
             </div></div>
         </div>
       </div>
+
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
-          <div class="tl-spine-node">
-            <div class="tl-dot"></div>
-            <div class="tl-label">1/4 Финала</div>
-          </div>
+          <div class="tl-spine-node"><div class="tl-dot"></div><div class="tl-label">1/4 Финала</div></div>
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">16.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:2</span><span class="tl-them">BETEP</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:2</span><span class="tl-them">BETEP</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1244,23 +1260,21 @@
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-card rc win">
               <div class="tl-card-date">18.04</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">NSFW</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:0</span><span class="tl-them">NSFW</span></div>
             </div></div>
         </div>
       </div>
+
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
-          <div class="tl-spine-node">
-            <div class="tl-dot"></div>
-            <div class="tl-label">1/2 Финала</div>
-          </div>
+          <div class="tl-spine-node"><div class="tl-dot"></div><div class="tl-label">1/2 Финала</div></div>
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">23.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:1</span><span class="tl-them">BETEP</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-them">BETEP</span><span class="tl-score-mid">1:4</span><span class="tl-us">GDM</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1269,24 +1283,23 @@
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-card rc win">
+              <a class="tl-stream" href="https://www.youtube.com/live/Kc13V0z3BJg?si=7RxCL_5yIm86o_SL" target="_blank" title="Смотреть трансляцию">REC</a>
               <div class="tl-card-date">26.04</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">DF</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-them">DF</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div>
             </div></div>
         </div>
       </div>
-      <div class="timeline-stage dim">
+
+      <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
-          <div class="tl-spine-node">
-            <div class="tl-dot dim"></div>
-            <div class="tl-label">Финал</div>
-          </div>
+          <div class="tl-spine-node"><div class="tl-dot"></div><div class="tl-label">Финал</div></div>
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-card scrim win">
               <div class="tl-card-date">30.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:0</span><span class="tl-them">LBF1</span><span class="tl-tick"></span></div>
+              <div class="tl-card-match"><span class="tl-them">LBF1</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div>
             </div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
@@ -1294,9 +1307,9 @@
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc dim">
+          <div class="tl-col-right"><div class="tl-card rc win">
               <div class="tl-card-date">03.05</div>
-              <div class="tl-card-match"><span class="tl-tick"></span><span class="tl-them">YOLO</span><span class="tl-score-mid">?:?</span><span class="tl-us">GDM</span></div>
+              <div class="tl-card-match"><span class="tl-them">YOLO</span><span class="tl-score-mid">0:0</span><span class="tl-us">GDM</span></div>
             </div></div>
         </div>
       </div>
