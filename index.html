@@ -657,8 +657,8 @@
     text-align: center; margin-top: 0.2rem; white-space: nowrap;
   }
 
-  .tl-col-left  { display: flex; justify-content: flex-end; padding-right: 6px; }
-  .tl-col-right { display: flex; justify-content: flex-start; padding-left: 6px; }
+  .tl-col-left  { display: flex; justify-content: flex-end; padding-right: 6px; overflow: visible; }
+  .tl-col-right { display: flex; justify-content: flex-start; padding-left: 6px; overflow: visible; }
   .tl-empty-cell { height: 32px; }
 
 
@@ -691,7 +691,7 @@
 
   @media(max-width:600px){
     .tl-date { display: none; }
-    .tl-card { font-size: 0.6rem; }
+    .tl-card { font-size: 0.6rem; position: relative; overflow: visible; }
     .timeline-wrap { padding: 0; }
   }
 
