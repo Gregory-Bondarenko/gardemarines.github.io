@@ -1,1086 +1,210 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="format-detection" content="telephone=no">
-<title>GARDEMARINES [GDM]</title>
-
-<!-- SEO -->
-<meta name="description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends. Официальный сайт клана Гардемарины. Состав, турниры, достижения.">
-<meta name="keywords" content="
-  Gardemarines, Гардемарины, GDM, ГДМ, Гардемарины клан, GDM клан,
-  gardemarines.ru, Gardemarine, Гардемарин,
-  World of Warships Legends, WoWs Legends, ВоВс Легендс, Ворлд оф Воршипс,
-  World of Warships Legends клан, WoWs Legends клан, WoWS клан,
-  лучший флот СНГ, лучший клан СНГ, топ флот СНГ, топ клан WoWs,
-  клан Гардемарины, флот Гардемарины, клан GDM, флот GDM,
-  Gardemarines WoWs, GDM WoWs, GDM WoWs Legends,
-  клановые бои WoWs, турниры WoWs Legends, WoWs Legends РУ,
-  Гардемарины World of Warships, GDM World of Warships,
-  клан ворлд оф воршипс, флот ворлд оф воршипс легендс,
-  Gardemarines clan, GDM clan, best clan WoWs Legends CIS,
-  CIS clan WoWs, RU clan WoWs Legends
-">
-<meta name="author" content="GARDEMARINES [GDM]">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0a0d10">
-
-<!-- Канонический URL -->
-<link rel="canonical" href="https://gardemarines.ru">
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://gardemarines.ru">
-<meta property="og:title" content="Gardemarines — Флот Гардемарины | World of Warships Legends">
-<meta property="og:description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
-<meta property="og:image" content="https://gardemarines.ru/logo.png">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:site_name" content="Gardemarines">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gardemarines [GDM] — World of Warships Legends">
-<meta name="twitter:description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
-<meta name="twitter:image" content="https://gardemarines.ru/logo.png">
-<meta name="google-site-verification" content="google298b3a4774992c99">
-<meta name="yandex-verification" content="8a59f5874d14fa97">
-<link rel="icon" type="image/png" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Oswald:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --steel-darkest: #0a0d10;
-    --steel-dark: #14181d;
-    --steel-mid: #1e242b;
-    --steel-light: #2a3139;
-    --steel-edge: #3d4651;
-    --gold-shadow: #6e5420;
-    --gold-base: #b8902f;
-    --gold: #d4a849;
-    --gold-bright: #f4d57a;
-    --gold-shine: #fff2c4;
-    --text: #e4e8ec;
-    --text-dim: #8b97a3;
-    --line: #2a3641;
-    --content-width: 1100px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Oswald', sans-serif;
-    background: var(--steel-darkest);
-    color: var(--text);
-    overflow-x: hidden;
-    font-weight: 300;
-    line-height: 1.6;
-  }
-
-  .metal-bg {
-    position: fixed; inset: 0; z-index: -3;
-    background:
-      radial-gradient(ellipse 1000px 600px at 50% 0%, rgba(212, 168, 73, 0.10) 0%, transparent 60%),
-      linear-gradient(180deg, #14181d 0%, #1a1f25 30%, #0f1318 70%, #0a0d10 100%);
-  }
-  .metal-bg::before {
-    content: ''; position: absolute; inset: 0;
-    background-image:
-      repeating-linear-gradient(90deg, transparent 0px, rgba(255,255,255,0.012) 1px, transparent 2px, rgba(0,0,0,0.02) 3px);
-    opacity: 0.7;
-  }
-  .metal-bg::after {
-    content: ''; position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.2; mix-blend-mode: overlay;
-  }
-
-  .particles { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; }
-  .particle { position: absolute; border-radius: 50%; opacity: 0; animation: float linear infinite; }
-  .particle.s { width: 2px; height: 2px; background: var(--gold-bright); box-shadow: 0 0 6px var(--gold), 0 0 12px var(--gold); }
-  .particle.m { width: 3px; height: 3px; background: var(--gold-shine); box-shadow: 0 0 8px var(--gold-bright), 0 0 16px var(--gold); }
-  .particle.l { width: 4px; height: 4px; background: var(--gold-shine); box-shadow: 0 0 10px var(--gold-bright), 0 0 20px var(--gold), 0 0 30px rgba(244, 213, 122, 0.4); }
-  @keyframes float {
-    0% { transform: translateY(105vh) translateX(0); opacity: 0; }
-    8% { opacity: 0.85; }
-    50% { transform: translateY(50vh) translateX(20px); }
-    92% { opacity: 0.85; }
-    100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
-  }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1.2rem 0;
-    background: rgba(10, 13, 16, 0.7);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-    transition: padding 0.3s, background 0.3s;
-  }
-  nav.scrolled { padding: 0.6rem 0; background: rgba(10, 13, 16, 0.95); }
-  .nav-inner { max-width: var(--content-width); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-  .nav-brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-  .nav-brand img { width: 36px; height: 36px; transition: transform 0.6s; mix-blend-mode: screen; }
-  .nav-brand:hover img { transform: rotate(360deg); }
-  .nav-brand-text {
-    font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.3em;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-family: 'Oswald', sans-serif; font-size: 0.82rem; color: var(--text-dim);
-    text-decoration: none; text-transform: uppercase; letter-spacing: 0.15em;
-    position: relative; padding: 0.3rem 0; transition: color 0.3s;
-  }
-  .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); transition: width 0.4s; }
-  .nav-links a:hover { color: var(--gold-bright); }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-cta {
-    font-family: 'Oswald', sans-serif; font-size: 0.78rem; padding: 0.6rem 1.2rem;
-    background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    color: var(--steel-darkest); text-decoration: none; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 500;
-    border: 1px solid var(--gold-shine);
-    box-shadow: inset 0 1px 0 rgba(255, 242, 196, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s;
-  }
-  .nav-cta:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,242,196,0.7), 0 0 20px rgba(212,168,73,0.5); }
-
-  .container { max-width: var(--content-width); margin: 0 auto; padding: 0 2rem; }
-
-  .hero { padding: 5.5rem 0 3rem; text-align: center; position: relative; }
-
-  .logo-stage {
-    position: relative;
-    width: min(360px, 62vmin);
-    height: min(360px, 62vmin);
-    margin: 0 auto 2rem;
-    display: flex; align-items: center; justify-content: center;
-    animation: logo-entry 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
-  }
-
-  @keyframes logo-entry {
-    0% { opacity: 0; transform: scale(0.7); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes glow-pulse {
-    0%, 100% { opacity: 0.7; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.06); }
-  }
-
-  .logo-img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    mix-blend-mode: screen;
-    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.6));
-  }
-
-    100% { opacity: 1; transform: scale(1); }
-  }
-
-  .est-line {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem; letter-spacing: 0.4em;
-    color: var(--gold); margin-bottom: 1rem;
-    opacity: 0; animation: fade-up 1s 1.2s ease-out forwards;
-  }
-  .est-line span { color: var(--text-dim); }
-
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-title {
-    font-family: 'Cinzel', serif; font-weight: 900;
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    letter-spacing: 0.12em; line-height: 1;
-    margin-bottom: 1.2rem;
-    opacity: 0; animation: fade-up 1s 1.4s ease-out forwards;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold-bright) 25%, var(--gold) 50%, var(--gold-base) 75%, var(--gold-shadow) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    text-shadow: 0 4px 30px rgba(212, 168, 73, 0.3);
-    position: relative;
-  }
-
-  .hero-title::after {
-    content: 'GARDEMARINES';
-    position: absolute; inset: 0;
-    background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.35) 50%, transparent 65%);
-    background-size: 250% 100%;
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    animation: shimmer 7s 3s ease-in-out infinite;
-  }
-  @keyframes shimmer {
-    0% { background-position: 250% 0; }
-    50% { background-position: -150% 0; }
-    100% { background-position: -150% 0; }
-  }
-
-  .hero-sub {
-    font-family: 'Oswald', sans-serif; font-weight: 300;
-    font-size: 1rem; color: var(--text-dim);
-    max-width: 580px; margin: 0 auto 1.2rem;
-    letter-spacing: 0.05em;
-    opacity: 0; animation: fade-up 1s 1.6s ease-out forwards;
-  }
-
-  .hero-motto {
-    font-family: 'Cinzel', serif; font-style: italic;
-    font-size: 0.95rem; color: var(--gold);
-    letter-spacing: 0.2em; margin-bottom: 2rem;
-    opacity: 0; animation: fade-up 1s 1.8s ease-out forwards;
-  }
-
-  .hero-buttons {
-    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-    opacity: 0; animation: fade-up 1s 2s ease-out forwards;
-  }
-
-  .btn {
-    font-family: 'Oswald', sans-serif; font-size: 0.85rem;
-    padding: 0.9rem 2rem; cursor: pointer; text-decoration: none;
-    text-transform: uppercase; letter-spacing: 0.2em; font-weight: 500;
-    transition: all 0.3s;
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    position: relative; overflow: hidden;
-  }
-  .btn-gold {
-    background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 45%, var(--gold-base) 100%);
-    color: var(--steel-darkest); border: 1px solid var(--gold-shine);
-    box-shadow: inset 0 1px 0 rgba(255,242,196,0.6), inset 0 -1px 0 rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.5);
-  }
-  .btn-gold::before { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s; }
-  .btn-gold:hover::before { transform: translateX(100%); }
-  .btn-gold:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,242,196,0.8), 0 0 25px rgba(212,168,73,0.6); }
-  .btn-steel { background: linear-gradient(180deg, var(--steel-light) 0%, var(--steel-mid) 50%, var(--steel-dark) 100%); color: var(--text); border: 1px solid var(--steel-edge); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 12px rgba(0,0,0,0.5); }
-  .btn-steel:hover { border-color: var(--gold); color: var(--gold-bright); transform: translateY(-2px); }
-
-  section.block { padding: 5.5rem 0; text-align: center; position: relative; }
-  .section-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 1rem; }
-  .section-tag::before, .section-tag::after { content: ''; width: 30px; height: 1px; background: var(--gold); }
-  .section-title { font-family: 'Cinzel', serif; font-weight: 700; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: 0.08em; line-height: 1.1; margin-bottom: 1rem; background: linear-gradient(180deg, #f0f0f0 0%, #b0b0b0 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .section-title em { font-style: normal; background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .section-sub { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 1rem; color: var(--text-dim); margin-bottom: 3rem; letter-spacing: 0.05em; }
-
-  .roster-table { width: 100%; border-collapse: collapse; text-align: left; background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%); border: 1px solid var(--steel-edge); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 4px 20px rgba(0,0,0,0.3); }
-  .roster-table thead { background: linear-gradient(180deg, var(--steel-light), var(--steel-mid)); border-bottom: 2px solid var(--gold); }
-  .roster-table th { padding: 1.1rem 1.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); font-weight: 500; }
-  .roster-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--line); font-family: 'Oswald', sans-serif; font-size: 0.95rem; transition: all 0.3s; }
-  .roster-table tbody tr { opacity: 0; transform: translateX(-20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-  .roster-table tbody tr.shown { opacity: 1; transform: translateX(0); }
-  .roster-table tbody tr:hover td { background: rgba(212, 168, 73, 0.05); color: var(--gold-bright); }
-  .roster-table tbody tr.cmd td { background: linear-gradient(90deg, rgba(212,168,73,0.12) 0%, transparent 70%); border-left: 3px solid var(--gold); }
-  .roster-table tbody tr.cmd:hover td { background: linear-gradient(90deg, rgba(212,168,73,0.18) 0%, rgba(212,168,73,0.03) 70%); }
-  .rank-badge { display: inline-block; padding: 0.3rem 0.7rem; background: var(--steel-darkest); border: 1px solid var(--steel-edge); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
-  .rank-badge.cmd { background: linear-gradient(180deg, var(--gold-bright), var(--gold-base)); color: var(--steel-darkest); border-color: var(--gold-shine); box-shadow: inset 0 1px 0 rgba(255,242,196,0.6); }
-  .nick { color: var(--text); font-weight: 500; }
-  .role { color: var(--text-dim); font-style: italic; font-size: 0.9rem; }
-  .stat-num { color: var(--gold-bright); font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
-
-  .tour-grid { display: block; text-align: left; max-width: 800px; margin: 0 auto; }
-  .tour-list { background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%); border: 1px solid var(--steel-edge); padding: 1.5rem; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 4px 12px rgba(0,0,0,0.3); }
-  .tour-list-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--line); }
-  .tour-item { display: grid; grid-template-columns: 52px 1fr auto; gap: 1rem; padding: 1.2rem 0.5rem; border-bottom: 1px dashed var(--line); align-items: center; min-height: 80px; transition: all 0.3s; }
-  .tour-item:hover { padding-left: 1.3rem; background: linear-gradient(90deg, rgba(212,168,73,0.06), transparent); }
-
-  .tour-item:last-child { border-bottom: none; }
-
-  .tour-medal { font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.6rem; text-align: center; line-height: 1; }
-  .tour-medal.gold { background: linear-gradient(180deg, var(--gold-shine), var(--gold-base)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .tour-medal.silver { background: linear-gradient(180deg, #e0e0e0, #888888); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .tour-medal.bronze { background: linear-gradient(180deg, #d49b6a, #7a4f2f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .tour-medal.part { color: var(--text-dim); font-size: 1.2rem; }
-  .tour-item > * { display:flex; align-items:center; }
-  .tour-medal { justify-content:center; padding: 0.8rem 0; }
-  .tour-info { flex-direction:column; align-items:flex-start; justify-content:center; padding: 0.8rem 0; }
-  .tour-place-wrap { justify-content:center; padding: 0.8rem 0.5rem; }
-
-  .tour-info h4 { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 1rem; margin-bottom: 0.2rem; }
-  .tour-info p { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--text-dim); }
-  .tour-place { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem; color: var(--gold); min-width: 80px;
- 
-}
-
-  .achievements { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; align-content: start; }
-  .achievement { background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%); border: 1px solid var(--steel-edge); padding: 1.2rem; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 2px 8px rgba(0,0,0,0.3); }
-  .achievement::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(212,168,73,0.15), transparent 60%); opacity: 0; transition: opacity 0.4s; }
-  .achievement:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.5), 0 0 25px rgba(212,168,73,0.2); }
-  .achievement:hover::before { opacity: 1; }
-  .achievement-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; background: linear-gradient(180deg, var(--gold-shine), var(--gold-base)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; position: relative; z-index: 1; }
-  .achievement-title { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.85rem; color: var(--text); margin-bottom: 0.3rem; position: relative; z-index: 1; }
-  .achievement-desc { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-dim); position: relative; z-index: 1; }
-
-  .schedule { text-align: left; }
-  .sched-row { display: grid; grid-template-columns: 100px 1fr 130px 130px; gap: 1.5rem; padding: 1.4rem 1.8rem; background: linear-gradient(90deg, var(--steel-dark) 0%, var(--steel-mid) 100%); border: 1px solid var(--steel-edge); border-left: 3px solid var(--gold); margin-bottom: 0.8rem; align-items: center; transition: all 0.3s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 2px 6px rgba(0,0,0,0.3); }
-  .sched-row:hover { transform: translateX(6px); border-left-color: var(--gold-bright); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 20px rgba(212,168,73,0.15); }
-  .sched-date { font-family: 'Cinzel', serif; font-weight: 700; text-align: center; border-right: 1px solid var(--line); padding-right: 1rem; }
-  .sched-date .d { font-size: 2.2rem; line-height: 1; background: linear-gradient(180deg, var(--gold-shine), var(--gold-base)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .sched-date .m { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-dim); margin-top: 0.3rem; letter-spacing: 0.2em; }
-  .sched-info h4 { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 1.05rem; margin-bottom: 0.3rem; }
-  .sched-info p { font-family: 'Oswald', sans-serif; font-weight: 300; font-size: 0.88rem; color: var(--text-dim); }
-  .sched-time { font-family: 'IBM Plex Mono', monospace; color: var(--gold-bright); font-size: 0.9rem; }
-  .sched-tag { font-family: 'Oswald', sans-serif; font-size: 0.72rem; padding: 0.4rem 0.9rem; text-transform: uppercase; letter-spacing: 0.15em; text-align: center; font-weight: 500; }
-  .sched-tag.battle { background: rgba(184,71,58,0.15); color: #d96250; border: 1px solid #d96250; }
-  .sched-tag.train { background: rgba(212,168,73,0.1); color: var(--gold); border: 1px solid var(--gold-base); }
-  .sched-tag.event { background: rgba(74,139,139,0.15); color: #6cb1b1; border: 1px solid #6cb1b1; }
-
-  .recruit { background: radial-gradient(circle at 30% 50%, rgba(212,168,73,0.08), transparent 70%), linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%); border: 1px solid var(--gold-base); padding: 0; display: grid; grid-template-columns: 1fr 1fr; text-align: left; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
-  .recruit::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-  .recruit-l { padding: 2.5rem; border-right: 1px solid var(--steel-edge); }
-  .recruit-l h3 { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.8rem; margin-bottom: 1.2rem; letter-spacing: 0.05em; background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .recruit-l p { color: var(--text-dim); margin-bottom: 1.2rem; font-weight: 300; line-height: 1.7; font-size: 0.95rem; }
-  .recruit-r { padding: 2.5rem; }
-  .req-list { list-style: none; }
-  .req-list li { padding: 0.9rem 0; border-bottom: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; }
-  .req-list li:last-child { border-bottom: none; }
-  .req-list .key { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; }
-  .req-list .val { color: var(--gold-bright); font-weight: 500; }
-
-  footer { padding: 4rem 0 2rem; border-top: 1px solid var(--steel-edge); background: linear-gradient(180deg, var(--steel-dark) 0%, var(--steel-darkest) 100%); text-align: center; }
-  .foot-logo { width: 60px; margin-bottom: 1.2rem; mix-blend-mode: screen; filter: drop-shadow(0 0 20px rgba(212,168,73,0.3)); }
-  .foot-name { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3em; background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold-base) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-  .foot-tagline { font-family: 'Oswald', sans-serif; font-weight: 300; font-style: italic; color: var(--text-dim); font-size: 0.88rem; margin-bottom: 2rem; }
-  .foot-links { display: flex; justify-content: center; gap: 1.8rem; list-style: none; margin-bottom: 2rem; flex-wrap: wrap; }
-  .foot-links a { font-family: 'Oswald', sans-serif; font-size: 0.82rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 0.15em; transition: color 0.3s; }
-  .foot-links a:hover { color: var(--gold-bright); }
-  .foot-bottom { padding-top: 2rem; border-top: 1px solid var(--line); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--text-dim); }
-
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @media (max-width: 900px) {
-
-    .nav-inner { padding: 0 1rem; }
-    .nav-links { display: none; }
-
-    .tour-item {
-      grid-template-columns: 36px 1fr auto !important;
-      min-height: auto !important;
-      padding: 0.9rem 0 !important;
-      gap: 0.6rem !important;
-    }
-    .tour-medal { font-size: 1.1rem !important; }
-    .tour-info h4 { font-size: 0.9rem; }
-    .tour-info p { font-size: 0.72rem; }
-    .tour-place { font-size: 0.78rem; min-width: 60px; white-space: nowrap;
- 
-}
-
-    .container { padding: 0 1rem; }
-    section.block { padding: 3rem 0; }
-
-    .hero { padding: 5rem 0 2.5rem; }
-    .hero-title { font-size: clamp(2rem, 10vw, 3.5rem); }
-    .hero-sub { font-size: 0.95rem; }
-    .hero-buttons { flex-direction: column; align-items: center; }
-    .hero-buttons .btn { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
-
-    .logo-stage { width: min(280px, 70vmin); height: min(280px, 70vmin); }
-
-    #radarCanvas { max-width: 100% !important; }
-
-    .tour-item { grid-template-columns: 40px 1fr auto; gap: 0.6rem; padding: 0.8rem 0; }
-    .tour-place { font-size: 0.85rem; min-width: auto;
- 
-}
-    .tour-info h4 { font-size: 0.9rem; }
-    .tour-info p { font-size: 0.75rem; }
-    .tour-medal { font-size: 1.2rem; }
-
-    .section-title { font-size: clamp(1.8rem, 7vw, 3rem); }
-
-    footer { padding: 2.5rem 0 1.5rem; }
-    .foot-name { font-size: 1rem; }
-  }
-
-  @media (max-width: 480px) {
-    .hero-title { font-size: clamp(1.8rem, 9vw, 2.8rem); letter-spacing: 0.06em; }
-    .logo-stage { width: min(240px, 65vmin); height: min(240px, 65vmin); }
-    .tour-item { grid-template-columns: 32px 1fr; gap: 0.5rem; }
-    .tour-place { grid-column: 2; font-size: 0.8rem;
- 
-}
-    .nav-brand-text { font-size: 0.85rem; letter-spacing: 0.15em; }
-  }
-
-  .nav-season { color: var(--gold-bright) !important; }
-
-  #season { text-align: center; }
-
-  .season-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--steel-edge);
-    margin-bottom: 3rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    position: relative;
-  }
-  .season-grid::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .season-cell {
-    background: linear-gradient(180deg, var(--steel-mid) 0%, var(--steel-dark) 100%);
-    padding: 1.8rem 1rem;
-    text-align: center;
-  }
-  .season-cell-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem; color: var(--text-dim);
-    text-transform: uppercase; letter-spacing: 0.2em;
-    margin-bottom: 0.8rem;
-  }
-  .season-cell-val {
-    font-family: 'Cinzel', serif; font-weight: 900;
-    font-size: 2.2rem; line-height: 1;
-    margin-bottom: 0.4rem;
-    background: linear-gradient(180deg, #e8e8e8 0%, #888 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .season-cell-val.gold {
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .season-cell-sub {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem; color: var(--text-dim);
-  }
-
-  @media(max-width:900px){
-    .season-grid { grid-template-columns: 1fr; }
-    .season-cell { padding: 1.2rem 1rem; }
-    .season-cell-val { font-size: 1.8rem; }
-  }
-
-  .vroad-title {
-    font-family:'IBM Plex Mono',monospace; font-size:0.72rem;
-    color:var(--gold); letter-spacing:0.25em; text-transform:uppercase;
-    margin-bottom:2rem; display:inline-flex; align-items:center; gap:1rem;
-  }
-  .vroad-title::before,.vroad-title::after { content:''; width:30px; height:1px; background:var(--gold); }
-
-  .vroad {
-    display:grid;
-    grid-template-columns: 1fr 48px 1fr;
-    gap:0;
-    position:relative;
-    max-width:700px;
-    margin:0 auto 2rem;
-  }
-
-  .vroad-line {
-    position:relative;
-    display:flex; flex-direction:column; align-items:center;
-  }
-  .vroad-line::before {
-    content:'';
-    position:absolute;
-    top:0; bottom:0; left:50%;
-    width:3px;
-    background: linear-gradient(180deg,
-      transparent,
-      var(--gold-base) 3%,
-      var(--gold-bright) 50%,
-      var(--gold-base) 97%,
-      transparent
-    );
-    box-shadow: 0 0 12px rgba(212,168,73,0.35);
-    transform:translateX(-50%);
-  }
-
-  .vroad-node {
-    width:12px; height:12px; border-radius:50%; z-index:2; flex-shrink:0;
-    background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
-    border:2px solid var(--gold-bright);
-    box-shadow:0 0 8px rgba(212,168,73,0.6);
-    margin:0 auto;
-  }
-  .vroad-node.dim {
-    background:var(--steel-mid);
-    border-color:var(--steel-edge);
-    box-shadow:none;
-  }
-
-  .vroad-stage-name {
-    font-family:'Cinzel',serif; font-weight:700; font-size:0.68rem;
-    color:var(--gold); letter-spacing:0.1em; white-space:nowrap;
-    text-align:center; margin:0.3rem 0;
-  }
-  .vroad-node.dim + .vroad-stage-name { color:var(--text-dim); }
-
-  .vroad-row {
-    display:contents;
-  }
-
-  .vroad-col-rc { 
-    display:flex; flex-direction:column; gap:4px;
-    padding:0.6rem 0 0.6rem 0.8rem;
-    justify-content:center;
-  }
-  .vroad-col-scrim { 
-    display:flex; flex-direction:column; gap:4px;
-    padding:0.6rem 0.8rem 0.6rem 0;
-    justify-content:center;
-    align-items:flex-end;
-  }
-
-  .vm {
-    font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
-    padding:0.25rem 0.5rem;
-    display:flex; gap:0.5rem; align-items:center;
-    background:var(--steel-mid);
-    white-space:nowrap;
-    border-left:2px solid var(--gold);
-    position:relative;
-  }
-  .vroad-col-scrim .vm {
-    border-left:none;
-    border-right:2px solid rgba(212,168,73,0.4);
-    flex-direction:row-reverse;
-    opacity:0.78;
-  }
-  .vm.loss { border-left-color:#b8473a; }
-  .vm.loss .vm-score { color:#d96250; }
-  .vroad-col-scrim .vm.loss { border-right-color:#b8473a; border-left:none; }
-  .vm.dim { border-left-color:var(--steel-edge); border-style:dashed; opacity:0.55; }
-
-  .vm::after {
-    content:''; position:absolute;
-    right:-9px; top:50%;
-    width:9px; height:1px;
-    background:var(--gold-base);
-    opacity:0.5;
-  }
-  .vroad-col-scrim .vm::after {
-    left:-9px; right:auto;
-  }
-  .vm.dim::after { background:var(--steel-edge); }
-
-  .vm-opp { color:var(--text); }
-  .vm-score { color:var(--gold-bright); font-weight:700; flex-shrink:0; }
-
-  .vroad-trophy {
-    text-align:center; font-size:2.5rem;
-    padding:1rem 0 0.5rem;
-    filter:drop-shadow(0 0 12px rgba(212,168,73,0.5));
-    animation:trophyGlow 3s ease-in-out infinite;
-    grid-column:1/-1;
-  }
-  @keyframes trophyGlow {
-    0%,100%{filter:drop-shadow(0 0 8px rgba(212,168,73,0.4));}
-    50%{filter:drop-shadow(0 0 20px rgba(212,168,73,0.8));}
-  }
-
-  .vroad-legend {
-    display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;
-    font-family:'IBM Plex Mono',monospace; font-size:0.63rem; color:var(--text-dim);
-    max-width:700px; margin:0 auto;
-    padding-top:1rem; border-top:1px solid var(--line);
-  }
-  .vroad-legend span { display:flex; align-items:center; gap:0.5rem; }
-  .vl-bar { display:inline-block; width:12px; height:2px; }
-  .vl-bar.gold { background:var(--gold); }
-  .vl-bar.dim  { background:var(--steel-edge); }
-  .vl-bar.red  { background:#b8473a; }
-
-  @media(max-width:600px){
-    .vroad { grid-template-columns:1fr 36px 1fr; }
-    .vm { font-size:0.6rem; padding:0.2rem 0.35rem; }
-  }
-
-  .timeline-wrap {
-    max-width: 680px;
-    margin: 2rem auto 0;
-    padding: 0 1rem;
-    position: relative;
-  }
-
-  .timeline-wrap::before {
-    content: '';
-    position: absolute;
-    top: 20px; bottom: 50px;
-    left: 50%;
-    width: 3px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, var(--gold-bright), var(--gold-base) 85%, transparent);
-    box-shadow: 0 0 12px rgba(212,168,73,0.35);
-    z-index: 0;
-  }
-
-  .timeline-stage { margin-bottom: 1rem; }
-  .timeline-stage.dim .tl-label { color: var(--text-dim); }
-
-  .tl-row {
-    display: grid;
-    grid-template-columns: 1fr 50px 1fr;
-    align-items: center;
-    min-height: 36px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tl-header-row { min-height: 72px; }
-
-  .tl-spine-node {
-    display: flex; flex-direction: column; align-items: center;
-    position: relative; z-index: 2;
-  }
-
-  .tl-spine-seg {
-    position: relative; z-index: 0;
-  }
-
-  .tl-dot {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: linear-gradient(180deg, var(--gold-shine), var(--gold-base));
-    border: 2px solid var(--gold-bright);
-    box-shadow: 0 0 10px rgba(212,168,73,0.6);
-    flex-shrink: 0;
-  }
-  .tl-dot.dim {
-    background: var(--steel-mid); border-color: var(--steel-edge); box-shadow: none;
-  }
-
-  .tl-label {
-    font-family: 'Cinzel', serif; font-weight: 700;
-    font-size: 0.72rem; color: var(--gold); letter-spacing: 0.12em;
-    text-align: center; margin-top: 0.2rem; white-space: nowrap;
-  }
-
-  .tl-col-left  { display: flex; justify-content: flex-end; padding-right: 6px; overflow: visible; }
-  .tl-col-right { display: flex; justify-content: flex-start; padding-left: 6px; overflow: visible; }
-  .tl-empty-cell { height: 32px; }
-
-
-  .tl-card.scrim.win  { border-right: 2px solid var(--gold); }
-  .tl-card.scrim.loss { border-right: 2px solid #b8473a; color: #d96250; }
-  .tl-card.scrim.dim  { border-right: 2px dashed var(--steel-edge); opacity: 0.6; }
-  .tl-card.rc.win     { border-left: 2px solid var(--gold); }
-  .tl-card.rc.loss    { border-left: 2px solid #b8473a; color: #d96250; }
-  .tl-card.rc.dim     { border-left: 2px dashed var(--steel-edge); opacity: 0.6; }
-
-  .tl-score { color: var(--gold-bright); font-weight: 700; }
-  .tl-card.loss .tl-score { color: #d96250; }
-  .tl-card.dim  .tl-score { color: var(--text-dim); }
-  .tl-date  { color: var(--text-dim); font-size: 0.58rem; }
-
-  .tl-tick {
-    width: 8px; height: 1px;
-    background: var(--gold-base); opacity: 0.5; flex-shrink: 0;
-  }
-
-  .tl-trophy {
-    text-align: center; font-size: 2.2rem; padding: 0.5rem 0 0;
-    position: relative; z-index: 2;
-    animation: trophyGlow 3s ease-in-out infinite;
-  }
-  @keyframes trophyGlow {
-    0%,100% { filter: drop-shadow(0 0 6px rgba(212,168,73,0.4)); }
-    50%      { filter: drop-shadow(0 0 18px rgba(212,168,73,0.9)); }
-  }
-
-  @media(max-width:600px){
-    .tl-date { display: none; }
-    .tl-card { font-size: 0.6rem; position: relative; overflow: visible; }
-    .timeline-wrap { padding: 0; }
-  }
-
-  .tl-cup-icon {
-    font-size: 2.4rem;
-    background: linear-gradient(180deg, var(--gold-shine) 0%, var(--gold) 50%, var(--gold-base) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(212,168,73,0.55));
-    animation: trophyGlow 4s ease-in-out infinite;
-    margin: 0.5rem 0 0.2rem;
-    display: block;
-  }
-
-  .season-metrics {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
-    background: linear-gradient(180deg, var(--steel-mid), var(--steel-dark));
-    border: 1px solid var(--steel-edge);
-    padding: 2rem;
-    margin-bottom: 2.5rem;
-    position: relative;
-  }
-  .season-metrics::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .sm-group { display:flex; align-items:center; gap:1.5rem; padding-right:2rem; border-right:1px solid var(--line); }
-  .sm-item { text-align:center; }
-  .sm-val { font-family:'Cinzel',serif; font-weight:900; font-size:3rem; line-height:1; background:linear-gradient(180deg,var(--gold-shine) 0%,var(--gold) 50%,var(--gold-base) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-  .sm-pct { font-size:1.5rem; }
-  .sm-label { font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.2em; color:var(--text); margin:0.3rem 0 0.2rem; text-transform:uppercase; }
-  .sm-sub { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--text-dim); }
-  .sm-divider { width:1px; height:60px; background:var(--line); }
-  .sm-maps { flex:1; }
-  .sm-maps-title { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--gold); letter-spacing:0.25em; text-transform:uppercase; margin-bottom:0.7rem; }
-  .sm-map-row { display:grid; grid-template-columns:130px 1fr 42px; align-items:center; gap:0.5rem; margin-bottom:0.35rem; }
-  .sm-map-name { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--text-dim); white-space:nowrap; }
-  .sm-map-bar { height:4px; background:var(--steel-light); border-radius:2px; overflow:hidden; }
-  .sm-map-fill { height:100%; background:linear-gradient(90deg,var(--gold-base),var(--gold-bright)); border-radius:2px; }
-  .sm-map-fill.weak { background:linear-gradient(90deg,#7a2020,#d96250); }
-  .sm-map-val { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--gold-bright); text-align:right; }
-  .sm-map-weak .sm-map-val { color:#d96250; }
-  @media(max-width:900px){
-    .season-metrics { grid-template-columns: 1fr; gap: 0; }
-    .sm-group {
-      border-right: none;
-      padding-right: 0;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.5rem;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .sm-divider { width: 1px; height: 70px; }
-    .sm-val { font-size: 2.8rem; }
-    .sm-maps { padding: 0; }
-    .sm-map-row { grid-template-columns: 120px 1fr 38px; }
-  }
-
-  .tl-header-labels {
-    display: grid;
-    grid-template-columns: 1fr 50px 1fr;
-    max-width: 680px;
-    margin: 0 auto 0.5rem;
-    padding: 0 1rem;
-  }
-  .tl-header-l {
-    text-align: center;
-    padding-right: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: rgba(220,235,248,0.92);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    line-height: 1.5;
-  }
-  .tl-header-r {
-    text-align: center;
-    padding-left: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: rgba(220,235,248,0.92);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    line-height: 1.5;
-  }
-  .tl-header-l span, .tl-header-r span {
-    font-size: 0.58rem; opacity: 0.7; display: block;
-  }
-  .tl-header-mid {}
-
-  .tl-col-left .tl-card::after {
-    content: '';
-    position: absolute;
-    right: -26px; top: 50%;
-    width: 26px; height: 1px;
-    transform: translateY(-50%);
-  }
-  .tl-col-left .tl-card.win::after  { background: linear-gradient(90deg, transparent, rgba(212,168,73,0.8)); }
-  .tl-col-left .tl-card.loss::after { background: linear-gradient(90deg, transparent, rgba(184,71,58,0.7)); }
-  .tl-col-left .tl-card.dim::after  { background: linear-gradient(90deg, transparent, rgba(80,90,100,0.5)); }
-
-  .tl-col-right .tl-card::before {
-    content: '';
-    position: absolute;
-    left: -26px; top: 50%;
-    width: 26px; height: 1px;
-    transform: translateY(-50%);
-  }
-  .tl-col-right .tl-card.win::before  { background: linear-gradient(270deg, transparent, rgba(212,168,73,0.8)); }
-  .tl-col-right .tl-card.loss::before { background: linear-gradient(270deg, transparent, rgba(184,71,58,0.7)); }
-  .tl-col-right .tl-card.dim::before  { background: linear-gradient(270deg, transparent, rgba(80,90,100,0.5)); }
-
-  .tl-card-date {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.58rem;
-    color: var(--text-dim);
-    text-align: center;
-    margin-bottom: 2px;
-  }
-  .tl-card-match {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.3rem;
-  }
-  .tl-us {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--text);
-    font-weight: 400;
-  }
-  .tl-them {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--text);
-    font-weight: 400;
-  }
-  .tl-score-mid {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 0.82rem;
-    color: var(--text);
-    padding: 0 0.1rem;
-  }
-  .tl-card.win  .tl-score-mid { color: var(--gold-bright); }
-  .tl-card.loss .tl-score-mid { color: #d96250; }
-  .tl-card.dim  .tl-score-mid { color: var(--text-dim); }
-  .tl-card.loss .tl-us        { color: var(--text); }
-  .tl-card.loss .tl-them      { color: var(--text); }
-
-  .tl-col-left  { align-items: flex-end; }
-  .tl-col-right { align-items: flex-start; }
-
-  .tl-card {
-    width: 152px !important;
-    min-height: 52px !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0.35rem 0.6rem !important;
-    position: relative;
-    text-align: center;
-    background: var(--steel-mid);
-    margin: 5px 0;
-    white-space: nowrap;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.64rem;
-  }
-  .tl-card-date {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.58rem;
-    color: var(--text-dim);
-    text-align: center;
-    width: 100%;
-    margin-bottom: 3px;
-  }
-  .tl-card-match {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
-    width: 100%;
-  }
-  .tl-us, .tl-them {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.64rem;
-    color: var(--text);
-    white-space: nowrap;
-  }
-  .tl-score-mid {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 0.82rem;
-    padding: 0 0.15rem;
-    white-space: nowrap;
-  }
-  .tl-card.win  .tl-score-mid { color: var(--gold-bright); }
-  .tl-card.loss .tl-score-mid { color: #d96250; }
-  .tl-card.dim  .tl-score-mid { color: var(--text-dim); }
-  .tl-card.loss .tl-us   { color: var(--text); }
-  .tl-card.loss .tl-them { color: var(--text); }
-
-  .tl-stream {
-    position: absolute;
-    top: 3px; right: 4px;
-    font-size: 0.55rem;
-    color: var(--gold-base);
-    opacity: 0.5;
-    text-decoration: none;
-    transition: opacity 0.2s, color 0.2s;
-    letter-spacing: 0.05em;
-    font-family: 'IBM Plex Mono', monospace;
-  }
-  .tl-stream:hover {
-    opacity: 1;
-    color: var(--gold-bright);
-  }
-  .tl-stream::before {
-    content: '▶';
-    font-size: 0.5rem;
-    margin-right: 2px;
-  }
-
-
-  .tl-label {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 0.72rem;
-    color: var(--gold);
-    letter-spacing: 0.12em;
-    white-space: nowrap;
-    margin-top: 0.3rem;
-    background: var(--steel-dark);
-    border: 1px solid rgba(212,168,73,0.25);
-    border-radius: 3px;
-    padding: 0.2rem 0.6rem;
-    position: relative;
-    z-index: 3;
-  }
-  .tour-place {
-    text-align: right !important;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-
-  .tour-place {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--gold);
-    min-width: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-  }
-  .tour-place-wreath {
-    font-size: 0.9rem;
-    opacity: 0.85;
-  }
-  .tour-place-wreath.gold   { color: var(--gold-bright); }
-  .tour-place-wreath.silver { color: #b8c8d8; }
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <title>GARDEMARINES [GDM]</title>
+
+  <!-- SEO -->
+  <meta name="description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends. Официальный сайт клана Гардемарины. Состав, турниры, достижения.">
+  <meta name="keywords" content="Gardemarines, Гардемарины, GDM, World of Warships Legends, лучший флот СНГ, клан WoWs">
+  <meta name="author" content="GARDEMARINES [GDM]">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0d10">
+  <link rel="canonical" href="https://gardemarines.ru">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://gardemarines.ru">
+  <meta property="og:title"       content="Gardemarines — Флот Гардемарины | World of Warships Legends">
+  <meta property="og:description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
+  <meta property="og:image"       content="https://gardemarines.ru/logo.png">
+  <meta property="og:locale"      content="ru_RU">
+  <meta property="og:site_name"   content="Gardemarines">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Gardemarines [GDM] — World of Warships Legends">
+  <meta name="twitter:description" content="GDM один из наиболее успешных флотов в СНГ в игре World of Warships Legends.">
+  <meta name="twitter:image"       content="https://gardemarines.ru/logo.png">
+
+  <!-- Verification -->
+  <meta name="google-site-verification" content="google298b3a4774992c99">
+  <meta name="yandex-verification"      content="8a59f5874d14fa97">
+
+  <!-- Icons -->
+  <link rel="icon"             type="image/png" href="logo.png">
+  <link rel="apple-touch-icon"                  href="logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Oswald:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="metal-bg"></div>
-<div class="particles" id="particles"></div>
+<!-- ── BACKGROUND ─────────────────────────────────────────── -->
+<div class="metal-bg" aria-hidden="true"></div>
+<div class="particles" id="particles" aria-hidden="true"></div>
 
-<nav id="nav">
+<!-- ── NAVIGATION ─────────────────────────────────────────── -->
+<nav id="nav" aria-label="Главная навигация">
   <div class="nav-inner">
-    <a href="#" class="nav-brand">
-      <img src="logo.png" alt="">
-      <div class="nav-brand-text">GARDEMARINES</div>
+    <a href="#" class="nav-brand" aria-label="Gardemarines — на главную">
+      <img src="logo.png" alt="Логотип GDM" width="36" height="36">
+      <span class="nav-brand-text">GARDEMARINES</span>
     </a>
     <ul class="nav-links">
       <li><a href="#roster">Состав</a></li>
       <li><a href="#tournaments">Турниры</a></li>
       <li><a href="#season" class="nav-season">Сезон 2026</a></li>
     </ul>
-
   </div>
 </nav>
 
-<div class="container">
-  <section class="hero">
+<!-- ── MAIN CONTENT ───────────────────────────────────────── -->
+<main>
 
+  <!-- Hero -->
+  <section class="hero container" aria-labelledby="hero-title">
     <div class="logo-stage">
       <img src="logo.png" alt="Gardemarines" class="logo-img">
-
     </div>
-    <h1 class="hero-title">GARDEMARINES</h1>
-    <p class="hero-sub">Флот в котором главная ценность - люди</p>
-    <div class="hero-buttons">
+    <h1 class="hero-title" id="hero-title">GARDEMARINES</h1>
+    <p class="hero-sub">Флот, в котором главная ценность&nbsp;— люди</p>
+    <nav class="hero-buttons" aria-label="Навигация по разделам">
       <a href="#roster"      class="btn btn-gold">Состав флота</a>
       <a href="#tournaments" class="btn btn-steel">Турниры</a>
-    </div></div>
-  </div>
-</div>
+    </nav>
+  </section>
 
-<div class="container">
-  <section class="block reveal" id="roster">
-    <h2 class="section-title">Состав <em>флота</em></h2>
-
-    <div style="display:flex;justify-content:center;margin:0 auto;">
-      <canvas id="radarCanvas" width="620" height="620" style="display:block;width:100%;max-width:680px;background:transparent;"></canvas>
+  <!-- Roster / Radar -->
+  <section class="block reveal container" id="roster" aria-labelledby="roster-title">
+    <h2 class="section-title" id="roster-title">Состав <em>флота</em></h2>
+    <div class="radar-wrap">
+      <canvas id="radarCanvas" width="620" height="620"
+              style="display:block;width:100%;max-width:680px;background:transparent;"
+              aria-label="Радарная карта состава флота"></canvas>
     </div>
   </section>
-</div>
 
-<div class="container">
-  <section class="block reveal" id="tournaments">
-    <h2 class="section-title">Турниры и <em>достижения</em></h2>
+  <!-- Tournaments -->
+  <section class="block reveal container" id="tournaments" aria-labelledby="tournaments-title">
+    <h2 class="section-title" id="tournaments-title">Турниры и <em>достижения</em></h2>
 
     <div class="tour-grid">
-                              <div class="tour-list">
-        <div class="tour-list-title"><i class="fa-solid fa-clock-rotate-left"></i> История участий</div>
-        <div class="tour-item">
-          <div class="tour-medal gold"><i class="fa-solid fa-trophy"></i></div>
-          <div class="tour-info"><h4>Risers Cup 26</h4><p>МАРТ 2026<br>Победители</p></div>
-          <div class="tour-place"><i class="fa-solid fa-star tour-place-wreath gold"></i>1 место<i class="fa-solid fa-star tour-place-wreath gold"></i></div>
+      <div class="tour-list">
+        <div class="tour-list-title">
+          <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+          История участий
         </div>
-        <div class="tour-item">
-          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
-          <div class="tour-info"><h4>Ocean Cup 5</h4><p>СЕНТ 2025<br>Играли сборной командой UGF</p></div>
+
+        <article class="tour-item">
+          <div class="tour-medal gold" aria-label="Золото"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Risers Cup 26</h3>
+            <p>МАРТ 2026<br>Победители</p>
+          </div>
+          <div class="tour-place">
+            <i class="fa-solid fa-star tour-place-wreath gold" aria-hidden="true"></i>
+            1 место
+            <i class="fa-solid fa-star tour-place-wreath gold" aria-hidden="true"></i>
+          </div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal part" aria-label="Участие"><i class="fa-solid fa-diamond" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Ocean Cup 5</h3>
+            <p>СЕНТ 2025<br>Играли сборной командой UGF</p>
+          </div>
           <div class="tour-place">1/8 Финала</div>
-        </div>
-        <div class="tour-item">
-          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
-          <div class="tour-info"><h4>Rookie Cup 25</h4><p>МАРТ 2025<br>Играл 2й состав GDM2</p></div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal part" aria-label="Участие"><i class="fa-solid fa-diamond" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Rookie Cup 25</h3>
+            <p>МАРТ 2025<br>Играл 2й состав GDM2</p>
+          </div>
           <div class="tour-place">1/8 Финала</div>
-        </div>
-        <div class="tour-item">
-          <div class="tour-medal gold"><i class="fa-solid fa-trophy"></i></div>
-          <div class="tour-info"><h4>Кубок СНГ 25</h4><p>ФЕВР 2025<br>Победители</p></div>
-          <div class="tour-place"><i class="fa-solid fa-star tour-place-wreath gold"></i>1 место<i class="fa-solid fa-star tour-place-wreath gold"></i></div>
-        </div>
-        <div class="tour-item">
-          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
-          <div class="tour-info"><h4>Winter Cup 25</h4><p>ЯНВ 2025</p></div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal gold" aria-label="Золото"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Кубок СНГ 25</h3>
+            <p>ФЕВР 2025<br>Победители</p>
+          </div>
+          <div class="tour-place">
+            <i class="fa-solid fa-star tour-place-wreath gold" aria-hidden="true"></i>
+            1 место
+            <i class="fa-solid fa-star tour-place-wreath gold" aria-hidden="true"></i>
+          </div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal part" aria-label="Участие"><i class="fa-solid fa-diamond" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Winter Cup 25</h3>
+            <p>ЯНВ 2025</p>
+          </div>
           <div class="tour-place">1/4 Финала нижней сетки</div>
-        </div>
-        <div class="tour-item">
-          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
-          <div class="tour-info"><h4>Ocean Cup 4</h4><p>СЕНТ 2024</p></div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal part" aria-label="Участие"><i class="fa-solid fa-diamond" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Ocean Cup 4</h3>
+            <p>СЕНТ 2024</p>
+          </div>
           <div class="tour-place">Групповая стадия</div>
-        </div>
-        <div class="tour-item">
-          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
-          <div class="tour-info"><h4>Ocean Cup 3</h4><p>АПР 2024<br>Выступало 2 состава</p></div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal part" aria-label="Участие"><i class="fa-solid fa-diamond" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Ocean Cup 3</h3>
+            <p>АПР 2024<br>Выступало 2 состава</p>
+          </div>
           <div class="tour-place">Групповая стадия</div>
-        </div>
-        <div class="tour-item">
-          <div class="tour-medal silver"><i class="fa-solid fa-medal"></i></div>
-          <div class="tour-info"><h4>Кубок СНГ 24</h4><p>ФЕВР 2024</p></div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal silver" aria-label="Серебро"><i class="fa-solid fa-medal" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Кубок СНГ 24</h3>
+            <p>ФЕВР 2024</p>
+          </div>
           <div class="tour-place">2 место</div>
-        </div>
-        <div class="tour-item">
-          <div class="tour-medal part"><i class="fa-solid fa-diamond"></i></div>
-          <div class="tour-info"><h4>Winter Cup 24</h4><p>ЯНВ 2024</p></div>
+        </article>
+
+        <article class="tour-item">
+          <div class="tour-medal part" aria-label="Участие"><i class="fa-solid fa-diamond" aria-hidden="true"></i></div>
+          <div class="tour-info">
+            <h3>Winter Cup 24</h3>
+            <p>ЯНВ 2024</p>
+          </div>
           <div class="tour-place">1/4 Финала</div>
-        </div>
+        </article>
       </div>
-      </div>
-    </div>
-    </div>
-    </div>
-      </div>
-    </div>
-      </div>
-    </div>
-    </div>
     </div>
   </section>
-</div>
 
-<div class="container">
-  <section class="block reveal" id="season">
+  <!-- Season 2026 -->
+  <section class="block reveal container" id="season" aria-labelledby="season-title">
     <div class="section-tag">Сезон 2026</div>
-    <h2 class="section-title">Risers <em>Cup 26</em></h2>
+    <h2 class="section-title" id="season-title">Risers <em>Cup 26</em></h2>
 
+    <!-- Stats grid -->
     <div class="season-metrics">
       <div class="sm-group">
         <div class="sm-item">
@@ -1088,7 +212,7 @@
           <div class="sm-label">Матчи</div>
           <div class="sm-sub">14W · 2L</div>
         </div>
-        <div class="sm-divider"></div>
+        <div class="sm-divider" aria-hidden="true"></div>
         <div class="sm-item">
           <div class="sm-val">79.4<span class="sm-pct">%</span></div>
           <div class="sm-label">Раунды (Карты)</div>
@@ -1108,94 +232,73 @@
       </div>
     </div>
 
-    <div class="section-tag" style="margin-bottom:1.5rem;margin-top:0.5rem;">Путь к трофею</div>
-    <div class="tl-header-labels">
+    <!-- Tournament path timeline -->
+    <div class="section-tag" style="margin-bottom:1.5rem;margin-top:.5rem;">Путь к трофею</div>
+
+    <div class="tl-header-labels" aria-hidden="true">
       <div class="tl-header-l">Scrim<br><span>Тренировки</span></div>
-      <div class="tl-header-mid"></div>
+      <div></div>
       <div class="tl-header-r">RC26<br><span>Турнирные</span></div>
     </div>
+
     <div class="timeline-wrap">
 
+      <!-- Swiss Stage -->
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
           <div class="tl-spine-node"><div class="tl-dot"></div><div class="tl-label">Швейцарка</div></div>
           <div class="tl-col-right"></div>
         </div>
+
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">28.02</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:2</span><span class="tl-them">NSFW</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">28.02</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:2</span><span class="tl-them">NSFW</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">11.03</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">6:0</span><span class="tl-them">AZD</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">11.03</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">6:0</span><span class="tl-them">AZD</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc loss">
-              <div class="tl-card-date">14.03</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">1:2</span><span class="tl-them">YOINK</span></div>
-            </div></div>
+          <div class="tl-col-right"><div class="tl-card rc loss"><div class="tl-card-date">14.03</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">1:2</span><span class="tl-them">YOINK</span></div></div></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">16.03</div>
-              <div class="tl-card-match"><span class="tl-them">BEREG</span><span class="tl-score-mid">0:5</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">16.03</div><div class="tl-card-match"><span class="tl-them">BEREG</span><span class="tl-score-mid">0:5</span><span class="tl-us">GDM</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim loss">
-              <div class="tl-card-date">19.03</div>
-              <div class="tl-card-match"><span class="tl-them">JN</span><span class="tl-score-mid">5:1</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim loss"><div class="tl-card-date">19.03</div><div class="tl-card-match"><span class="tl-them">JN</span><span class="tl-score-mid">5:1</span><span class="tl-us">GDM</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc win">
-              <div class="tl-card-date">22.03</div>
-              <div class="tl-card-match"><span class="tl-them">ONYXH</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-right"><div class="tl-card rc win"><div class="tl-card-date">22.03</div><div class="tl-card-match"><span class="tl-them">ONYXH</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc win">
-              <div class="tl-card-date">28.03</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">2:0</span><span class="tl-them">WOWSH</span></div>
-            </div></div>
+          <div class="tl-col-right"><div class="tl-card rc win"><div class="tl-card-date">28.03</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">2:0</span><span class="tl-them">WOWSH</span></div></div></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">04.04</div>
-              <div class="tl-card-match"><span class="tl-them">YOLO</span><span class="tl-score-mid">0:4</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">04.04</div><div class="tl-card-match"><span class="tl-them">YOLO</span><span class="tl-score-mid">0:4</span><span class="tl-us">GDM</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc win">
-              <div class="tl-card-date">05.04</div>
-              <div class="tl-card-match"><span class="tl-them">JN</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-right"><div class="tl-card rc win"><div class="tl-card-date">05.04</div><div class="tl-card-match"><span class="tl-them">JN</span><span class="tl-score-mid">0:2</span><span class="tl-us">GDM</span></div></div></div>
         </div>
       </div>
 
+      <!-- Round of 16 -->
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
@@ -1203,23 +306,18 @@
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">11.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:1</span><span class="tl-them">RETRO</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">11.04</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">4:1</span><span class="tl-them">RETRO</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc win">
-              <div class="tl-card-date">12.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:0</span><span class="tl-them">RMI</span></div>
-            </div></div>
+          <div class="tl-col-right"><div class="tl-card rc win"><div class="tl-card-date">12.04</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:0</span><span class="tl-them">RMI</span></div></div></div>
         </div>
       </div>
 
+      <!-- Quarter-final -->
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
@@ -1227,23 +325,18 @@
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">16.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:2</span><span class="tl-them">BETEP</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">16.04</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:2</span><span class="tl-them">BETEP</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc win">
-              <div class="tl-card-date">18.04</div>
-              <div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:0</span><span class="tl-them">NSFW</span></div>
-            </div></div>
+          <div class="tl-col-right"><div class="tl-card rc win"><div class="tl-card-date">18.04</div><div class="tl-card-match"><span class="tl-us">GDM</span><span class="tl-score-mid">3:0</span><span class="tl-them">NSFW</span></div></div></div>
         </div>
       </div>
 
+      <!-- Semi-final -->
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
@@ -1251,24 +344,24 @@
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">23.04</div>
-              <div class="tl-card-match"><span class="tl-them">BETEP</span><span class="tl-score-mid">1:4</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">23.04</div><div class="tl-card-match"><span class="tl-them">BETEP</span><span class="tl-score-mid">1:4</span><span class="tl-us">GDM</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc win">
-              <a class="tl-stream" href="https://www.youtube.com/live/Kc13V0z3BJg?si=7RxCL_5yIm86o_SL" target="_blank" title="Смотреть трансляцию">REC</a>
+          <div class="tl-col-right">
+            <div class="tl-card rc win">
+              <a class="tl-stream" href="https://www.youtube.com/live/Kc13V0z3BJg?si=7RxCL_5yIm86o_SL" target="_blank" rel="noopener" title="Смотреть трансляцию">REC</a>
               <div class="tl-card-date">26.04</div>
               <div class="tl-card-match"><span class="tl-them">DF</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div>
-            </div></div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Final -->
       <div class="timeline-stage">
         <div class="tl-row tl-header-row">
           <div class="tl-col-left"></div>
@@ -1276,311 +369,41 @@
           <div class="tl-col-right"></div>
         </div>
         <div class="tl-row">
-          <div class="tl-col-left"><div class="tl-card scrim win">
-              <div class="tl-card-date">30.04</div>
-              <div class="tl-card-match"><span class="tl-them">LBF1</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-left"><div class="tl-card scrim win"><div class="tl-card-date">30.04</div><div class="tl-card-match"><span class="tl-them">LBF1</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div></div></div>
           <div class="tl-spine-seg"></div>
           <div class="tl-col-right"><div class="tl-empty-cell"></div></div>
         </div>
         <div class="tl-row">
           <div class="tl-col-left"><div class="tl-empty-cell"></div></div>
           <div class="tl-spine-seg"></div>
-          <div class="tl-col-right"><div class="tl-card rc win">
-              <div class="tl-card-date">03.05</div>
-              <div class="tl-card-match"><span class="tl-them">YOLO</span><span class="tl-score-mid">0:0</span><span class="tl-us">GDM</span></div>
-            </div></div>
+          <div class="tl-col-right"><div class="tl-card rc win"><div class="tl-card-date">03.05</div><div class="tl-card-match"><span class="tl-them">YOLO</span><span class="tl-score-mid">0:3</span><span class="tl-us">GDM</span></div></div></div>
         </div>
       </div>
 
-      <div class="tl-trophy-wrap">
-        <div class="tl-trophy-line"></div>
-        <i class="fa-solid fa-trophy tl-cup-icon"></i>
+      <!-- Trophy -->
+      <div class="tl-trophy-wrap" aria-label="Победители Risers Cup 26">
+        <div class="tl-trophy-line" aria-hidden="true"></div>
+        <i class="fa-solid fa-trophy tl-cup-icon" aria-hidden="true"></i>
         <div class="tl-cup-label">RISERS CUP 26</div>
       </div>
-    </div>
 
+    </div><!-- .timeline-wrap -->
   </section>
-</div>
 
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
   <div class="container">
-    <img src="logo.png" alt="" class="foot-logo">
+    <img src="logo.png" alt="Логотип GDM" class="foot-logo" width="60" height="60">
     <div class="foot-name">GARDEMARINES</div>
+    <div class="foot-tagline">Флот в котором главная ценность — люди</div>
+    <div class="foot-bottom">
+      &copy; 2024–2026 GARDEMARINES [GDM] · World of Warships Legends
+    </div>
+  </div>
 </footer>
 
-<script>
-  const particlesEl = document.getElementById('particles');
-  const sizes = ['s', 's', 's', 'm', 'm', 'l'];
-  for (let i = 0; i < 50; i++) {
-    const p = document.createElement('div');
-    const size = sizes[Math.floor(Math.random() * sizes.length)];
-    p.className = 'particle ' + size;
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDelay = Math.random() * 20 + 's';
-    p.style.animationDuration = (10 + Math.random() * 12) + 's';
-    particlesEl.appendChild(p);
-  }
-
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // ============ RADAR ============
-  (function(){
-    const cv = document.getElementById('radarCanvas');
-    if(!cv) return;
-    const ctx = cv.getContext('2d');
-    const W=620, CX=310, CY=310, RMAX=268, TAU=Math.PI*2, SPEED=0.0028;
-
-    const TIER_R={cmd:130, off:130, grd:130, cdt:130, all:130};
-
-    const PLAYERS=[
-      {nick:'egorkochman', tier:'all'},
-      {nick:'MaloyGnoy', tier:'all'},
-      {nick:'Leps_on_TV', tier:'all'},
-      {nick:'gggk303', tier:'all'},
-      {nick:'Alex_DeviL777', tier:'all'},
-      {nick:'Wit163rus', tier:'all'},
-      {nick:'Yaruy_K', tier:'all'},
-      {nick:'PoznyakAlexDi', tier:'all'},
-      {nick:'Tima-ma', tier:'all'},
-      {nick:'Roman_WOW_', tier:'all'},
-      {nick:'Checkmatic', tier:'all'},
-      {nick:'mcbay1988', tier:'all'},
-      {nick:'Alexander-VIII', tier:'all'},
-      {nick:'CEPbIU_76', tier:'all'},
-      {nick:'Evgeniy_Ivshin', tier:'all'},
-      {nick:'Alex_Messer', tier:'all'},
-      {nick:'Prado_VOD', tier:'all'},
-      {nick:'Naikon71', tier:'all'},
-      {nick:'F0K1CH', tier:'all'},
-      {nick:'Super-zverugin', tier:'all'},
-      {nick:'BaLTaZaR014', tier:'all'},
-      {nick:'ZEMJI9IHUH', tier:'all'},
-      {nick:'komawars', tier:'all'},
-      {nick:'dimonlamo', tier:'all'},
-      {nick:'RoskeA-RoBBi', tier:'all'},
-      {nick:'isaev_denis', tier:'all'},
-      {nick:'Dennazzz', tier:'all'},
-      {nick:'Intrepids7', tier:'all'},
-      {nick:'FenomenRostov', tier:'all'},
-      {nick:'BursAssassin', tier:'all'},
-      {nick:'ChestorQQ_RU', tier:'all'},
-      {nick:'OziSchneider', tier:'all'},
-      {nick:'GOLDBERG475', tier:'all'},
-      {nick:'devasator91', tier:'all'},
-      {nick:'lucky292pear', tier:'all'},
-      {nick:'OziBlitz', tier:'all'},
-      {nick:'Xolod', tier:'all'},
-      {nick:'vsegda-buhoy', tier:'all'},
-      {nick:'vladimir_chevere', tier:'all'},
-      {nick:'sagoyakov_roman', tier:'all'},
-      {nick:'Fufic-92', tier:'all'},
-      {nick:'Aerilou', tier:'all'},
-      {nick:'Mrwhitevoron', tier:'all'},
-      {nick:'Redvoin_RF', tier:'all'},
-      {nick:'SharOn_RU', tier:'all'}
-    ];
-
-    function norm(a){let x=a%TAU;return x<0?x+TAU:x;}
-
-    const dots=[];
-    const n=PLAYERS.length;
-    const r0=124, r1=176;
-    const n0=Math.ceil(n/2), n1=Math.floor(n/2);
-
-    // Сначала раскладываем все точки по углу на одном виртуальном кольце,
-    // затем чётные/нечётные разводим на r0/r1.
-    // Так угловые позиции строго чередуются и группы тоже строго чередуются.
-    PLAYERS.forEach((p,idx)=>{
-      const inner=(idx%2===0);
-      const r=inner?r0:r1;
-      // Все 45 точек равномерно по углу — не парами, а одной лентой
-      const ang=norm(-Math.PI/2 + (idx/n)*TAU);
-      const rv=r+(Math.random()-0.5)*5;
-      dots[idx]={
-        x:CX+rv*Math.cos(ang), y:CY+rv*Math.sin(ang),
-        angle:ang, nick:p.nick, tier:'all',
-        bright:0, revealed:false,
-        group:idx%3,
-      };
-    });
-
-    // Ручные корректировки позиций
-    dots.forEach(d=>{
-      if(d.nick==='egorkochman'){
-        const ang=d.angle+0.14;
-        const r=90;
-        d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
-        d.angle=ang;
-      }
-      if(d.nick==='Wit163rus'){
-        const ang=d.angle+0.42;
-        const r=Math.hypot(d.x-CX, d.y-CY);
-        d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
-        d.angle=ang;
-      }
-      if(d.nick==='RoskeA-RoBBi'){
-        // чуть центрее — уменьшаем радиус
-        const ang=d.angle;
-        const r=105;
-        d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
-      }
-      if(d.nick==='Wit163rus'){
-        const ang=d.angle;
-        const r=200;
-        d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
-        d.group=1;
-      }
-      if(d.nick==='Mrwhitevoron'){
-        const ang=d.angle+0.18;
-        const r=Math.hypot(d.x-CX, d.y-CY);
-        d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
-        d.angle=ang;
-      }
-      if(d.nick==='BaLTaZaR014'){
-        const ang=d.angle+0.16;
-        const r=Math.hypot(d.x-CX, d.y-CY);
-        d.x=CX+r*Math.cos(ang); d.y=CY+r*Math.sin(ang);
-        d.angle=ang;
-      }
-    });
-    function nickPos(d){
-      const NW=d.nick.length*6.2;
-      const PAD=30;
-      const qx=d.x>CX?1:-1;
-      const qy=d.y>CY?1:-1;
-      let tx=d.x+qx*10;
-      let ty=d.y+qy*13;
-      const anchor=qx>0?'left':'right';
-      if(anchor==='left'){ if(tx+NW>W-PAD) tx=W-PAD-NW; }
-      else               { if(tx-NW<PAD)   tx=PAD+NW;   }
-      ty=Math.max(PAD+10, Math.min(W-PAD, ty));
-      return{tx,ty,anchor};
-    }
-
-    let sweep=norm(-Math.PI/2+0.7), totalAngle=0;
-    const TOTAL=4;
-
-    function reset(){
-      totalAngle=0; sweep=norm(-Math.PI/2+0.7);
-      dots.forEach(d=>{d.bright=0;d.revealed=false;});
-    }
-
-    function drawBg(){
-      ctx.clearRect(0,0,W,W);
-      [52,108,166,224,268].forEach((r,i)=>{
-        ctx.beginPath();ctx.arc(CX,CY,r,0,TAU);
-        ctx.strokeStyle=i===4?'#c9a04a':'#243040';
-        ctx.lineWidth=i===4?1.2:0.5;ctx.stroke();
-      });
-      [[CX-272,CY,CX+272,CY],[CX,CY-272,CX,CY+272],
-       [CX-193,CY-193,CX+193,CY+193],[CX+193,CY-193,CX-193,CY+193]
-      ].forEach(([x1,y1,x2,y2])=>{
-        ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);
-        ctx.strokeStyle='#243040';ctx.lineWidth=0.4;ctx.stroke();
-      });
-      for(let i=0;i<36;i++){
-        const a=(i/36)*TAU, len=i%9===0?10:i%3===0?6:3;
-        ctx.beginPath();
-        ctx.moveTo(CX+Math.cos(a)*268,CY+Math.sin(a)*268);
-        ctx.lineTo(CX+Math.cos(a)*(268-len),CY+Math.sin(a)*(268-len));
-        ctx.strokeStyle='#c9a04a';ctx.lineWidth=0.6;ctx.stroke();
-      }
-      ctx.font='bold 11px monospace';ctx.fillStyle='#d4a849';
-      ctx.textAlign='center';ctx.fillText('N',CX,CY-276);ctx.fillText('S',CX,CY+287);
-      ctx.textAlign='left'; ctx.fillText('E',CX+278,CY+4);
-      ctx.textAlign='right';ctx.fillText('W',CX-275,CY+4);
-      ctx.beginPath();ctx.arc(CX,CY,3,0,TAU);ctx.fillStyle='#d4a849';ctx.fill();
-
-      const pass=Math.floor(totalAngle/TAU)+1;
-      const pct=Math.min(100,Math.round(((totalAngle%TAU)/TAU)*100));
-      ctx.font='9px monospace';ctx.fillStyle='#2a3a48';ctx.textAlign='left';
-      ctx.fillText('SCAN '+Math.min(pass,TOTAL)+'/'+TOTAL+'  '+pct+'%',CX-260,CY+263);
-    }
-
-    function drawSweep(){
-      const TRAIL=Math.PI*0.55, STEPS=20;
-      for(let i=0;i<STEPS;i++){
-        const a0=sweep-TRAIL*(1-i/STEPS);
-        const a1=sweep-TRAIL*(1-(i+1)/STEPS);
-        const t=(i+1)/STEPS;
-        ctx.save();ctx.beginPath();ctx.moveTo(CX,CY);
-        ctx.arc(CX,CY,RMAX,a0,a1);ctx.closePath();
-        ctx.fillStyle='rgba(212,168,73,'+(t*t*0.13)+')';
-        ctx.fill();ctx.restore();
-      }
-      ctx.beginPath();ctx.moveTo(CX,CY);
-      ctx.lineTo(CX+Math.cos(sweep)*RMAX,CY+Math.sin(sweep)*RMAX);
-      ctx.strokeStyle='rgba(212,168,73,0.88)';ctx.lineWidth=1.2;ctx.stroke();
-    }
-
-    function drawDots(){
-      dots.forEach(d=>{
-        if(d.bright<0.01)return;
-        const a=d.bright;
-        ctx.save();ctx.globalAlpha=a*0.15;
-        ctx.beginPath();ctx.arc(d.x,d.y,12,0,TAU);
-        ctx.fillStyle='#d4a849';ctx.fill();ctx.restore();
-        ctx.save();ctx.globalAlpha=a;
-        ctx.beginPath();ctx.arc(d.x,d.y,3,0,TAU);
-        ctx.fillStyle='#d4a849';ctx.fill();ctx.restore();
-        if(a<0.08)return;
-        const {tx,ty,anchor}=nickPos(d);
-        ctx.save();ctx.globalAlpha=a*0.92;
-        ctx.font='10px monospace';ctx.fillStyle='#d4a849';
-        ctx.textAlign=anchor;ctx.fillText(d.nick,tx,ty);
-        ctx.restore();
-      });
-    }
-
-    function frame(){
-      sweep=norm(sweep+SPEED);
-      totalAngle+=SPEED;
-      if(totalAngle>=TAU*TOTAL+0.01){reset();return requestAnimationFrame(frame);}
-
-      const passes=totalAngle/TAU;
-      dots.forEach(d=>{
-        const lo=d.group, hi=d.group+1;
-        const canReveal=passes>=lo&&passes<hi;
-        const diff=norm(d.angle-sweep);
-        const onBeam=diff<0.07||diff>TAU-0.015;
-
-        if(onBeam&&canReveal&&!d.revealed){ d.revealed=true; }
-
-        if(d.revealed){
-          if(onBeam&&canReveal) d.bright=Math.min(1,d.bright+0.08);
-          else                  d.bright=Math.max(0,d.bright-0.0008);
-        }
-      });
-
-      drawBg();drawSweep();drawDots();
-      requestAnimationFrame(frame);
-    }
-
-    // запускаем только когда секция попадает в viewport
-    const radarObs=new IntersectionObserver(entries=>{
-      if(entries[0].isIntersecting){ radarObs.disconnect(); frame(); }
-    },{threshold:0.2});
-    radarObs.observe(cv);
-  })();
-</script>
-
-<script>
-
-</script>
-<script>
-
-})();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
