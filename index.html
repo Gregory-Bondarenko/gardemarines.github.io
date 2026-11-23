@@ -1374,19 +1374,19 @@
       {nick:'FenomenRostov', tier:'all'},
       {nick:'BursAssassin', tier:'all'},
       {nick:'ChestorQQ_RU', tier:'all'},
-      {nick:'OziSchneider', tier:'all'},
+      {nick:'T_o_t_t_i_8', tier:'all'},
       {nick:'GOLDBERG475', tier:'all'},
       {nick:'devasator91', tier:'all'},
       {nick:'lucky292pear', tier:'all'},
       {nick:'OziBlitz', tier:'all'},
-      {nick:'Xolod', tier:'all'},
-      {nick:'vsegda-buhoy', tier:'all'},
+      {nick:'Artemius_od', tier:'all'},
+      {nick:'aleksey_449', tier:'all'},
       {nick:'vladimir_chevere', tier:'all'},
-      {nick:'sagoyakov_roman', tier:'all'},
-      {nick:'Fufic-92', tier:'all'},
-      {nick:'Aerilou', tier:'all'},
-      {nick:'Mrwhitevoron', tier:'all'},
-      {nick:'Redvoin_RF', tier:'all'},
+      {nick:'sagoyakov_roman-', tier:'all', labelOffsetX:10},
+      {nick:'lll_QuaZar_lll', tier:'all'},
+      {nick:'Ch3ckm4t1c', tier:'all'},
+      {nick:'DENis3040', tier:'all'},
+      {nick:'Redvoin RF', tier:'all'},
       {nick:'SharOn_RU', tier:'all'}
     ];
 
@@ -1408,7 +1408,7 @@
       const rv=r+(Math.random()-0.5)*5;
       dots[idx]={
         x:CX+rv*Math.cos(ang), y:CY+rv*Math.sin(ang),
-        angle:ang, nick:p.nick, tier:'all',
+        angle:ang, nick:p.nick, tier:'all', labelOffsetX:p.labelOffsetX ?? 0,
         bright:0, revealed:false,
         group:idx%3,
       };
@@ -1458,7 +1458,7 @@
       const PAD=30;
       const qx=d.x>CX?1:-1;
       const qy=d.y>CY?1:-1;
-      let tx=d.x+qx*10;
+      let tx=d.x+qx*10+d.labelOffsetX;
       let ty=d.y+qy*13;
       const anchor=qx>0?'left':'right';
       if(anchor==='left'){ if(tx+NW>W-PAD) tx=W-PAD-NW; }
