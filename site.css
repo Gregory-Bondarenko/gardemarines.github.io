@@ -628,3 +628,18 @@
   .masthead-inner { justify-content:center; }
   .club-crest { width: min(11rem,49vw); }
 }
+
+@font-face { font-family: 'Golos Text'; src: url('fonts/golos-text-var.woff2') format('woff2'); font-weight: 400 600; font-display: swap; }
+@font-face { font-family: 'Spectral'; src: url('fonts/spectral-600.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+.fleet-site { font-family: 'Golos Text', system-ui, sans-serif; }
+.opening h1, .content-section h2, .event-page h1, .yearbook h3 { font-family: 'Spectral', Georgia, serif; font-style: normal; font-weight: 600; letter-spacing: 0; line-height: 1.12; }
+.masthead { position: sticky; top: 0; z-index: 10; background: #171716; }
+.masthead::after { content: ''; display: block; height: 2px; background: var(--accent); transform: scaleX(var(--progress, 0)); transform-origin: left; }
+.masthead nav a[aria-current] { color: var(--accent); text-decoration: underline; text-underline-offset: .35em; }
+.fleet-site [id] { scroll-margin-top: 6.75rem; }
+.yearbook { grid-template-columns: repeat(4,minmax(0,1fr)); }
+.season-status { border-top: 1px solid var(--rule); padding-block: .75rem; color: var(--muted); font-size: .9rem; }
+div.result-row:hover { background: none; }
+div.result-row:hover strong { text-decoration: none; }
+@media(max-width:950px) { .yearbook { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:700px) { .yearbook { grid-template-columns: 1fr; } .opening h1 { font-size: clamp(2.15rem,8vw,3.5rem); } }
