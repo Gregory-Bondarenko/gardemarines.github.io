@@ -1,9 +1,9 @@
 
   :root {
-    --steel-darkest: #0a0d10;
-    --steel-dark: #14181d;
-    --steel-mid: #1e242b;
-    --steel-light: #2a3139;
+    --steel-darkest: #141414;
+    --steel-dark: #181818;
+    --steel-mid: #242424;
+    --steel-light: #303030;
     --steel-edge: #3d4651;
     --gold-shadow: #6e5420;
     --gold-base: #b8902f;
@@ -12,7 +12,7 @@
     --gold-shine: #fff2c4;
     --text: #e4e8ec;
     --text-dim: #8b97a3;
-    --line: #2a3641;
+    --line: #3d392f;
     --content-width: 1100px;
   }
 
@@ -496,11 +496,11 @@
 /* Fleet editorial layout */
 .fleet-site {
   --paper: #f0eee6;
-  --muted: #adb8b8;
-  --accent: #e7c584;
-  --rule: #37454b;
-  --base: #10171c;
-  --panel: #172126;
+  --muted: #bcb8ae;
+  --accent: #e0b85f;
+  --rule: #46423b;
+  --base: #161616;
+  --panel: #232221;
   color: var(--paper);
   background: var(--base);
   font: 400 1rem/1.55 system-ui, sans-serif;
@@ -541,7 +541,7 @@
 .result-row:hover strong, .result-row:focus-visible strong { text-decoration: underline; text-underline-offset: .25em; }
 .result-date, .result-place, .result-win { font-size: .92rem; }
 .result-win, .result-arrow { color: var(--accent); }
-.roster-section { background: #141e23; border-block: 1px solid var(--rule); }
+.roster-section { background: #191919; border-block: 1px solid var(--rule); }
 .roster-layout { display: grid; grid-template-columns: minmax(12rem, .65fr) minmax(0, 1fr); align-items: center; gap: 1rem clamp(1rem, 6vw, 4.5rem); }
 .roster-copy p { margin-block: .9rem 1rem; max-width: 26ch; }
 .roster-layout #radarCanvas { display: block; width: 100%; max-width: 620px; height: auto; justify-self: end; }
@@ -568,7 +568,7 @@
 .players th:first-child { padding-left: 0; text-align: left; }
 .players th { font-weight: 600; }
 .players td { white-space: nowrap; }
-.fleet-site .site-footer { background: #131c21; border-top: 1px solid var(--rule); padding: 0; text-align: left; }
+.fleet-site .site-footer { background: #121212; border-top: 1px solid var(--rule); padding: 0; text-align: left; }
 .footer-inner p { color: var(--muted); font-size: .85rem; }
 .tournament-detail { padding-block: 2.75rem clamp(3rem, 7vw, 5rem); min-height: 66vh; }
 .back-link { display: inline-block; margin-bottom: 2rem; }
@@ -600,4 +600,31 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .result-row { transition: none; }
+}
+
+/* Club crest and seasonal results */
+.masthead .wordmark { align-items: center; }
+.wordmark img, .club-crest { object-fit: contain; mix-blend-mode: screen; }
+.opening { display: block; text-align: center; padding-block: clamp(1.5rem,4vw,3rem) clamp(2rem,5vw,4rem); }
+.fleet-site:has(.opening) { background: radial-gradient(ellipse 48rem 28rem at 50% 10rem, #322c20 0%, transparent 87%), var(--base); }
+.club-crest { display: block; width: clamp(10rem,21vw,17rem); height: auto; margin: 0 auto .8rem; }
+.opening h1, .content-section h2, .event-page h1 { font-family: "Arial Narrow", "Segoe UI", sans-serif; font-weight: 800; letter-spacing: -.045em; }
+.opening h1 { font-size: clamp(2.5rem,6.6vw,5.25rem); margin-block: .2rem .45rem; }
+.opening .eyebrow { letter-spacing: .16em; font-size: .69rem; }
+.content-section h2 { font-size: clamp(1.85rem,4.5vw,3.15rem); }
+.yearbook { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(1.25rem,3vw,3rem); }
+.yearbook h3 { font: italic 700 clamp(2rem,3vw,3rem)/1.2 Georgia, serif; color: var(--accent); margin-bottom: .55rem; }
+.yearbook .result-row { grid-template-columns: 1fr auto; gap: .12rem .5rem; padding-block: .7rem; }
+.yearbook .result-date { font-size: .78rem; grid-column: 1; }
+.yearbook .result-row strong { grid-column: 1; font-size: 1.08rem; }
+.yearbook .result-place, .yearbook .result-win { grid-column: 1; font-size: .82rem; }
+.yearbook .result-arrow { grid-column: 2; grid-row: 2; }
+.calculation { margin-top: .8rem; font-size: .84rem; color: var(--muted); }
+.calculation summary { cursor:pointer; }
+@media(max-width:700px) {
+  .yearbook { grid-template-columns: 1fr; }
+  .yearbook > section { display:grid; grid-template-columns: 4.1rem minmax(0,1fr); gap:.8rem; }
+  .yearbook h3 { font-size:1.65rem; }
+  .masthead-inner { justify-content:center; }
+  .club-crest { width: min(11rem,49vw); }
 }
