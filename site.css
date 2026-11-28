@@ -1,0 +1,222 @@
+
+  :root {
+    --steel-darkest: #141414;
+    --steel-dark: #181818;
+    --steel-mid: #242424;
+    --steel-light: #303030;
+    --steel-edge: #3d4651;
+    --gold-shadow: #6e5420;
+    --gold-base: #b8902f;
+    --gold: #d4a849;
+    --gold-bright: #f4d57a;
+    --gold-shine: #fff2c4;
+    --text: #e4e8ec;
+    --text-dim: #8b97a3;
+    --line: #3d392f;
+    --content-width: 1100px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+/* Fleet editorial layout */
+.fleet-site {
+  --paper: #f0eee6;
+  --muted: #bcb8ae;
+  --accent: #e0b85f;
+  --rule: #46423b;
+  --base: #161616;
+  --panel: #232221;
+  color: var(--paper);
+  background: var(--base);
+  font: 400 1rem/1.55 system-ui, sans-serif;
+}
+.fleet-site a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.fleet-site [id] { scroll-margin-top: 1.5rem; }
+.page-width { width: min(100% - 3rem, 72rem); margin-inline: auto; }
+.skip-link { position: absolute; left: 1rem; top: -6rem; z-index: 3; color: var(--base); background: var(--accent); padding: .6rem 1rem; }
+.skip-link:focus { top: 1rem; }
+.masthead { border-bottom: 1px solid var(--rule); }
+.masthead-inner, .footer-inner { min-height: 4.75rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; }
+.wordmark { color: inherit; display: inline-flex; align-items: baseline; gap: .55rem; text-decoration: none; letter-spacing: .12em; font-size: .86rem; white-space: nowrap; }
+.wordmark span { color: var(--accent); font: .75rem ui-monospace, monospace; letter-spacing: .03em; }
+.fleet-site .masthead nav { position: static; background: none; border: 0; padding: 0; backdrop-filter: none; display: flex; flex-wrap: wrap; gap: .5rem clamp(1rem, 4vw, 2.75rem); }
+.masthead nav a { color: var(--muted); font-size: .9rem; text-decoration: none; }
+.masthead nav a:hover, .masthead nav a:focus-visible { color: var(--paper); text-decoration: underline; text-underline-offset: .3em; }
+.opening { display: grid; grid-template-columns: minmax(0, 1fr) minmax(14rem, .38fr); align-items: end; gap: 2.5rem; padding-block: clamp(3.2rem, 10vw, 8rem) clamp(2.75rem, 7vw, 5.25rem); }
+.eyebrow { color: var(--accent); font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.opening h1, .content-section h2, .event-page h1 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.045em; line-height: 1.04; }
+.opening h1 { font-size: clamp(2.8rem, 8.4vw, 7.3rem); margin-block: .45rem .8rem; }
+.opening-message { color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); }
+.action { display: inline-flex; justify-content: space-between; align-items: center; gap: 1rem; color: #1d1a14; background: var(--accent); padding: .7rem 1rem; margin-top: 1.5rem; font-size: .9rem; font-weight: 650; text-decoration: none; }
+.action:hover { background: #f2d7a2; }
+.opening-result { border-left: 1px solid var(--rule); padding: .4rem 0 .4rem clamp(1rem, 4vw, 2.5rem); }
+.winner-place { display: block; margin-block: .3rem .55rem; font: 400 clamp(2rem, 4.6vw, 3.65rem)/1.1 Georgia, serif; }
+.text-link { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: .23em; }
+.text-link:hover { color: var(--paper); }
+.content-section { padding-block: clamp(2.7rem, 6vw, 5rem); }
+#tournaments, #statistics { border-top: 1px solid var(--rule); }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .45rem 1rem; margin-bottom: 1.4rem; }
+.content-section h2 { font-size: clamp(2rem, 5.6vw, 4rem); }
+.section-head > p, .current-season p, .result-date, .roster-copy p, .data-note { color: var(--muted); }
+.current-season { display: flex; align-items: baseline; flex-wrap: wrap; gap: .25rem 1rem; padding: .85rem 0 1.2rem; }
+.current-season strong { color: var(--accent); }
+.results { list-style: none; border-top: 1px solid var(--rule); }
+.result-row { display: grid; grid-template-columns: minmax(8rem, .6fr) minmax(0, 1fr) minmax(0, .85fr) auto; align-items: baseline; gap: .35rem 1rem; padding: .85rem .2rem; border-bottom: 1px solid var(--rule); color: var(--paper); text-decoration: none; transition: background .18s ease; }
+.result-row:hover, .result-row:focus-visible { background: var(--panel); }
+.result-row:hover strong, .result-row:focus-visible strong { text-decoration: underline; text-underline-offset: .25em; }
+.result-date, .result-place, .result-win { font-size: .92rem; }
+.result-win, .result-arrow { color: var(--accent); }
+.roster-section { background: #191919; border-block: 1px solid var(--rule); }
+.roster-layout { display: grid; grid-template-columns: minmax(12rem, .65fr) minmax(0, 1fr); align-items: center; gap: 1rem clamp(1rem, 6vw, 4.5rem); }
+.roster-copy p { margin-block: .9rem 1rem; max-width: 26ch; }
+.roster-layout #radarCanvas { display: block; width: 100%; max-width: 620px; height: auto; justify-self: end; }
+.stats-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2rem 3rem; border-block: 1px solid var(--rule); padding-block: 1.5rem; }
+.stats-primary > p, .stats-secondary dt { color: var(--muted); }
+.stats-primary > strong { display: block; margin-block: .35rem 1.25rem; font: 400 clamp(3.6rem, 10vw, 7rem)/1 Georgia, serif; color: var(--accent); font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.05em; }
+.stats-primary > strong span { font-size: .56em; padding-inline-start: .12em; }
+.stats-secondary { display: flex; flex-wrap: wrap; gap: .65rem clamp(1rem, 4vw, 2.75rem); }
+.stats-secondary dt { font-size: .83rem; }
+.stats-secondary dd { font-weight: 600; font-size: 1.15rem; }
+.distribution h3 { font-size: .95rem; font-weight: 650; margin-bottom: .85rem; }
+.distribution ul { list-style: none; display: grid; gap: .45rem; }
+.distribution li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr) 1.5rem; align-items: center; gap: .6rem; font-size: .82rem; font-variant-numeric: tabular-nums; }
+.distribution li > strong { text-align: right; font-weight: 600; }
+.bar-track { height: .35rem; background: var(--rule); }
+.bar-track span { display: block; width: var(--bar); height: 100%; background: var(--accent); }
+.data-note { margin-top: 1rem; font-size: .85rem; max-width: 75ch; }
+.players { margin-top: 1.5rem; border-block: 1px solid var(--rule); }
+.players summary { padding-block: .9rem; color: var(--accent); font-weight: 650; cursor: pointer; }
+.players summary:focus-visible, .players-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.players-scroll { overflow-x: auto; }
+.players table { border-collapse: collapse; width: 100%; font-size: .875rem; font-variant-numeric: tabular-nums; }
+.players th, .players td { padding: .45rem .75rem; text-align: right; border-top: 1px solid var(--rule); }
+.players th:first-child { padding-left: 0; text-align: left; }
+.players th { font-weight: 600; }
+.players td { white-space: nowrap; }
+.fleet-site .site-footer { background: #121212; border-top: 1px solid var(--rule); padding: 0; text-align: left; }
+.footer-inner p { color: var(--muted); font-size: .85rem; }
+.tournament-detail { padding-block: 2.75rem clamp(3rem, 7vw, 5rem); min-height: 66vh; }
+.back-link { display: inline-block; margin-bottom: 2rem; }
+.event-page { display: none; }
+.event-page:target, .event-pages:not(:has(.event-page:target)) > :first-child { display: block; }
+.event-page h1 { margin-block: .45rem 1rem; font-size: clamp(2.7rem, 8vw, 6rem); }
+.event-result { border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.5rem; padding-top: .85rem; }
+.event-result dt, .event-note { color: var(--muted); }
+.event-result dd { font-weight: 600; }
+.event-note { margin-top: .5rem; }
+.fleet-site .archive-detail { padding-top: 2rem; padding-bottom: 0; text-align: center; }
+#season { text-align: left; }
+@media (max-width: 700px) {
+  .page-width { width: calc(100% - 2rem); }
+  .opening, .roster-layout, .stats-layout { grid-template-columns: minmax(0, 1fr); }
+  .opening { gap: 1.7rem; }
+  .opening-result { padding: .85rem 0 0; border-left: 0; border-top: 1px solid var(--rule); }
+  .winner-place { display: inline-block; margin: .4rem .75rem 0 0; }
+  .roster-layout #radarCanvas { justify-self: center; }
+  .result-row { grid-template-columns: minmax(0, 1fr) minmax(0, .8fr) auto; }
+  .result-date { grid-column: 1 / -1; font-size: .8rem; }
+  .result-row strong, .result-row .result-place, .result-row .result-win { overflow-wrap: anywhere; }
+}
+@media (max-width: 520px) {
+  .masthead-inner, .footer-inner { min-height: 0; padding-block: .85rem; flex-wrap: wrap; gap: .55rem 1rem; }
+  .fleet-site .masthead nav { width: 100%; justify-content: space-between; }
+  .players th, .players td { padding-inline: .4rem; font-size: .78rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .result-row { transition: none; }
+}
+
+/* Club crest and seasonal results */
+.masthead .wordmark { align-items: center; }
+.wordmark img, .club-crest { object-fit: contain; mix-blend-mode: screen; }
+.opening { display: block; text-align: center; padding-block: clamp(1.5rem,4vw,3rem) clamp(2rem,5vw,4rem); }
+.fleet-site:has(.opening) { background: radial-gradient(ellipse 48rem 28rem at 50% 10rem, #322c20 0%, transparent 87%), var(--base); }
+.club-crest { display: block; width: clamp(10rem,21vw,17rem); height: auto; margin: 0 auto .8rem; }
+.opening h1, .content-section h2, .event-page h1 { font-family: "Arial Narrow", "Segoe UI", sans-serif; font-weight: 800; letter-spacing: -.045em; }
+.opening h1 { font-size: clamp(2.5rem,6.6vw,5.25rem); margin-block: .2rem .45rem; }
+.opening .eyebrow { letter-spacing: .16em; font-size: .69rem; }
+.content-section h2 { font-size: clamp(1.85rem,4.5vw,3.15rem); }
+.yearbook { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(1.25rem,3vw,3rem); }
+.yearbook h3 { font: italic 700 clamp(2rem,3vw,3rem)/1.2 Georgia, serif; color: var(--accent); margin-bottom: .55rem; }
+.yearbook .result-row { grid-template-columns: 1fr auto; gap: .12rem .5rem; padding-block: .7rem; }
+.yearbook .result-date { font-size: .78rem; grid-column: 1; }
+.yearbook .result-row strong { grid-column: 1; font-size: 1.08rem; }
+.yearbook .result-place, .yearbook .result-win { grid-column: 1; font-size: .82rem; }
+.yearbook .result-arrow { grid-column: 2; grid-row: 2; }
+.calculation { margin-top: .8rem; font-size: .84rem; color: var(--muted); }
+.calculation summary { cursor:pointer; }
+@media(max-width:700px) {
+  .yearbook { grid-template-columns: 1fr; }
+  .yearbook > section { display:grid; grid-template-columns: 4.1rem minmax(0,1fr); gap:.8rem; }
+  .yearbook h3 { font-size:1.65rem; }
+  .masthead-inner { justify-content:center; }
+  .club-crest { width: min(11rem,49vw); }
+}
+
+@font-face { font-family: 'Golos Text'; src: url('fonts/golos-text-var.woff2') format('woff2'); font-weight: 400 600; font-display: swap; }
+@font-face { font-family: 'Spectral'; src: url('fonts/spectral-600.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+.fleet-site { font-family: 'Golos Text', system-ui, sans-serif; }
+.opening h1, .content-section h2, .event-page h1, .yearbook h3 { font-family: 'Spectral', Georgia, serif; font-style: normal; font-weight: 600; letter-spacing: 0; line-height: 1.12; }
+.masthead { position: sticky; top: 0; z-index: 10; background: #171716; }
+.masthead::after { content: ''; display: block; height: 2px; background: var(--accent); transform: scaleX(var(--progress, 0)); transform-origin: left; }
+.masthead nav a[aria-current] { color: var(--accent); text-decoration: underline; text-underline-offset: .35em; }
+.fleet-site [id] { scroll-margin-top: 6.75rem; }
+.yearbook { grid-template-columns: repeat(4,minmax(0,1fr)); }
+.season-status { border-top: 1px solid var(--rule); padding-block: .75rem; color: var(--muted); font-size: .9rem; }
+div.result-row:hover { background: none; }
+div.result-row:hover strong { text-decoration: none; }
+@media(max-width:950px) { .yearbook { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:700px) { .yearbook { grid-template-columns: 1fr; } .opening h1 { font-size: clamp(2.15rem,8vw,3.5rem); } }
+
+.yearbook { display:block; }
+.yearbook > section { display:grid; grid-template-columns: minmax(5rem,.27fr) 1fr; align-items:start; gap:1.5rem; border-top:1px solid var(--rule); padding-block:1rem; }
+.yearbook .results,.yearbook .season-status { border:0; }
+.yearbook .result-row { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 1rem; align-items:baseline; }
+.yearbook .result-row strong,.yearbook .result-place,.yearbook .result-win,.yearbook .result-arrow { grid-column:auto; grid-row:auto; }
+.yearbook li:last-child .result-row { border:0; }
+.cup-heading { padding:1rem 0 2rem; border-bottom:1px solid var(--rule); }
+.cup-layout { display:grid; grid-template-columns:minmax(0,2fr) minmax(15rem,1fr); gap:clamp(1.5rem,6vw,5rem); padding-top:2rem; }
+.cup-layout h2,.cup-stage h3 { font-family:Spectral,Georgia,serif; font-weight:600; }
+.cup-layout h2 { font-size:2rem; }
+.score-key,.match-lines time,.cup-summary small { color:var(--muted); font-size:.85rem; }
+.cup-stage { position:relative; margin-left:.4rem; border-left:1px solid var(--rule); padding:1.4rem 0 .35rem 1.5rem; }
+.cup-stage::before { content:''; position:absolute; left:-4px; top:2.15rem; width:7px; height:7px; border-radius:50%; background:var(--accent); }
+.cup-stage h3 { font-size:1.35rem; }
+.match-lines,.cup-summary ul { list-style:none; }
+.match-lines li { display:grid; grid-template-columns:4rem 1fr auto; align-items:baseline; gap:.25rem .6rem; border-bottom:1px solid var(--rule); padding:.65rem 0; font-variant-numeric:tabular-nums; }
+.match-lines strong { color:var(--accent); }
+.record { grid-column:2 / -1; color:var(--accent); font-size:.85rem; }
+.cup-layout summary { cursor:pointer; color:var(--muted); padding:.65rem 0; }
+.cup-summary { align-self:start; background:var(--panel); padding:1rem 1.5rem; }
+.cup-summary dt { margin-top:.9rem; color:var(--muted); }
+.cup-summary dd { font-size:1.7rem; }
+.cup-summary li { display:flex; justify-content:space-between; padding:.35rem 0; }
+@media(max-width:700px) {
+ .yearbook > section { display:block; }
+ .yearbook h3 { font-size:1.5rem; }
+ .yearbook .result-row { grid-template-columns:minmax(0,1fr) minmax(0,.9fr) .75rem; }
+ .cup-layout { display:flex; flex-direction:column; }
+ .cup-summary { align-self:stretch; }
+}
+
+.yearbook a.result-row { grid-template-columns: minmax(0,1.2fr) minmax(4rem,1fr) auto; }
+.history-link { color:var(--accent); text-decoration:underline; text-underline-offset:.25em; font-size:.85rem; }
+.compass-trail { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+.compass-trail i { position:absolute; width:5px; height:1.5px; background:#efca76; }
+.stage-fork,.fleet-metrics { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,3vw,2.5rem); }
+.stage-fork { margin-top:.65rem; border-top:1px solid var(--rule); }
+.stage-fork > div { position:relative; padding:.7rem 0 0 .8rem; }
+.stage-fork > div::before { content:''; position:absolute; left:0; top:0; width:.5rem; height:1.4rem; border:solid var(--rule); border-width:0 0 1px 1px; }
+.stage-fork h4 { color:var(--accent); font-size:.88rem; }
+.stage-fork .match-lines li { grid-template-columns:auto minmax(0,1fr) auto; }
+.fleet-metrics { border-block:1px solid var(--rule); padding-block:1.4rem; }
+.fleet-metrics h3,.battle-time h3 { font-family:Spectral,Georgia,serif; font-size:1.45rem; }
+.fleet-metrics dl { display:flex; gap:clamp(1.3rem,3vw,3rem); margin-top:.75rem; }
+.fleet-metrics dt,.battle-time small { color:var(--muted); }
+.fleet-metrics dd { color:var(--accent); font:600 clamp(1.6rem,3vw,2.5rem) Spectral,Georgia,serif; }
+.battle-time { padding-top:1.4rem; }
+.battle-time p { margin-block:.45rem; line-height:1.85; }
+.battle-time span { white-space:nowrap; }
+@media(max-width:750px){.stage-fork,.fleet-metrics { grid-template-columns:1fr; }.stage-fork { margin-left:.2rem; border-left:1px solid var(--rule); gap:.3rem; }.stage-fork > div::before { border-left:0; }.yearbook a.result-row {grid-template-columns:1fr auto;}.history-link {grid-column:1 / -1;} }
