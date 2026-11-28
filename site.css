@@ -200,3 +200,23 @@ div.result-row:hover strong { text-decoration: none; }
  .cup-layout { display:flex; flex-direction:column; }
  .cup-summary { align-self:stretch; }
 }
+
+.yearbook a.result-row { grid-template-columns: minmax(0,1.2fr) minmax(4rem,1fr) auto; }
+.history-link { color:var(--accent); text-decoration:underline; text-underline-offset:.25em; font-size:.85rem; }
+.compass-trail { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+.compass-trail i { position:absolute; width:5px; height:1.5px; background:#efca76; }
+.stage-fork,.fleet-metrics { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,3vw,2.5rem); }
+.stage-fork { margin-top:.65rem; border-top:1px solid var(--rule); }
+.stage-fork > div { position:relative; padding:.7rem 0 0 .8rem; }
+.stage-fork > div::before { content:''; position:absolute; left:0; top:0; width:.5rem; height:1.4rem; border:solid var(--rule); border-width:0 0 1px 1px; }
+.stage-fork h4 { color:var(--accent); font-size:.88rem; }
+.stage-fork .match-lines li { grid-template-columns:auto minmax(0,1fr) auto; }
+.fleet-metrics { border-block:1px solid var(--rule); padding-block:1.4rem; }
+.fleet-metrics h3,.battle-time h3 { font-family:Spectral,Georgia,serif; font-size:1.45rem; }
+.fleet-metrics dl { display:flex; gap:clamp(1.3rem,3vw,3rem); margin-top:.75rem; }
+.fleet-metrics dt,.battle-time small { color:var(--muted); }
+.fleet-metrics dd { color:var(--accent); font:600 clamp(1.6rem,3vw,2.5rem) Spectral,Georgia,serif; }
+.battle-time { padding-top:1.4rem; }
+.battle-time p { margin-block:.45rem; line-height:1.85; }
+.battle-time span { white-space:nowrap; }
+@media(max-width:750px){.stage-fork,.fleet-metrics { grid-template-columns:1fr; }.stage-fork { margin-left:.2rem; border-left:1px solid var(--rule); gap:.3rem; }.stage-fork > div::before { border-left:0; }.yearbook a.result-row {grid-template-columns:1fr auto;}.history-link {grid-column:1 / -1;} }
